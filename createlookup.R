@@ -13,20 +13,22 @@ getTplVascularPlantFamilies<-function(){
 }
 
 downloadPlantList<-function(familyList){
-  dir.create("plantListAcceptedNames/", showWarnings = FALSE)
-  alreadyHaveFile<-dir("plantListAcceptedNames/")
+  path <- "plantListAcceptedNames"
+  dir.create(path, FALSE)
+  alreadyHaveFile<-dir(path)
   alreadyHave<-sub(".csv","",alreadyHaveFile)
-  tpl_get("plantListAcceptedNames/",family=tf$family[!tf$family%in%alreadyHave])
+  suppressWarnings(tpl_get(path,family=familyList$family[!familyList$family%in%alreadyHave]))
+  path
 }
 
-get.genera<-function(family){
-  ah<-read.csv(paste0("plantListAcceptedNames/",family))
+get.genera<-function(family, path){
+  ah<-read.csv(file.path(path,family))
   out<-data.frame(family=ah$Family[1],genus=unique(ah$Genus))
   return(out)
 }
 
-combineGeneraLists<-function(){
-  out<-lapply(dir("plantListAcceptedNames/"),get.genera)
+combineGeneraLists<-function(path){
+  out<-lapply(dir(path), get.genera, path)
   tplGenera<-do.call(rbind,out)
   return(tplGenera)
 }

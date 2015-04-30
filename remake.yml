@@ -9,15 +9,16 @@ targets:
   all:
     depends:
       - genusFamilyOrder.csv
+      - downloadTPL
 
   VascularPlantFamilies:
      command: getTplVascularPlantFamilies()
 
   downloadTPL:
-    command: downloadPlantList()
+    command: downloadPlantList(VascularPlantFamilies)
 
   tplGenera:
-    command: combineGeneraLists()
+    command: combineGeneraLists(downloadTPL)
 
   lookupRaw:
     command: matchPlantListFamiliesToApweb(tplGenera)
