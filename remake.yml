@@ -1,0 +1,29 @@
+sources:
+  - createlookup.R
+
+packages:
+  - taxize
+  - devtools
+
+targets:
+  all:
+    depends:
+      - genusFamilyOrder.csv
+
+  VascularPlantFamilies:
+     command: getTplVascularPlantFamilies("fire_littersize_manipulation_data.txt")
+
+  downloadTPL:
+    command: downloadPlantList("fire_littersize_manipulation_data.txt")
+
+  tplGenera:
+    command: combineGeneraLists()
+
+  lookupRaw:
+    command: matchPlantListFamiliesToApweb(tplGenera)
+
+  lookupFixed:
+    command: fixFernsAndOtherProblems(lookupRaw)
+
+  genusFamilyOrder.csv:
+    command: outputFlatFile(lookupFixed)

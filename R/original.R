@@ -34,7 +34,7 @@ relationalise <- function(d) {
   pairs <- c(family = "genus",
              order  = "family")
 
-  d <- combine(d)
+  #d <- combine(d)
 
   dat <- setNames(vector("list", length(pairs)), names(pairs))
 

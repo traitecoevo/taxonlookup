@@ -11,3 +11,8 @@
 # produced vignettes
 vignettes/*.html
 vignettes/*.pdf
+.Rproj.user
+.remake/
+.DS_Store
+genusFamilyOrder.csv
+plantListAcceptedNames/
