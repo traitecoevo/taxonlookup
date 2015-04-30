@@ -15,8 +15,9 @@ To build the lookup table, first install the required packages from CRAN:
 
 	install.packages(c("R6","yaml","digest","devtools"))
 
-Download and install two additional packages from github.    
+Download and install 3 additional packages from github:    
 
+	devtools::install_github("richfitz/storr")
 	devtools::install_github("richfitz/remake")
 	devtools::install_github("ropensci/taxize")
 
@@ -24,4 +25,4 @@ Then run the following command from within R.  Make sure the home directory is w
 
 	remake::make()
 	
-This requires a working internet connection and that both the plnat list and mobot servers are up.  The should create a new lookup table called `genusFamilyOrder.csv` within your repository.  
+This requires a working internet connection and that both the plant list and mobot servers are up.  The should create a new lookup table called `genusFamilyOrder.csv` within your repository.  
