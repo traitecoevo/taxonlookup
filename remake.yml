@@ -11,10 +11,10 @@ targets:
       - genusFamilyOrder.csv
 
   VascularPlantFamilies:
-     command: getTplVascularPlantFamilies("fire_littersize_manipulation_data.txt")
+     command: getTplVascularPlantFamilies()
 
   downloadTPL:
-    command: downloadPlantList("fire_littersize_manipulation_data.txt")
+    command: downloadPlantList()
 
   tplGenera:
     command: combineGeneraLists()

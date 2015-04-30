@@ -33,18 +33,20 @@ combineGeneraLists<-function(){
 
 matchPlantListFamiliesToApweb<-function(tplGenera){
   apFamilies<-apgFamilies()
+  apFamilies$family<-gsub('"',"",apFamilies$family)
+  apFamilies$order<-gsub(',',"",apFamilies$order)
   apFamilies$acceptedFamilies<-apFamilies$synonym
   apFamilies$acceptedFamilies[is.na(apFamilies$acceptedFamilies)]<-apFamilies$family[is.na(apFamilies$acceptedFamilies)]
   tplGenera$order<-apFamilies$order[match(tplGenera$family,apFamilies$acceptedFamilies)]
-  tplGenera$order[is.na(tplGenera$order)]<-apFamilies$order[match(tplGenera$family,apFamilies$family)][is.na(tplGenera$order)]
+  tplGenera$order[is.na(tplGenera$order)]<-apFamilies$order[match(tplGenera$family,apFamilies$family)[is.na(tplGenera$order)]]
   return(tplGenera)
 }
 
 fixFernsAndOtherProblems<-function(genera.list){
   problems<-unique(genera.list$family[is.na(genera.list$order)])
   genera.list$family[genera.list$family=="Dryopteridacae"]<-"Dryopteridaceae" # spelling mistake in the plant list
-  fae<-read.csv(file ="inst/extdata//genus_order_lookup_fae.csv")
-  genera.list$order[is.na(genera.list$order)]<-fae$order[match(genera.list$family,fae$family)][is.na(genera.list$order)]
+  fae<-read.csv(file ="inst/extdata//genus_order_lookup_fae.csv",stringsAsFactors=F)
+  genera.list$order[is.na(genera.list$order)]<-fae$order[match(genera.list$family,fae$family)[is.na(genera.list$order)]]
   genera.list$order[genera.list$family=="Cystodiaceae"]<-"Polypodiales"
   genera.list$order[genera.list$family=="Isoëtaceae"]<-"Isoetaceae"
   genera.list$order[genera.list$family=="Isoetaceae"]<-"Isoetales"
