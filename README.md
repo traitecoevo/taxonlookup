@@ -2,6 +2,9 @@
 
 [![Build Status](https://travis-ci.org/wcornwell/TaxonLookup.png?branch=master)](https://travis-ci.org/wcornwell/TaxonLookup)
 
+    data(plant_lookup)
+
+# Rebuilding the lookup table
 
 This is a set of scripts that dynamically build a genus-family-order look-up table for vascular plants.  As long as the canonical sources of the data stay in the same format, this should build an up-to-date lookup table. The data primarily comes from two sources: 
 
@@ -20,6 +23,10 @@ Download and install 3 additional packages from github:
 	devtools::install_github("richfitz/storr")
 	devtools::install_github("richfitz/remake")
 	devtools::install_github("ropensci/taxize")
+
+Or, if you already have remake installed run
+
+    remake::install_missing_packages()
 
 Then run the following command from within R.  Make sure the home directory is within the repository:
 

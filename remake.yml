@@ -10,6 +10,7 @@ targets:
     depends:
       - genusFamilyOrder.csv
       - downloadTPL
+      - data/plant_lookup.rda
 
   VascularPlantFamilies:
      command: getTplVascularPlantFamilies()
@@ -23,8 +24,14 @@ targets:
   lookupRaw:
     command: matchPlantListFamiliesToApweb(tplGenera)
 
+  lookupPatch:
+    command: read.csv("source_data/genus_order_lookup_fae.csv", stringsAsFactors=FALSE)
+
   lookupFixed:
-    command: fixFernsAndOtherProblems(lookupRaw)
+    command: fixFernsAndOtherProblems(lookupRaw, lookupPatch)
 
   genusFamilyOrder.csv:
     command: outputFlatFile(lookupFixed)
+
+  data/plant_lookup.rda:
+    command: packageData(lookupFixed, target_name)

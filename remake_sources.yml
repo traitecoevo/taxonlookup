@@ -1,0 +1,3 @@
+taxize:
+  source: github
+  repo: ropensci/taxize
