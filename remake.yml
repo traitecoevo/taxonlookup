@@ -8,7 +8,6 @@ packages:
 targets:
   all:
     depends:
-      - genusFamilyOrder.csv
       - downloadTPL
       - data/plant_lookup.rda
 
