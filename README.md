@@ -2,19 +2,37 @@
 
 [![Build Status](https://travis-ci.org/wcornwell/TaxonLookup.png?branch=master)](https://travis-ci.org/wcornwell/TaxonLookup)
 
-    data(plant_lookup)
-
-# Rebuilding the lookup table
-
-This is a set of scripts that dynamically build a genus-family-order look-up table for vascular plants.  As long as the canonical sources of the data stay in the same format, this should build an up-to-date lookup table. The data primarily comes from two sources: 
+The data for this lookup primarily comes from two sources: 
 
 1. [The Plant List](http://www.theplantlist.org/) for accepted genera to families
 
 2. [APWeb](http://www.mobot.org/MOBOT/research/APweb/) for family level synonymies and family to order
 
-To complete the family to order data (beyond the taxonomic scope of APWeb) we add a few additional family to order mappings for ferns.  We also correct some spelling errors and special character issues from The Plant List.  We will try to keep this up-to-date, but there may new errors introduced as the cannonical data sources shift to future versions.  
+To complete the family to order data (beyond the taxonomic scope of APWeb) we add a few additional family to order mappings for non-seed plants (mostly ferns).  We also correct some spelling errors, special character issues, and other errors from The Plant List.  We will try to keep this up-to-date, but there may new errors introduced as the cannonical data sources shift to future versions.  
 
-To build the lookup table, first install the required packages from CRAN:
+To use the data from the most recent release.  First install and load devtools; that will then let you load the package from this respository:
+
+```{r}
+install.packages(c("R6","yaml","digest","devtools"))
+library(devtools)
+install_github("wcornwell/TaxonLookup")
+```
+
+Then you can load the data:
+
+`data(plant_lookup)`
+
+And the look up table will then be in R's memory.  
+
+`head(plant_lookup)`
+
+If there have been some recent changes to taxonomy you might want to rebuilding the lookup table.  See the section below.
+
+# Rebuilding the lookup table
+
+This is a set of scripts that dynamically build a genus-family-order look-up table for vascular plants.  As long as the canonical sources of the data stay in the same format, this should build an up-to-date lookup table. 
+
+To build the lookup table, first clone this repository.  Then install the required packages from CRAN:
 
 	install.packages(c("R6","yaml","digest","devtools"))
 
