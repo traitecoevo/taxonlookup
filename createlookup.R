@@ -63,7 +63,7 @@ fixFernsAndOtherProblems<-function(genera.list, fae, errors){
   ret <- dropTplErrors(genera.list, errors)
 
   # Sort rows and columns appropriately:
-  ret <- genera.list[c("genus", "family", "order","group")]
+  ret <- ret[c("genus", "family", "order", "group")]
   ret <- ret[order(ret$group,ret$order, ret$family, ret$genus), ]
   rownames(ret) <- NULL
 
@@ -107,5 +107,5 @@ title_case <- function(x) {
 }
 
 read_csv <- function(...) {
-  read.csv(..., stringsAsFactors=TRUE)
+  read.csv(..., stringsAsFactors=FALSE)
 }

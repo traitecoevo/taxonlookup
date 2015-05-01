@@ -1,12 +1,11 @@
 context("plant_lookup")
 
 test_that("table sane", {
-  expect_that(ncol(plant_lookup), equals(3L))
+  expect_that(ncol(plant_lookup), equals(4L))
   expect_that(plant_lookup, is_a("data.frame"))
-  expect_that(names(plant_lookup), equals(c("genus", "family", "order")))
+  expect_that(names(plant_lookup),
+              equals(c("genus", "family", "order", "group")))
   expect_that(any(is.na(plant_lookup)), is_false())
   expect_that(any(plant_lookup == ""), is_false())
-
-  ## This seems desirable:
-  ## expect_that(any(duplicated(plant_lookup$genus)), is_false())
+  expect_that(any(duplicated(plant_lookup$genus)), is_false())
 })
