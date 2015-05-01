@@ -1,0 +1,44 @@
+context("lookup")
+
+test_that("lookup_table", {
+  sp <- c("Heteromma", "Serenoa", "Montrouziera", "Verzinum",
+          "Janusia", "Ericameria", "Odontostomum", "Hippophaestum",
+          "Calyptraria", "Lepiactis", "Xipotheca", "Bifrenaria",
+          "Conchocarpus", "Glossidea", "Dactylanthus", "Laxopetalum",
+          "Chamissoa", "Tamarindus", "Polemoniella", "Macrozamia")
+
+  dat <- lookup_table(sp, plant_lookup)
+
+  expect_that(nrow(dat), equals(length(sp)))
+  expect_that(rownames(dat), equals(as.character(seq_len(nrow(dat)))))
+
+  ## with extra things:
+  sp2 <- sample(c(sp, "missing1", "missing2"))
+
+  ## Default is drop:
+  dat <- lookup_table(sp2, plant_lookup)
+  expect_that(nrow(dat), equals(length(sp)))
+  expect_that(dat$genus, equals(sp2[!grepl("^missing", sp2)]))
+
+  ## Or we can error:
+  expect_that(lookup_table(sp2, plant_lookup, missing_action="error"),
+              throws_error("Missing genera: missing"))
+
+  ## Or we can generate unknowns:
+  dat <- lookup_table(sp2, plant_lookup, missing_action="NA")
+  expect_that(nrow(dat), equals(length(sp2)))
+  expect_that(dat$genus, equals(sp2))
+
+  expect_that(dat$family[grepl("^missing", sp2)],
+              equals(rep(NA_character_, 2)))
+
+  ## Automatically detect the species table:
+  dat2 <- lookup_table(sp2, missing_action="NA")
+  expect_that(dat2, is_identical_to(dat))
+
+  ## Filtering.
+  sp3 <- sample(rep(sp, 2))
+  dat3 <- lookup_table(sp3)
+  expect_that(nrow(dat3), equals(length(sp)))
+  expect_that(dat3$genus, equals(unique(sp3)))
+})
