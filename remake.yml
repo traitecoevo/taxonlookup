@@ -24,10 +24,12 @@ targets:
     command: matchPlantListFamiliesToApweb(tplGenera)
 
   lookupPatch:
-    command: read.csv("source_data/genus_order_lookup_fae.csv", stringsAsFactors=FALSE)
+    command: read_csv("source_data/genus_order_lookup_fae.csv")
+  badTPL:
+    command: read_csv("source_data/badGeneraFamilyPairs.csv")
 
   lookupFixed:
-    command: fixFernsAndOtherProblems(lookupRaw, lookupPatch)
+    command: fixFernsAndOtherProblems(lookupRaw, lookupPatch, badTPL)
 
   genusFamilyOrder.csv:
     command: outputFlatFile(lookupFixed)

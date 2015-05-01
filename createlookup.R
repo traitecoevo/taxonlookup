@@ -42,7 +42,7 @@ matchPlantListFamiliesToApweb<-function(tplGenera){
   return(tplGenera)
 }
 
-fixFernsAndOtherProblems<-function(genera.list, fae){
+fixFernsAndOtherProblems<-function(genera.list, fae, errors){
   problems<-unique(genera.list$family[is.na(genera.list$order)])
   genera.list$family[genera.list$family=="Dryopteridacae"]<-"Dryopteridaceae" # spelling mistake in the plant list
   genera.list$order[is.na(genera.list$order)]<-fae$order[match(genera.list$family,fae$family)[is.na(genera.list$order)]]
@@ -59,12 +59,29 @@ fixFernsAndOtherProblems<-function(genera.list, fae){
   # Other standardisation:
   genera.list$order <- title_case(genera.list$order)
 
+  # tpl errors:
+  ret <- dropTplErrors(genera.list, errors)
+
   # Sort rows and columns appropriately:
   ret <- genera.list[c("genus", "family", "order","group")]
   ret <- ret[order(ret$group,ret$order, ret$family, ret$genus), ]
   rownames(ret) <- NULL
 
   return(ret)
+}
+
+dropTplErrors <- function(genera.list, errors) {
+  key <- paste(errors$genus, errors$family, sep="\r")
+  i <- match(key, paste(genera.list$genus, genera.list$family, sep="\r"))
+  if (any(is.na(i))) {
+    msg <- errors[is.na(i)]
+    mssg <- paste0("did not find errors in data:\n",
+                   paste(msg$family, msg$genus, sep=" / ", collapse="\n"))
+    warning(mssg, immediate.=TRUE)
+    i <- i[!is.na(i)]
+  }
+
+  genera.list[-i, , drop=FALSE]
 }
 
 outputFlatFile<-function(genera.list){
@@ -87,4 +104,8 @@ title_case <- function(x) {
     title_case(x)
   }
   x
+}
+
+read_csv <- function(...) {
+  read.csv(..., stringsAsFactors=TRUE)
 }
