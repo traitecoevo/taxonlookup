@@ -1,12 +1,8 @@
 context("lookup")
 
 test_that("lookup_table", {
-  sp <- c("Heteromma", "Serenoa", "Montrouziera", "Verzinum",
-          "Janusia", "Ericameria", "Odontostomum", "Hippophaestum",
-          "Calyptraria", "Lepiactis", "Xipotheca", "Bifrenaria",
-          "Conchocarpus", "Glossidea", "Dactylanthus", "Laxopetalum",
-          "Chamissoa", "Tamarindus", "Polemoniella", "Macrozamia")
-
+  set.seed(1)
+  sp <- sample(plant_lookup$genus, 20)
   dat <- lookup_table(sp, plant_lookup)
 
   expect_that(nrow(dat), equals(length(sp)))
