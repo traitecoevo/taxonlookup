@@ -17,7 +17,9 @@ downloadPlantList<-function(familyList){
 
 get.genera<-function(family, path){
   ah <- read.csv(file.path(path,family), stringsAsFactors=FALSE)
-  out <- data.frame(family=ah$Family[1], genus=unique(ah$Genus),
+  accepted.species<-subset(ah,Taxonomic.status.in.TPL=="Accepted")
+  if(nrow(accepted.species)==0) return(NULL)
+  out <- data.frame(family=accepted.species$Family[1], genus=unique(accepted.species$Genus),
                     stringsAsFactors=FALSE)
   return(out)
 }
