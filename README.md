@@ -13,7 +13,7 @@ To complete the family to order data (beyond the taxonomic scope of APWeb) we ad
 To use the data from the most recent release.  First install and load devtools; that will then let you load the package from this respository:
 
 ```{r}
-install.packages(c("devtools"))
+install.packages("devtools")
 library(devtools)
 install_github("wcornwell/TaxonLookup")
 library(TaxonLookup)
