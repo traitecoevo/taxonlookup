@@ -1,4 +1,4 @@
-genusFamilyOrder##' Build a lookup table for a set of species
+##' Build a lookup table for a set of species
 ##' @title Build a lookup table for a set of species
 ##' @param species_list Character vector of species names
 ##' @param lookup_table A lookup table, or by default \code{\link{plant_lookup}}
