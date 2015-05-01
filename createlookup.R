@@ -15,17 +15,18 @@ downloadPlantList<-function(familyList){
   path
 }
 
-get.genera<-function(family, path){
+get.genera<-function(family, path,tf){
   ah <- read.csv(file.path(path,family), stringsAsFactors=FALSE)
   accepted.species<-subset(ah,Taxonomic.status.in.TPL=="Accepted")
   if(nrow(accepted.species)==0) return(NULL)
-  out <- data.frame(family=accepted.species$Family[1], genus=unique(accepted.species$Genus),
+  group<-tf$group[match(accepted.species$Family[1],tf$family)]
+  out <- data.frame(family=accepted.species$Family[1], genus=unique(accepted.species$Genus), group=group,
                     stringsAsFactors=FALSE)
   return(out)
 }
 
-combineGeneraLists<-function(path){
-  out<-lapply(dir(path), get.genera, path)
+combineGeneraLists<-function(path,tf){
+  out<-lapply(dir(path), get.genera, path,tf)
   tplGenera<-do.call(rbind,out)
   return(tplGenera)
 }
@@ -59,8 +60,8 @@ fixFernsAndOtherProblems<-function(genera.list, fae){
   genera.list$order <- title_case(genera.list$order)
 
   # Sort rows and columns appropriately:
-  ret <- genera.list[c("genus", "family", "order")]
-  ret <- ret[order(ret$order, ret$family, ret$genus), ]
+  ret <- genera.list[c("genus", "family", "order","group")]
+  ret <- ret[order(ret$group,ret$order, ret$family, ret$genus), ]
   rownames(ret) <- NULL
 
   return(ret)

@@ -18,7 +18,7 @@ targets:
     command: downloadPlantList(VascularPlantFamilies)
 
   tplGenera:
-    command: combineGeneraLists(downloadTPL)
+    command: combineGeneraLists(downloadTPL,VascularPlantFamilies)
 
   lookupRaw:
     command: matchPlantListFamiliesToApweb(tplGenera)
