@@ -84,8 +84,8 @@ dropTplErrors <- function(genera.list, errors) {
   genera.list[-i, , drop=FALSE]
 }
 
-outputFlatFile<-function(genera.list){
-  write.csv(genera.list, "genusFamilyOrder.csv", row.names=FALSE, quote=FALSE)
+outputFlatFile <- function(genera.list, filename) {
+  write.csv(genera.list, filename, row.names=FALSE, quote=FALSE)
 }
 
 packageData <- function(object, filename) {

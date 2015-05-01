@@ -3,13 +3,11 @@ sources:
 
 packages:
   - taxize
-  - devtools
 
 targets:
   all:
     depends:
-      - downloadTPL
-      - data/plant_lookup.rda
+      - plant_lookup.csv
 
   VascularPlantFamilies:
      command: getTplVascularPlantFamilies()
@@ -31,8 +29,5 @@ targets:
   lookupFixed:
     command: fixFernsAndOtherProblems(lookupRaw, lookupPatch, badTPL)
 
-  genusFamilyOrder.csv:
-    command: outputFlatFile(lookupFixed)
-
-  data/plant_lookup.rda:
-    command: packageData(lookupFixed, target_name)
+  plant_lookup.csv:
+    command: outputFlatFile(lookupFixed, target_name)

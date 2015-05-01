@@ -7,5 +7,5 @@
 ^remake_sources\.yml$
 ^source_data$
 ^Makefile$
-^genusFamilyOrder\.csv$
+^plant_lookup\.csv$
 ^\.remake$

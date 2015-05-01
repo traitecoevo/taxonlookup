@@ -14,5 +14,5 @@ vignettes/*.pdf
 .Rproj.user
 .remake/
 .DS_Store
-genusFamilyOrder.csv
+plant_lookup.csv
 plantListAcceptedNames/

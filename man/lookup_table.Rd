@@ -5,7 +5,7 @@
 \title{Build a lookup table for a set of species}
 \usage{
 lookup_table(species_list, lookup_table = NULL, genus_column = "genus",
-  missing_action = c("drop", "NA", "error"))
+  missing_action = c("drop", "NA", "error"), by_species = FALSE)
 }
 \arguments{
 \item{species_list}{Character vector of species names}
@@ -21,6 +21,9 @@ the correct name for \code{\link{plant_lookup}}.}
 \code{"drop"} (the default) generates a table without these
 genera, \code{"NA"} will leave the non-genus taxonomic levels as
 missing values and \code{error} will throw an error.}
+
+\item{by_species}{If \code{TRUE}, then return a larger data frame
+with one row per species and with species as row names.}
 }
 \description{
 Build a lookup table for a set of species

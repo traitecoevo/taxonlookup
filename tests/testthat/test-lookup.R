@@ -1,9 +1,10 @@
 context("lookup")
 
 test_that("lookup_table", {
+  lookup <- plant_lookup()
   set.seed(1)
-  sp <- sample(plant_lookup$genus, 20)
-  dat <- lookup_table(sp, plant_lookup)
+  sp <- sample(lookup$genus, 20)
+  dat <- lookup_table(sp, lookup)
 
   expect_that(nrow(dat), equals(length(sp)))
   expect_that(rownames(dat), equals(as.character(seq_len(nrow(dat)))))
@@ -12,16 +13,16 @@ test_that("lookup_table", {
   sp2 <- sample(c(sp, "missing1", "missing2"))
 
   ## Default is drop:
-  dat <- lookup_table(sp2, plant_lookup)
+  dat <- lookup_table(sp2, lookup)
   expect_that(nrow(dat), equals(length(sp)))
   expect_that(dat$genus, equals(sp2[!grepl("^missing", sp2)]))
 
   ## Or we can error:
-  expect_that(lookup_table(sp2, plant_lookup, missing_action="error"),
+  expect_that(lookup_table(sp2, lookup, missing_action="error"),
               throws_error("Missing genera: missing"))
 
   ## Or we can generate unknowns:
-  dat <- lookup_table(sp2, plant_lookup, missing_action="NA")
+  dat <- lookup_table(sp2, lookup, missing_action="NA")
   expect_that(nrow(dat), equals(length(sp2)))
   expect_that(dat$genus, equals(sp2))
 

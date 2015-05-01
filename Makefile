@@ -40,7 +40,7 @@ clean:
 vignettes: vignettes/traitfill.Rmd
 	Rscript -e 'library(methods); options(warnPartialMatchArgs=FALSE, warnPartialMatchDollar=FALSE); devtools::build_vignettes()'
 
-package_data: data/plant_lookup.Rdata
+package_data: plant_lookup.csv
 	remake $<
 
 .PHONY: clean all test document install vignettes

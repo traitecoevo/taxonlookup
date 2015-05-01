@@ -19,3 +19,7 @@ split_genus <- function(str) {
   str_split <- strsplit(str, "[_ ]+")
   vcapply(str_split, "[[", 1L)
 }
+
+last <- function(x) {
+  x[[length(x)]]
+}
