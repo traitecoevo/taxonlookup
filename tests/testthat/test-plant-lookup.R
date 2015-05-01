@@ -6,4 +6,7 @@ test_that("table sane", {
   expect_that(names(plant_lookup), equals(c("genus", "family", "order")))
   expect_that(any(is.na(plant_lookup)), is_false())
   expect_that(any(plant_lookup == ""), is_false())
+
+  ## This seems desirable:
+  ## expect_that(any(duplicated(plant_lookup$genus)), is_false())
 })

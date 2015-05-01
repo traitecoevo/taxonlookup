@@ -25,17 +25,21 @@ get_plant_lookup <- function() {
 ##' \code{"drop"} (the default) generates a table without these
 ##' genera, \code{"NA"} will leave the non-genus taxonomic levels as
 ##' missing values and \code{error} will throw an error.
+##' @param by_species If \code{TRUE}, then return a larger data frame
+##' with one row per species and with species as row names.
 ##' @export
 lookup_table <- function(species_list, lookup_table=NULL,
                          genus_column="genus",
-                         missing_action=c("drop", "NA", "error")) {
+                         missing_action=c("drop", "NA", "error"),
+                         by_species=FALSE) {
   if (is.null(lookup_table)) {
     lookup_table <- get_plant_lookup()
   }
 
   missing_action <- match.arg(missing_action)
 
-  genera <- unique(split_genus(species_list))
+  genus_list <- split_genus(species_list)
+  genera <- unique(genus_list)
   i <- match(genera, lookup_table[[genus_column]])
 
   if (any(is.na(i))) {
@@ -51,7 +55,12 @@ lookup_table <- function(species_list, lookup_table=NULL,
     ret[[genus_column]][is.na(i)] <- genera[is.na(i)]
   }
 
-  rownames(ret) <- NULL
+  if (by_species) {
+    ret <- ret[match(genus_list, genera), ]
+    rownames(ret) <- species_list
+  } else {
+    rownames(ret) <- NULL
+  }
 
   ret
 }

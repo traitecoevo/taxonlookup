@@ -41,4 +41,11 @@ test_that("lookup_table", {
   dat3 <- lookup_table(sp3)
   expect_that(nrow(dat3), equals(length(sp)))
   expect_that(dat3$genus, equals(unique(sp3)))
+
+  ## by species:
+  pt2 <- sample(c("foo", "bar", "baz"), length(sp3), replace=TRUE)
+  sp4 <- unique(paste(sp3, pt2))
+  dat4 <- lookup_table(sp4, by_species=TRUE)
+  expect_that(rownames(dat4), equals(sp4))
+  expect_that(dat4$genus, equals(split_genus(sp4)))
 })
