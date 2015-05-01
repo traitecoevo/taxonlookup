@@ -44,6 +44,7 @@ lookup_table <- function(species_list, lookup_table=NULL,
 
   if (any(is.na(i))) {
     if (missing_action == "drop") {
+      genera <- genera[!is.na(i)]
       i <- i[!is.na(i)]
     } else if (missing_action == "error") {
       stop("Missing genera: ", pastec(genera[is.na(i)]))
@@ -56,7 +57,12 @@ lookup_table <- function(species_list, lookup_table=NULL,
   }
 
   if (by_species) {
-    ret <- ret[match(genus_list, genera), ]
+    j <- match(genus_list, genera)
+    if (missing_action == "drop") {
+      species_list <- species_list[!is.na(j)]
+      j <- j[!is.na(j)]
+    }
+    ret <- ret[j, ]
     rownames(ret) <- species_list
   } else {
     rownames(ret) <- NULL

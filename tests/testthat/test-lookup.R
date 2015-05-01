@@ -44,4 +44,12 @@ test_that("lookup_table", {
   dat4 <- lookup_table(sp4, by_species=TRUE)
   expect_that(rownames(dat4), equals(sp4))
   expect_that(dat4$genus, equals(split_genus(sp4)))
+
+  sp5 <- sample(c(sp4, "missing1", "missing2"))
+  ## drop missing
+  dat5 <- lookup_table(sp5, by_species=TRUE)
+  expect_that(any(is.na(dat5$family)), is_false())
+
+  dat5 <- lookup_table(sp5, by_species=TRUE, missing_action="NA")
+  expect_that(any(is.na(dat5$family)), is_true())
 })
