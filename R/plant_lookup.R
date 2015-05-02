@@ -25,7 +25,7 @@ plant_lookup <- function(version=plant_lookup_version_current()) {
 ##' @param all test against all version known to the package?
 plant_lookup_versions <- function(all=FALSE) {
   if (all) {
-    c("0.1.0")
+    c("0.1.0", "0.1.1")
   } else {
     re <- "^plant_lookup_(.+).csv$"
     sub(re, "\\1", dir(plant_lookup_path(), re))
