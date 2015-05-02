@@ -127,7 +127,7 @@ readHigherOrderTaxonomy <- function(filename, genera.list) {
   res <- rbind(easy, hard)
 
   rownames(res) <- res$order
-  res[names(res) != "order", ]
+  res[names(res) != "order"]
 }
 
 packageData <- function(higher_order_taxonomy, filename) {
