@@ -23,3 +23,7 @@ split_genus <- function(str) {
 last <- function(x) {
   x[[length(x)]]
 }
+
+is_version <- function(version) {
+  !inherits(try(numeric_version(version), silent=TRUE), "try-error")
+}

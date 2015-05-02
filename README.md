@@ -14,18 +14,18 @@ To use the data from the most recent release.  First install and load devtools; 
 
 ```{r}
 install.packages("devtools")
-library(devtools)
-install_github("wcornwell/TaxonLookup")
+devtools::install_github("richfitz/storr")
+devtools::install_github("wcornwell/TaxonLookup")
 library(TaxonLookup)
 ```
 
-Then you can load the data:
+Then you can load the data using the `plant_lookup()` function:
 
-`pl<-plant_lookup()`
+```
+head(plant_lookup())
+```
 
-And the look up table will then be in R's memory.  
-
-`head(pl)`
+The first call to `plant_lookup` will download the data but subsequent calls will be essentially instantaneous.
 
 If there have been some recent changes to taxonomy you might want to rebuilding the lookup table.  See the section below.
 

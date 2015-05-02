@@ -10,10 +10,14 @@ plant_lookup <- function(version=plant_lookup_version_current()) {
   if (is.null(version)) {
     version <- plant_lookup_version_current(FALSE)
   }
-  ## TODO: this should run through storr I think as that'll make
-  ## subsequent loads way faster?
-  path <- plant_lookup_fetch(version)
-  read.csv(path, stringsAsFactors=FALSE)
+  st <- plant_lookup_storr()
+  if (st$exists(version)) {
+    st$get(version)
+  } else {
+    d <- plant_lookup_fetch(version)
+    st$set(version, d)
+    d
+  }
 }
 
 ##' @export
@@ -32,13 +36,14 @@ plant_lookup_versions <- function(all=FALSE) {
 ##' @rdname plant_lookup
 plant_lookup_version_current <- function(all=FALSE) {
   if (all) {
+    ## TODO: This *should* ping /latest I think.
     last(plant_lookup_versions(TRUE))
   } else {
-    v <- plant_lookup_versions(FALSE)
+    v <- plant_lookup_storr()$list()
     if (length(v) == 0L) {
       plant_lookup_version_current(TRUE)
     } else {
-      last(v)
+      last(sort(numeric_version(v)))
     }
   }
 }
@@ -53,12 +58,13 @@ plant_lookup_path <- function(version=NULL) {
   }
 }
 
-is_version <- function(version) {
-  !inherits(try(numeric_version(version), silent=TRUE), "try-error")
+plant_lookup_storr <- function() {
+  storr::storr_rds(rappdirs::user_data_dir(.packageName),
+                   default_namespace="plant_lookup")
 }
 
 plant_lookup_delete <- function(version) {
-  file.remove(plant_lookup_path(version))
+  plant_lookup_storr()$del(version)
 }
 
 plant_lookup_url <- function(version) {
@@ -67,24 +73,20 @@ plant_lookup_url <- function(version) {
 }
 
 ##' @importFrom downloader download
-plant_lookup_fetch <- function(version, refetch=FALSE) {
-  path <- plant_lookup_path(version)
-  dir.create(path, FALSE, TRUE)
-  dest <- file.path(path, "plant_lookup.csv")
-  if (refetch || !file.exists(dest)) {
-    url <- plant_lookup_url(version)
-    downloader::download(url, dest)
-    ## Detecting error here is surprisingly hard:
-    if (!file.exists(dest)) {
-      stop("Download failed")
-    } else {
-      first <- readLines(dest, n=1, warn=FALSE)
-      if (grepl("error", first, fixed=TRUE) ||
-          grepl("DOCTYPE", first, fixed=TRUE)) {
-        file.remove(dest)
-        stop("Download failed: ", first)
-      }
+plant_lookup_fetch <- function(version) {
+  dest <- tempfile()
+  url <- plant_lookup_url(version)
+  downloader::download(url, dest)
+  ## Detecting error here is surprisingly hard:
+  if (!file.exists(dest)) {
+    stop("Download failed")
+  } else {
+    first <- readLines(dest, n=1, warn=FALSE)
+    if (grepl("error", first, fixed=TRUE) ||
+        grepl("DOCTYPE", first, fixed=TRUE)) {
+      file.remove(dest)
+      stop("Download failed: ", first)
     }
   }
-  invisible(dest)
+  read.csv(dest, stringsAsFactors=FALSE)
 }
