@@ -66,3 +66,16 @@ We will periodically release development versions of the database using github r
 ## Bleeding edge version
 
 Download the package and rerun the build script.  We'll work this way as we add new data to the package.
+
+# Making a release
+
+* Update the `DESCRIPTION` file to increase the version number.  Once we hit version 1, we use [semantic versioning](http://semver.org/) so be aware of when to change what number.  Assume it's `1.2.3` for the rest of instructions.
+* Update known versions in `plant_lookup_versions` (eventually we'll do this with the github api but that will introduce a httr and jsonlite dependency)
+* Run `remake::make()` to rebuild `plant_lookup.csv`
+* Commit and push to github
+* In github, create a new release [link](https://github.com/wcornwell/TaxonLookup/releases/new)
+  - Tag version must be prefixed with the letter "v", e.g., `v1.2.3`
+  - In the release title / description give a short descripton about what the feature(s) that this release adds is/are
+  - Drag the `plant_lookup.csv` file into the upload area or use the "selecting them" link
+  - Click "Publish release"
+* Check that it works by running `TaxonLookup::plant_lookup("1.2.3")` which should pull the data.
