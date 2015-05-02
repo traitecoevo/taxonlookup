@@ -21,11 +21,11 @@ library(TaxonLookup)
 
 Then you can load the data:
 
-`data(plant_lookup)`
+`pl<-plant_lookup()`
 
 And the look up table will then be in R's memory.  
 
-`head(plant_lookup)`
+`head(pl)`
 
 If there have been some recent changes to taxonomy you might want to rebuilding the lookup table.  See the section below.
 
