@@ -1,6 +1,6 @@
 Package: TaxonLookup
 Title: What the package does (one line)
-Version: 0.1.1
+Version: 0.1.2
 Description: What the package does (one paragraph)
 Depends: R (>= 3.1.0)
 License: BSD_2_clause + file LICENSE

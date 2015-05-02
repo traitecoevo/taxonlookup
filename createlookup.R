@@ -20,12 +20,27 @@ downloadPlantList<-function(familyList){
 get.genera<-function(family, path,tf){
   ah <- read.csv(file.path(path,family), stringsAsFactors=FALSE)
   accepted.species<-subset(ah,Taxonomic.status.in.TPL=="Accepted")
-  if(nrow(accepted.species)==0) return(NULL)
   group<-tf$group[match(accepted.species$Family[1],tf$family)]
+
+  if (nrow(accepted.species)==0) {
+    return(NULL)
+  }
+
+  not.species <- c("Species.hybrid.marker", "Genus.hybrid.marker", "Infraspecific.epithet")
+  tmp <- accepted.species[not.species]
+  accepted.species <- accepted.species[apply(tmp == "" | is.na(tmp), 1, all), ]
+
+  if (nrow(accepted.species)==0) {
+    return(NULL)
+  }
+
+  # not using table(accepted.species$Genus) because it leaves things oddly structured
+  n.species <- tapply(accepted.species$Infraspecific.rank, accepted.species$Genus, length)
+
   out <- data.frame(family=accepted.species$Family[1],
-                    genus=unique(accepted.species$Genus),
+                    genus=names(n.species),
                     group=group,
-                    number.of.species=tapply(accepted.species$Infraspecific.rank, accepted.species$Genus,FUN=function(x)sum(is.na(x)|x=="")),
+                    number.of.species=n.species,
                     stringsAsFactors=FALSE)
   return(out)
 }
