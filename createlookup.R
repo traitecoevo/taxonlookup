@@ -15,12 +15,17 @@ downloadPlantList<-function(familyList){
   path
 }
 
+
+
 get.genera<-function(family, path,tf){
   ah <- read.csv(file.path(path,family), stringsAsFactors=FALSE)
   accepted.species<-subset(ah,Taxonomic.status.in.TPL=="Accepted")
   if(nrow(accepted.species)==0) return(NULL)
   group<-tf$group[match(accepted.species$Family[1],tf$family)]
-  out <- data.frame(family=accepted.species$Family[1], genus=unique(accepted.species$Genus), group=group,
+  out <- data.frame(family=accepted.species$Family[1],
+                    genus=unique(accepted.species$Genus),
+                    group=group,
+                    number.of.species=tapply(accepted.species$Infraspecific.rank, accepted.species$Genus,FUN=function(x)sum(is.na(x)|x=="")),
                     stringsAsFactors=FALSE)
   return(out)
 }
@@ -63,8 +68,8 @@ fixFernsAndOtherProblems<-function(genera.list, fae, errors){
   ret <- dropTplErrors(genera.list, errors)
 
   # Sort rows and columns appropriately:
-  ret <- ret[c("genus", "family", "order", "group")]
-  ret <- ret[order(ret$group,ret$order, ret$family, ret$genus), ]
+  ret <- ret[c("number.of.species","genus", "family", "order", "group")]
+  ret <- ret[order(ret$group,ret$order, ret$family, ret$genus,ret$number.of.species), ]
   rownames(ret) <- NULL
 
   return(ret)
