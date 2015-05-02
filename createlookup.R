@@ -88,10 +88,30 @@ outputFlatFile <- function(genera.list, filename) {
   write.csv(genera.list, filename, row.names=FALSE, quote=FALSE)
 }
 
-packageData <- function(object, filename) {
-  name <- tools::file_path_sans_ext(basename(filename))
-  assign(name, object)
-  save(list=name, file=filename)
+readHigherOrderTaxonomy <- function(filename, genera.list) {
+  d <- read_csv(filename)
+
+  easy <- d[setdiff(names(d), c("X", "family"))]
+  easy <- unique(easy[easy$order != "", ])
+
+  hard <- unique(d[d$order == "", setdiff(names(d), "X")])
+  i <- match(hard$family, genera.list$family)
+  if (any(is.na(i))) {
+    stop("higher order taxonomy needs work")
+  }
+  hard$order <- genera.list$order[i]
+  hard <- hard[setdiff(names(hard), "family")]
+  hard <- hard[!(hard$order %in% easy$order), ]
+  hard <- unique(hard)
+
+  res <- rbind(easy, hard)
+
+  rownames(res) <- res$order
+  res[names(res) != "order", ]
+}
+
+packageData <- function(higher_order_taxonomy, filename) {
+  save(list=c("higher_order_taxonomy"), file=filename)
 }
 
 title_case <- function(x) {

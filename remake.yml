@@ -8,6 +8,7 @@ targets:
   all:
     depends:
       - plant_lookup.csv
+      - R/sysdata.rda
 
   VascularPlantFamilies:
      command: getTplVascularPlantFamilies()
@@ -31,3 +32,12 @@ targets:
 
   plant_lookup.csv:
     command: outputFlatFile(lookupFixed, target_name)
+
+  source_data/Spermatophyta_Genera.csv:
+    download: http://datadryad.org/bitstream/handle/10255/dryad.59001/Spermatophyta_Genera.csv?sequence=2
+
+  higherOrderTaxonomy:
+    command: readHigherOrderTaxonomy("source_data/Spermatophyta_Genera.csv", lookupFixed)
+
+  R/sysdata.rda:
+    command: packageData(higherOrderTaxonomy, target_name)
