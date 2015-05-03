@@ -5,10 +5,7 @@ Description: a set of scripts to dynamically build a genus-family-order-higher t
 Depends: R (>= 3.1.0)
 License: BSD_2_clause + file LICENSE
 LazyData: true
-Authors@R: as.person(c(
-    “Will Cornwell <wcornwell@gmail.com> [aut, cre]", 
-    “Rich FitzJohn <winston@rstudio.com> [aut]”,
-    “Matt Pennell <mwpennell@gmail.com> [aut]”
+Authors@R: as.person(c("Will Cornwell <wcornwell@gmail.com> [aut, cre]","Rich FitzJohn <rich.fitzjohn@gmail.com> [aut]","Matt Pennell <mwpennell@gmail.com> [aut]"
   ))
 Maintainer: Will Cornwell <rich.fitzjohn@gmail.com>
 Imports: rappdirs, downloader, storr
