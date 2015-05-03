@@ -1,12 +1,11 @@
 Package: TaxonLookup
 Title: A dynamically updating taxonomic resource for vascular plants
 Version: 0.1.4
-Description: a set of scripts to dynamically build a genus-family-order-higher taxonomy lookup for vascular plants
+Description: This is a set of scripts that dynamically build a versioned genus-family-order-higher taxa lookup table for vascular plants (with possible extensions to other taxa).
 Depends: R (>= 3.1.0)
 License: BSD_2_clause + file LICENSE
 LazyData: true
-Authors@R: as.person(c("Will Cornwell <wcornwell@gmail.com> [aut, cre]","Rich FitzJohn <rich.fitzjohn@gmail.com> [aut]","Matt Pennell <mwpennell@gmail.com> [aut]"
-  ))
-Maintainer: Will Cornwell <rich.fitzjohn@gmail.com>
+Authors@R: as.person(c("Will Cornwell <wcornwell@gmail.com> [aut, cre]","Rich FitzJohn <rich.fitzjohn@gmail.com> [aut]","Matt Pennell <mwpennell@gmail.com> [aut]"))
+Maintainer: Will Cornwell <wcornwell@gmail.com>
 Imports: rappdirs, downloader, storr
 Suggests: testthat
