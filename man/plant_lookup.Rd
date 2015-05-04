@@ -24,15 +24,13 @@ Lookup table relating plant genera, families and orders along with number of spe
 persists across package installations.
 }
 \details{
-The data for this lookup primarily comes from three sources:
+The data for this lookup primarily comes from two sources:
 
 1. The Plant List v1.1. (http://www.theplantlist.org/) for accepted genera to families and species richness within each genera.  Note that we do not consider hybrids (e.g. Genus x species) as species for this count while the plant list summary statistics do, so the counts will not line up exactly.
 
 2. APWeb (http://www.mobot.org/MOBOT/research/APweb/) for family level synonymies and family to order
 
-3. A higher-level taxonomy lookup (http://datadryad.org/resource/doi:10.5061/dryad.63q27.2/1.1) compiled by Dave Tank and colleagues
-
-To complete the family to order data (beyond the taxonomic scope of APWeb) we add a few additional family to order mappings for non-seed plants (mostly ferns).  We also correct some spelling errors, special character issues, and other errors from The Plant List.
+To complete the family to order data (beyond the taxonomic scope of APWeb) we add a few additional family to order mappings for non-seed plants (mostly ferns).  We also correct some spelling errors, special character issues, and a few other errors from The Plant List.
 }
 \examples{
 #
