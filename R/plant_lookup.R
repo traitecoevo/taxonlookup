@@ -1,18 +1,30 @@
-##' Lookup table relating plant genera, families and orders along with number of species in each genus.  Data
-##' persists across package installations.
+##' Lookup table relating plant genera, families and orders along with
+##' number of species in each genus.  Data persists across package
+##' installations.
 ##'
 ##' The data for this lookup primarily comes from two sources:
 ##'
-##' 1. The Plant List v1.1. (http://www.theplantlist.org/) for accepted genera to families and species richness within each genera.  Note that we do not consider hybrids (e.g. Genus x species) as species for this count while the plant list summary statistics do, so the counts will not line up exactly.
+##' 1. The Plant List v1.1. (http://www.theplantlist.org/) for
+##' accepted genera to families and species richness within each
+##' genera.  Note that we do not consider hybrids (e.g. Genus x
+##' species) as species for this count while the plant list summary
+##' statistics do, so the counts will not line up exactly.
 ##'
-##' 2. APWeb (http://www.mobot.org/MOBOT/research/APweb/) for family level synonymies and family to order
+##' 2. APWeb (http://www.mobot.org/MOBOT/research/APweb/) for family
+##' level synonymies and family to order
 ##'
-##'To complete the family to order data (beyond the taxonomic scope of APWeb) we add a few additional family to order mappings for non-seed plants (mostly ferns).  We also correct some spelling errors, special character issues, and a few other errors from The Plant List.
+##' To complete the family to order data (beyond the taxonomic scope
+##' of APWeb) we add a few additional family to order mappings for
+##' non-seed plants (mostly ferns).  We also correct some spelling
+##' errors, special character issues, and a few other errors from The
+##' Plant List.
 ##'
 ##' @title Plant lookup table
 ##' @param version Version number.  The default will load the most
 ##' recent version on your computer or the most recent version known
 ##' to the package if you have never downloaded the data before.
+##' @param include_counts Logical: Include a column of genus counts as
+##' \code{number.of.species}.
 ##' @export
 ##' @examples
 ##' #
@@ -30,18 +42,25 @@
 ##' # find the number of species in Asteraceae
 ##' sum(pl$number.of.species[pl$family=="Asteraceae"])
 ##'
-plant_lookup <- function(version=plant_lookup_version_current()) {
+plant_lookup <- function(version=plant_lookup_version_current(),
+                         include_counts=FALSE) {
   if (is.null(version)) {
     version <- plant_lookup_version_current(FALSE)
   }
+
   st <- plant_lookup_storr()
   if (st$exists(version)) {
-    st$get(version)
+    d <- st$get(version)
   } else {
     d <- plant_lookup_fetch(version)
     st$set(version, d)
-    d
   }
+
+  if (!include_counts) {
+    d <- d[names(d) != "number.of.species"]
+  }
+
+  d
 }
 
 ##' @export
