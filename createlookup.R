@@ -64,7 +64,7 @@ matchPlantListFamiliesToApweb<-function(tplGenera){
   apFamilies$acceptedFamilies<-apFamilies$synonym
   apFamilies$acceptedFamilies[is.na(apFamilies$acceptedFamilies)]<-apFamilies$family[is.na(apFamilies$acceptedFamilies)]
   #tplGenera$apweb.family<-apFamilies$acceptedFamilies[match(tplGenera$family,apFamilies$acceptedFamilies)]
-  #tplGenera$apweb.family[is.na(tplGenera$apweb.family)]<-apFamilies$family[match(tplGenera$family,apFamilies$family)[is.na(tplGenera$apweb.family)]]
+  #tplGenera$apweb.family[is.na(tplGenera$apweb.family)]<-apFamilies$acceptedFamilies[match(tplGenera$family,apFamilies$family)[is.na(tplGenera$apweb.family)]]
   #tplGenera$apweb.family[is.na(tplGenera$apweb.family)]<-tplGenera$family[is.na(tplGenera$apweb.family)]
   tplGenera$order<-apFamilies$order[match(tplGenera$family,apFamilies$acceptedFamilies)]
   tplGenera$order[is.na(tplGenera$order)]<-apFamilies$order[match(tplGenera$family,apFamilies$family)[is.na(tplGenera$order)]]
