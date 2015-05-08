@@ -11,7 +11,13 @@ downloadPlantList<-function(familyList){
   dir.create(path, FALSE)
   alreadyHaveFile<-dir(path)
   alreadyHave<-sub(".csv","",alreadyHaveFile)
-  suppressWarnings(tpl_get(path,family=familyList$family[!familyList$family%in%alreadyHave]))
+  # hack until taxize fixes special character handling
+  familyList$family[familyList$family=="IsoÃ«taceae"]<-"Zygophyllaceae"
+  if(any(!familyList$family%in%alreadyHave)){
+    suppressWarnings(tpl_get(path,family=familyList$family[!familyList$family%in%alreadyHave]))
+  }
+  #currently doesn't download
+  #http://www.theplantlist.org/1.1/browse/P/Iso%C3%ABtaceae/Iso%C3%ABtaceae.csv
   path
 }
 
@@ -57,6 +63,9 @@ matchPlantListFamiliesToApweb<-function(tplGenera){
   apFamilies$order<-gsub(',',"",apFamilies$order)
   apFamilies$acceptedFamilies<-apFamilies$synonym
   apFamilies$acceptedFamilies[is.na(apFamilies$acceptedFamilies)]<-apFamilies$family[is.na(apFamilies$acceptedFamilies)]
+  #tplGenera$apweb.family<-apFamilies$acceptedFamilies[match(tplGenera$family,apFamilies$acceptedFamilies)]
+  #tplGenera$apweb.family[is.na(tplGenera$apweb.family)]<-apFamilies$family[match(tplGenera$family,apFamilies$family)[is.na(tplGenera$apweb.family)]]
+  #tplGenera$apweb.family[is.na(tplGenera$apweb.family)]<-tplGenera$family[is.na(tplGenera$apweb.family)]
   tplGenera$order<-apFamilies$order[match(tplGenera$family,apFamilies$acceptedFamilies)]
   tplGenera$order[is.na(tplGenera$order)]<-apFamilies$order[match(tplGenera$family,apFamilies$family)[is.na(tplGenera$order)]]
   return(tplGenera)

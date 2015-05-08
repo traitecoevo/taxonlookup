@@ -27,7 +27,7 @@
 ##' # find the number of Conifer species in the world
 ##' sum(ho$number.of.species[ho$Coniferae=="Coniferae"])
 ##'
-add_higher_order <- function(lookup=plant_lookup(), order_column="order") {
+add_higher_order <- function(lookup=plant_lookup(include_counts=TRUE), order_column="order") {
   hot <- higher_order_taxonomy[lookup[[order_column]], ]
   rownames(hot) <- NULL
   hot[is.na(hot)] <- ""
