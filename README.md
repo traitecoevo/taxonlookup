@@ -1,8 +1,8 @@
-# TaxonLookup: a set of scripts to dynamically build a genus-family-order lookup for vascular plants
+# TaxonLookup: a taxonomic lookup table for vascular plants
 
 [![Build Status](https://travis-ci.org/wcornwell/TaxonLookup.png?branch=master)](https://travis-ci.org/wcornwell/TaxonLookup)
 
-This is a set of scripts that dynamically build a genus-family-order look-up table for vascular plants.  The data for this lookup primarily comes from three sources: 
+This is designed to be a living database--it will update as taxonomy changes (and it always will).  There is a set of scripts that dynamically build a genus-family-order look-up table for vascular plants.  The data for this lookup primarily comes from three sources: 
 
 1. [The Plant List](http://www.theplantlist.org/) for accepted genera to families
 
@@ -27,11 +27,11 @@ Then you can load the data using the `plant_lookup()` function:
 head(plant_lookup())
 ```
 
-The first call to `plant_lookup` will download the data but subsequent calls will be essentially instantaneous.
+The first call to `plant_lookup` will download the data, but subsequent calls will be essentially instantaneous.
 
 For taxonomic groups higher than order, use the `add_higher_order()` function.  
 
-If there have been some recent changes to taxonomy that are both important for your project and incorporated in the cannical sources but are more recent than the last release of this package, you might want to rebuild the lookup table. 
+For most uses, the latest release should be sufficient.  However, if there have been some recent changes to taxonomy  that are both important for your project and incorporated in the cannical sources (the plant list or APWeb) but are more recent than the last release of this package, you might want to rebuild the lookup table from the sources. 
 
 # Rebuilding the lookup table
 
