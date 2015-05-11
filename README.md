@@ -2,15 +2,15 @@
 
 [![Build Status](https://travis-ci.org/wcornwell/TaxonLookup.png?branch=master)](https://travis-ci.org/wcornwell/TaxonLookup)
 
-This is designed to be a living database--it will update as taxonomy changes (and it always will).  There is a set of scripts that dynamically build a genus-family-order look-up table for vascular plants.  The data for this lookup primarily comes from three sources: 
+This is designed to be a living database--it will update as taxonomy changes (which it always will).  There is a set of scripts that dynamically build a genus-family-order look-up table for vascular plants with the data lookup primarily coming from three sources: 
 
 1. [The Plant List](http://www.theplantlist.org/) for accepted genera to families
 
-2. [APWeb](http://www.mobot.org/MOBOT/research/APweb/) for family level synonymies and family to order
+2. [APWeb](http://www.mobot.org/MOBOT/research/APweb/) for family-level synonymies and family to order
 
 3. [A higher-level taxonomy lookup](http://datadryad.org/resource/doi:10.5061/dryad.63q27.2/1.1) compiled by [Dave Tank](http://phylodiversity.net/dtank/Tank_Lab/Tank_Lab.html) and colleagues
 
-To complete the family to order data (beyond the taxonomic scope of APWeb) we add a few additional family to order mappings for non-seed plants (mostly ferns).  We also correct some spelling errors, special character issues, and other errors from The Plant List.  We will try to keep this up-to-date, but there may new errors introduced as the cannonical data sources shift to future versions.  
+To complete the family-to-order data we add a few additional family to order mappings for non-seed plants (mostly ferns which are beyond the taxonomic scope of APWeb).  We also correct some spelling errors, special character issues, and other errors from The Plant List.  We will try to keep this error correction up-to-date, but there may new errors introduced as the cannonical data sources shift to future versions.  
 
 To use the data from the most recent release.  First install and load devtools; that will then let you load the package from this respository:
 
@@ -28,6 +28,12 @@ head(plant_lookup())
 ```
 
 The first call to `plant_lookup` will download the data, but subsequent calls will be essentially instantaneous.
+
+If you are interested in diversity data, the data object also stores the number of accepted species within each genus as per the plant list:
+
+```r
+head(plant_lookup(include_counts = TRUE))
+```
 
 For taxonomic groups higher than order, use the `add_higher_order()` function.  
 
