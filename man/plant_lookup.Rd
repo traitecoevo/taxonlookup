@@ -51,8 +51,12 @@ Plant List.
 # see the format of the resource
 head(plant_lookup())
 #
+# specify a particular version of the data
+# this will
+head(plant_lookup(version = "0.1.3"))
+#
 # load the data.frame into memory
-pl<-plant_lookup()
+pl<-plant_lookup(include_counts = TRUE)
 #
 # return family, order, and number of species for the genus Eucalyptus
 pl$family[pl$genus=="Eucalyptus"]
