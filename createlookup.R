@@ -2,7 +2,7 @@ getTplVascularPlantFamilies<-function(){
   #get full list of families
   tf<-tpl_families()
   #exclude bryophytes
-  tf<-subset(tf,tf$group!="Bryophytes")
+  #tf<-subset(tf,tf$group!="Bryophytes")
   return(tf)
 }
 
@@ -12,7 +12,7 @@ downloadPlantList<-function(familyList){
   alreadyHaveFile<-dir(path)
   alreadyHave<-sub(".csv","",alreadyHaveFile)
   # hack until taxize fixes special character handling
-  familyList$family[familyList$family=="IsoÃ«taceae"]<-"Zygophyllaceae"
+  # familyList$family[familyList$family=="IsoÃ«taceae"]<-"Zygophyllaceae"
   if(any(!familyList$family%in%alreadyHave)){
     suppressWarnings(tpl_get(path,family=familyList$family[!familyList$family%in%alreadyHave]))
   }
@@ -66,6 +66,8 @@ matchPlantListFamiliesToApweb<-function(tplGenera){
   #tplGenera$apweb.family<-apFamilies$acceptedFamilies[match(tplGenera$family,apFamilies$acceptedFamilies)]
   #tplGenera$apweb.family[is.na(tplGenera$apweb.family)]<-apFamilies$acceptedFamilies[match(tplGenera$family,apFamilies$family)[is.na(tplGenera$apweb.family)]]
   #tplGenera$apweb.family[is.na(tplGenera$apweb.family)]<-tplGenera$family[is.na(tplGenera$apweb.family)]
+  tplGenera$family[tplGenera$family=="Dryopteridacae"]<-"Dryopteridaceae"
+  tplGenera$family[tplGenera$family=="Apleniaceae"]<-"Aspleniaceae"
   tplGenera$order<-apFamilies$order[match(tplGenera$family,apFamilies$acceptedFamilies)]
   tplGenera$order[is.na(tplGenera$order)]<-apFamilies$order[match(tplGenera$family,apFamilies$family)[is.na(tplGenera$order)]]
   return(tplGenera)
@@ -73,9 +75,9 @@ matchPlantListFamiliesToApweb<-function(tplGenera){
 
 fixFernsAndOtherProblems<-function(genera.list, fae, errors){
   problems<-unique(genera.list$family[is.na(genera.list$order)])
-  genera.list$family[genera.list$family=="Dryopteridacae"]<-"Dryopteridaceae" # spelling mistake in the plant list
+  #genera.list$family[genera.list$family=="Dryopteridacae"]<-"Dryopteridaceae" # spelling mistake in the plant list
   genera.list$order[is.na(genera.list$order)]<-fae$order[match(genera.list$family,fae$family)[is.na(genera.list$order)]]
-  genera.list$order[genera.list$family=="Cystodiaceae"]<-"Polypodiales"
+  #genera.list$order[genera.list$family=="Cystodiaceae"]<-"Polypodiales"
   genera.list$family[genera.list$family=="Isoëtaceae"]<-"Isoetaceae"
   genera.list$order[genera.list$family=="Isoetaceae"]<-"Isoetales"
 
