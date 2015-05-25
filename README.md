@@ -2,13 +2,9 @@
 
 [![Build Status](https://travis-ci.org/wcornwell/TaxonLookup.png?branch=master)](https://travis-ci.org/wcornwell/TaxonLookup)
 
-This is designed to be a living database--it will update as taxonomy changes (which it always will).  
-These updates will correspond with changes to the version number of this resource, and each version
-of the database will be available via [Github Releases](https://github.com/blog/1547-release-your-software). 
-**If you use this resource please note the version number.  This can be found by running `plant_lookup_version_current()`**  The releases should be stable 
-allowing for anyone in the future to go back an use **exactly** the same version of the data for their analysis.
+This is designed to be a living database--it will update as taxonomy changes (which it always will). These updates will correspond with changes to the version number of this resource, and each version of the database will be available via [http://travis-ci.org](travis-ci) and [Github Releases](https://github.com/blog/1547-release-your-software). If you use this resource, please note the version number, which can be found by running `plant_lookup_version_current()`  This will allow anyone in the future to go back and use **exactly** the same version of the data for their analysis.
  
-The core of this repository is a set of scripts that dynamically build a genus-family-order-higher taxa look-up table for land plants with the data lookup primarily coming from three sources: 
+The core of this repository is a set of scripts that dynamically build a genus-family-order-higher taxa look-up table for land plants with the data lookup primarily coming from three sources (with scaping done by (taxize)[https://github.com/ropensci/taxize]): 
 
 1. [The Plant List](http://www.theplantlist.org/) for accepted genera to families
 
@@ -16,11 +12,9 @@ The core of this repository is a set of scripts that dynamically build a genus-f
 
 3. [A higher-level taxonomy lookup](http://datadryad.org/resource/doi:10.5061/dryad.63q27.2/1.1) compiled by [Dave Tank](http://phylodiversity.net/dtank/Tank_Lab/Tank_Lab.html) and colleagues
 
-We have a complete genus-family-order mapping for vascular plants. For bryophytes, there is only a genus-family mapping at present. 
-We also correct some spelling errors, special character issues, and other errors from The Plant List.  We will try to keep this error correction up-to-date, but there may new errors introduced as the cannonical data sources shift to future versions.  
+We have a complete genus-family-order mapping for vascular plants. For bryophytes, there is only a genus-family mapping at present. We also correct some spelling errors, special character issues, and other errors from The Plant List.  We will try to keep this error correction up-to-date, but there may new errors introduced as the cannonical data sources shift to future versions.  
 
-The scripts are in the repository but not in the package.  Only the data and ways to access the data are in the package.  The reason for this is explained further down in the readme.  
-To use the data from the most recent release: first install and load devtools; that will then let you load the package from this respository:
+The scripts are in the repository but not in the package.  Only the data and ways to access the data are in the package.  The reason for this is explained further down in the readme.  To use the data from the most recent release: first install and load devtools; that will then let you load the package from this respository:
 
 ```r
 install.packages("devtools")
@@ -35,9 +29,7 @@ Then you can load the data using the `plant_lookup()` function:
 head(plant_lookup())
 ```
 
-The first call to `plant_lookup` will download the data, but subsequent calls will be essentially instantaneous.
-
-If you are interested in diversity data, the data object also stores the number of accepted species within each genus as per the plant list:
+The first call to `plant_lookup` will download the data, but subsequent calls will be essentially instantaneous.  If you are interested in diversity data, the data object also stores the number of accepted species within each genus as per the plant list:
 
 ```r
 head(plant_lookup(include_counts = TRUE))
@@ -64,19 +56,13 @@ Download and install 3 additional packages from github:
 	devtools::install_github("ropensci/taxize")
 ```
 
-Or, if you already have remake installed run
-
-```r
-    remake::install_missing_packages()
-```
-
-Then run the following command from within R.  Make sure the home directory is within the repository:
+This will require a recent version of taxize, so if you have that already installed, please re-install.  Then run the following command from within R.  Make sure the home directory is within the repository:
 
 ```r
 	remake::make()
 ```	
 
-This requires a working internet connection and that the plant list, mobot, and datadryad servers are up.  This will dynamically re-create the lookup tables within your local version of the package, as well as save the main file as a .csv in your home directory.
+This requires a working internet connection and that the plant list, mobot, and datadryad servers are up and working properly.  This will dynamically re-create the lookup tables within your local version of the package, as well as save the main file as a `.csv` in your home directory.
 
 # Living database
 
