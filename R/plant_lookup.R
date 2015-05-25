@@ -23,12 +23,16 @@
 ##' @param version Version number.  The default will load the most
 ##' recent version on your computer or the most recent version known
 ##' to the package if you have never downloaded the data before.
-##' @param include_counts Logical: Include a column of genus counts as
+##' @param include_counts Logical: Include a column of number of "accepted" species within each genus counts as
 ##' \code{number.of.species}.
 ##' @export
 ##' @examples
 ##' #
 ##' # see the format of the resource
+##' head(plant_lookup())
+##'
+##' # or with number of species in each genus.
+##'
 ##' head(plant_lookup(include_counts = TRUE))
 ##' #
 ##' # load the data.frame into memory
@@ -68,7 +72,7 @@ plant_lookup <- function(version=plant_lookup_version_current(),
 ##' @param all test against all version known to the package?
 plant_lookup_versions <- function(all=FALSE) {
   if (all) {
-    c("0.1.0", "0.1.1","0.1.2","0.1.3","0.1.4","0.2.0")
+    c("0.1.0", "0.1.1","0.1.2","0.1.3","0.1.4","0.2.0","0.2.1")
   } else {
     plant_lookup_storr()$list()
   }
