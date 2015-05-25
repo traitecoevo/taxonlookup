@@ -2,7 +2,13 @@
 
 [![Build Status](https://travis-ci.org/wcornwell/TaxonLookup.png?branch=master)](https://travis-ci.org/wcornwell/TaxonLookup)
 
-This is designed to be a living database--it will update as taxonomy changes (which it always will).  There is a set of scripts that dynamically build a genus-family-order look-up table for vascular plants with the data lookup primarily coming from three sources: 
+This is designed to be a living database--it will update as taxonomy changes (which it always will).  
+These updates will correspond with changes to the version number of this resource, and each version
+of the database will be available via [Github Releases](https://github.com/blog/1547-release-your-software). 
+*If you use this resource please note the version number*.  The releases should be stable 
+allowing for anyone in the future to go back an use *exactly* the same version of the data for their analysis
+ 
+The core of this repository is a set of scripts that dynamically build a genus-family-order look-up table for land plants with the data lookup primarily coming from three sources: 
 
 1. [The Plant List](http://www.theplantlist.org/) for accepted genera to families
 
@@ -14,7 +20,10 @@ We have a complete genus-family-order mapping for vascular plants. For bryophyte
 We also correct some spelling errors, special character issues, and other errors from The Plant List.  
 We will try to keep this error correction up-to-date, but there may new errors introduced as the cannonical data sources shift to future versions.  
 
-To use the data from the most recent release.  First install and load devtools; that will then let you load the package from this respository:
+The scripts are in the repository but not in the package.  Only the data and ways to access the data are in the package.  
+The reason for this is explained further down in the readme.  
+To use the data from the most recent release: first install and load devtools; 
+that will then let you load the package from this respository:
 
 ```r
 install.packages("devtools")
@@ -39,7 +48,8 @@ head(plant_lookup(include_counts = TRUE))
 
 For taxonomic groups higher than order, use the `add_higher_order()` function.  
 
-For most uses, the latest release should be sufficient.  However, if there have been some recent changes to taxonomy  that are both important for your project and incorporated in the cannical sources (the plant list or APWeb) but are more recent than the last release of this package, you might want to rebuild the lookup table from the sources. 
+For most uses, the latest release should be sufficient, and this is all that is necessary to use the data.  
+However, if there have been some recent changes to taxonomy  that are both important for your project and incorporated in the cannical sources (the plant list or APWeb) but are more recent than the last release of this package, you might want to rebuild the lookup table from the sources. 
 
 # Rebuilding the lookup table
 
@@ -85,7 +95,7 @@ We will periodically release development versions of the database using github r
 
 Download the package and rerun the build script.  We'll work this way as we add new data to the package.
 
-# Making a release
+# Notes for making a release using this *living dataset* design
 
 * Update the `DESCRIPTION` file to increase the version number.  Once we hit version 1, we use [semantic versioning](http://semver.org/) so be aware of when to change what number.  Assume it's `1.2.3` for the rest of instructions.
 * Update known versions in `plant_lookup_versions` (eventually we'll do this with the github api but that will introduce a httr and jsonlite dependency)

@@ -18,7 +18,7 @@ plant_lookup_version_current(all = FALSE)
 recent version on your computer or the most recent version known
 to the package if you have never downloaded the data before.}
 
-\item{include_counts}{Logical: Include a column of genus counts as
+\item{include_counts}{Logical: Include a column of number of "accepted" species within each genus counts as
 \code{number.of.species}.}
 
 \item{all}{test against all version known to the package?}
@@ -49,6 +49,10 @@ and a few other errors from The Plant List.
 \examples{
 #
 # see the format of the resource
+head(plant_lookup())
+
+# or with number of species in each genus.
+
 head(plant_lookup(include_counts = TRUE))
 #
 # load the data.frame into memory
