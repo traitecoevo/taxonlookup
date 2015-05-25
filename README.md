@@ -1,4 +1,4 @@
-# TaxonLookup: a taxonomic lookup table for vascular plants
+# TaxonLookup: a taxonomic lookup table for land plants
 
 [![Build Status](https://travis-ci.org/wcornwell/TaxonLookup.png?branch=master)](https://travis-ci.org/wcornwell/TaxonLookup)
 
@@ -10,7 +10,9 @@ This is designed to be a living database--it will update as taxonomy changes (wh
 
 3. [A higher-level taxonomy lookup](http://datadryad.org/resource/doi:10.5061/dryad.63q27.2/1.1) compiled by [Dave Tank](http://phylodiversity.net/dtank/Tank_Lab/Tank_Lab.html) and colleagues
 
-To complete the family-to-order data we add a few additional family to order mappings for non-seed plants (mostly ferns which are beyond the taxonomic scope of APWeb).  We also correct some spelling errors, special character issues, and other errors from The Plant List.  We will try to keep this error correction up-to-date, but there may new errors introduced as the cannonical data sources shift to future versions.  
+We have a complete genus-family-order mapping for vascular plants. For bryophytes, there is only a genus-family mapping at present. 
+We also correct some spelling errors, special character issues, and other errors from The Plant List.  
+We will try to keep this error correction up-to-date, but there may new errors introduced as the cannonical data sources shift to future versions.  
 
 To use the data from the most recent release.  First install and load devtools; that will then let you load the package from this respository:
 

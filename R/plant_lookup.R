@@ -8,16 +8,16 @@
 ##' accepted genera to families and species richness within each
 ##' genera.  Note that we do not consider hybrids (e.g. Genus x
 ##' species) as species for this count while the plant list summary
-##' statistics do, so the counts will not line up exactly.
+##' statistics do, so the the counts from this package will not line up exactly
+##' with the ones on the TPL website.
 ##'
 ##' 2. APWeb (http://www.mobot.org/MOBOT/research/APweb/) for family
-##' level synonymies and family to order
+##' level synonymies and family-to-order for all vascular plant families.
+##' Note that there is not currently order-level information available for Bryophytes.
 ##'
-##' To complete the family to order data (beyond the taxonomic scope
-##' of APWeb) we add a few additional family to order mappings for
-##' non-seed plants (mostly ferns).  We also correct some spelling
-##' errors, special character issues, and a few other errors from The
-##' Plant List.
+##' 3. We correct some spelling
+##' errors, special character issues, genera listed in multiple families,
+##' and a few other errors from The Plant List.
 ##'
 ##' @title Plant lookup table
 ##' @param version Version number.  The default will load the most
@@ -29,18 +29,18 @@
 ##' @examples
 ##' #
 ##' # see the format of the resource
-##' head(plant_lookup())
+##' head(plant_lookup(include_counts = TRUE))
 ##' #
 ##' # load the data.frame into memory
-##' pl<-plant_lookup()
+##' pl<-plant_lookup(include_counts = TRUE)
 ##' #
 ##' # return family, order, and number of species for the genus Eucalyptus
 ##' pl$family[pl$genus=="Eucalyptus"]
 ##' pl$order[pl$genus=="Eucalyptus"]
 ##' pl$number.of.species[pl$genus=="Eucalyptus"]
 ##' #
-##' # find the number of species in Asteraceae
-##' sum(pl$number.of.species[pl$family=="Asteraceae"])
+##' # find the number of accepted species within the Myrtaceae
+##' sum(pl$number.of.species[pl$family=="Myrtaceae"])
 ##'
 plant_lookup <- function(version=plant_lookup_version_current(),
                          include_counts=FALSE) {
@@ -68,7 +68,7 @@ plant_lookup <- function(version=plant_lookup_version_current(),
 ##' @param all test against all version known to the package?
 plant_lookup_versions <- function(all=FALSE) {
   if (all) {
-    c("0.1.0", "0.1.1","0.1.2","0.1.3","0.1.4")
+    c("0.1.0", "0.1.1","0.1.2","0.1.3","0.1.4","0.2.0")
   } else {
     plant_lookup_storr()$list()
   }
