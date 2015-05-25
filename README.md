@@ -2,9 +2,9 @@
 
 [![Build Status](https://travis-ci.org/wcornwell/TaxonLookup.png?branch=master)](https://travis-ci.org/wcornwell/TaxonLookup)
 
-This is designed to be a living database--it will update as taxonomy changes (which it always will). These updates will correspond with changes to the version number of this resource, and each version of the database will be available via [http://travis-ci.org](travis-ci) and [Github Releases](https://github.com/blog/1547-release-your-software). If you use this resource, please note the version number, which can be found by running `plant_lookup_version_current()`  This will allow anyone in the future to go back and use **exactly** the same version of the data for their analysis.
+This is designed to be a living database--it will update as taxonomy changes (which it always will). These updates will correspond with changes to the version number of this resource, and each version of the database will be available via [travis-ci](http://travis-ci.org) and [Github Releases](http://docs.travis-ci.com/user/deployment/releases/). If you use this resource, please note the version number, which can be found by running `plant_lookup_version_current()`  This will allow anyone in the future to go back and use **exactly** the same version of the data for their analysis.
  
-The core of this repository is a set of scripts that dynamically build a genus-family-order-higher taxa look-up table for land plants with the data lookup primarily coming from three sources (with scaping done by (taxize)[https://github.com/ropensci/taxize]): 
+The core of this repository is a set of scripts that dynamically build a genus-family-order-higher taxa look-up table for land plants with the data lookup primarily coming from three sources (with scaping done by [taxize](https://github.com/ropensci/taxize)): 
 
 1. [The Plant List](http://www.theplantlist.org/) for accepted genera to families
 
@@ -72,7 +72,7 @@ Eventually this package will exist on CRAN; versions there will be our "stable r
 
 ## Development version
 
-We will periodically release development versions of the database using github releases (every CRAN release will also be a github release).  We'll do this automatically using [http://travis-ci.org](travis-ci) using its [deploy to github releases](http://docs.travis-ci.com/user/deployment/releases/) and [conditional deployment](http://docs.travis-ci.com/user/deployment/#Conditional-Releases-with-on%3A) features.  This will correspond to an increase in the second version number and also to the first version number when simultaneously being released to CRAN.
+We will periodically release development versions of the database using github releases (every CRAN release will also be a github release).  We'll do this automatically using [travis-ci](http://travis-ci.org) using its [deploy to github releases](http://docs.travis-ci.com/user/deployment/releases/) and [conditional deployment](http://docs.travis-ci.com/user/deployment/#Conditional-Releases-with-on%3A) features.  This will correspond to an increase in the second version number and also to the first version number when simultaneously being released to CRAN.
 
 ## Bleeding edge version
 
