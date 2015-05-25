@@ -35,15 +35,16 @@ The data for this lookup primarily comes from two sources:
 accepted genera to families and species richness within each
 genera.  Note that we do not consider hybrids (e.g. Genus x
 species) as species for this count while the plant list summary
-statistics do, so the counts will not line up exactly.
+statistics do, so the the counts from this package will not line up exactly
+with the ones on the TPL website.
 
 2. APWeb (http://www.mobot.org/MOBOT/research/APweb/) for family
-level synonymies and family to order for all vascular plant families.
-Note that there is not currently order level information available for Bryophytes.
+level synonymies and family-to-order for all vascular plant families.
+Note that there is not currently order-level information available for Bryophytes.
 
 3. We correct some spelling
-errors, special character issues, genera listed in multiple families, and a few other errors from The
-Plant List.
+errors, special character issues, genera listed in multiple families,
+and a few other errors from The Plant List.
 }
 \examples{
 #
