@@ -11,14 +11,10 @@ downloadPlantList<-function(familyList){
   dir.create(path, FALSE)
   alreadyHaveFile<-dir(path)
   alreadyHave<-sub(".csv","",alreadyHaveFile)
-  # hack until taxize fixes special character handling
-  # familyList$family[familyList$family=="IsoÃ«taceae"]<-"Zygophyllaceae"
   if(any(!familyList$family%in%alreadyHave)){
-    suppressWarnings(tpl_get(path,family=familyList$family[!familyList$family%in%alreadyHave]))
+    tpl_get(path,family=familyList$family[!familyList$family%in%alreadyHave])
   }
-  #currently doesn't download
-  #http://www.theplantlist.org/1.1/browse/P/Iso%C3%ABtaceae/Iso%C3%ABtaceae.csv
-  path
+  return(path)
 }
 
 
@@ -27,15 +23,12 @@ get.genera<-function(family, path,tf){
   ah <- read.csv(file.path(path,family), stringsAsFactors=FALSE)
   accepted.species<-subset(ah,Taxonomic.status.in.TPL=="Accepted")
   group<-tf$group[match(accepted.species$Family[1],tf$family)]
-
   if (nrow(accepted.species)==0) {
     return(NULL)
   }
-
   not.species <- c("Species.hybrid.marker", "Genus.hybrid.marker", "Infraspecific.epithet")
   tmp <- accepted.species[not.species]
   accepted.species <- accepted.species[apply(tmp == "" | is.na(tmp), 1, all), ]
-
   if (nrow(accepted.species)==0) {
     return(NULL)
   }
@@ -59,31 +52,31 @@ combineGeneraLists<-function(path,tf){
 
 matchPlantListFamiliesToApweb<-function(tplGenera){
   apFamilies<-apgFamilies()
+  #Some commas come in from apWeb and they cause problems later unless we take them out
   apFamilies$family<-gsub('"',"",apFamilies$family)
   apFamilies$order<-gsub(',',"",apFamilies$order)
+  #currently taxize doesn't parse the synonym versus real familes correctly
   apFamilies$acceptedFamilies<-apFamilies$synonym
   apFamilies$acceptedFamilies[is.na(apFamilies$acceptedFamilies)]<-apFamilies$family[is.na(apFamilies$acceptedFamilies)]
-  #tplGenera$apweb.family<-apFamilies$acceptedFamilies[match(tplGenera$family,apFamilies$acceptedFamilies)]
-  #tplGenera$apweb.family[is.na(tplGenera$apweb.family)]<-apFamilies$acceptedFamilies[match(tplGenera$family,apFamilies$family)[is.na(tplGenera$apweb.family)]]
-  #tplGenera$apweb.family[is.na(tplGenera$apweb.family)]<-tplGenera$family[is.na(tplGenera$apweb.family)]
+  #fix two spelling mistakes from the plant list, so that they match properly
   tplGenera$family[tplGenera$family=="Dryopteridacae"]<-"Dryopteridaceae"
   tplGenera$family[tplGenera$family=="Apleniaceae"]<-"Aspleniaceae"
   tplGenera$order<-apFamilies$order[match(tplGenera$family,apFamilies$acceptedFamilies)]
   tplGenera$order[is.na(tplGenera$order)]<-apFamilies$order[match(tplGenera$family,apFamilies$family)[is.na(tplGenera$order)]]
+  tplGenera$order[tplGenera$group=="Bryophytes"]<-"unknown.bryophte.order"
   return(tplGenera)
 }
 
 fixFernsAndOtherProblems<-function(genera.list, fae, errors){
   problems<-unique(genera.list$family[is.na(genera.list$order)])
-  #genera.list$family[genera.list$family=="Dryopteridacae"]<-"Dryopteridaceae" # spelling mistake in the plant list
   genera.list$order[is.na(genera.list$order)]<-fae$order[match(genera.list$family,fae$family)[is.na(genera.list$order)]]
-  #genera.list$order[genera.list$family=="Cystodiaceae"]<-"Polypodiales"
+  #changing ë to e for now.  Encoding is a nightmare
   genera.list$family[genera.list$family=="Isoëtaceae"]<-"Isoetaceae"
   genera.list$order[genera.list$family=="Isoetaceae"]<-"Isoetales"
 
-  # Rename some families with modern names
-  genera.list$family[genera.list$family == "Leguminosae"] <- "Fabaceae"
-  genera.list$family[genera.list$family == "Compositae"] <- "Asteraceae"
+  # Rename some families with modern names; commented out for now so that our family names match other tpl lists
+  #genera.list$family[genera.list$family == "Leguminosae"] <- "Fabaceae"
+  #genera.list$family[genera.list$family == "Compositae"] <- "Asteraceae"
 
   # Too many spaces:
   genera.list$order <- gsub("\\s\\s+", " ", genera.list$order)
@@ -91,6 +84,13 @@ fixFernsAndOtherProblems<-function(genera.list, fae, errors){
   genera.list$order <- title_case(genera.list$order)
 
   # tpl errors:
+  # these errors are genera that occur in multiple families;
+  # these appear to be taxonomically unressolved at the moment,
+  # to preserve the nestedness of the taxonomy before a formal decision by the IBC
+  # we now tried to identify errors in the plant list (or the sources the plant list uses)
+  # if no name appeared erroneous, we use the earlier name as canonical in an
+  # attempt to follow the botanical code.  This may need to be revisited as things develop.
+  #
   ret <- dropTplErrors(genera.list, errors)
 
   # Sort rows and columns appropriately:
