@@ -5,25 +5,22 @@
 This is designed to be a living database--it will update as taxonomy changes (which it always will).  
 These updates will correspond with changes to the version number of this resource, and each version
 of the database will be available via [Github Releases](https://github.com/blog/1547-release-your-software). 
-*If you use this resource please note the version number*.  The releases should be stable 
-allowing for anyone in the future to go back an use *exactly* the same version of the data for their analysis
+**If you use this resource please note the version number.  This can be found by running `plant_lookup_version_current()`**  The releases should be stable 
+allowing for anyone in the future to go back an use **exactly** the same version of the data for their analysis.
  
-The core of this repository is a set of scripts that dynamically build a genus-family-order look-up table for land plants with the data lookup primarily coming from three sources: 
+The core of this repository is a set of scripts that dynamically build a genus-family-order-higher taxa look-up table for land plants with the data lookup primarily coming from three sources: 
 
 1. [The Plant List](http://www.theplantlist.org/) for accepted genera to families
 
-2. [APWeb](http://www.mobot.org/MOBOT/research/APweb/) for family-level synonymies and family to order
+2. [APWeb](http://www.mobot.org/MOBOT/research/APweb/) for family-level synonymies and family to order as curated by [Peter Stephens](http://www.umsl.edu/~biology/About%20the%20Department/Faculty/stevens.html)
 
 3. [A higher-level taxonomy lookup](http://datadryad.org/resource/doi:10.5061/dryad.63q27.2/1.1) compiled by [Dave Tank](http://phylodiversity.net/dtank/Tank_Lab/Tank_Lab.html) and colleagues
 
 We have a complete genus-family-order mapping for vascular plants. For bryophytes, there is only a genus-family mapping at present. 
-We also correct some spelling errors, special character issues, and other errors from The Plant List.  
-We will try to keep this error correction up-to-date, but there may new errors introduced as the cannonical data sources shift to future versions.  
+We also correct some spelling errors, special character issues, and other errors from The Plant List.  We will try to keep this error correction up-to-date, but there may new errors introduced as the cannonical data sources shift to future versions.  
 
-The scripts are in the repository but not in the package.  Only the data and ways to access the data are in the package.  
-The reason for this is explained further down in the readme.  
-To use the data from the most recent release: first install and load devtools; 
-that will then let you load the package from this respository:
+The scripts are in the repository but not in the package.  Only the data and ways to access the data are in the package.  The reason for this is explained further down in the readme.  
+To use the data from the most recent release: first install and load devtools; that will then let you load the package from this respository:
 
 ```r
 install.packages("devtools")
