@@ -2,9 +2,9 @@
 
 [![Build Status](https://travis-ci.org/wcornwell/TaxonLookup.png?branch=master)](https://travis-ci.org/wcornwell/TaxonLookup)
 
-This is designed to be a living database--it will update as taxonomy changes (which it always will). These updates will correspond with changes to the version number of this resource, and each version of the database will be available via [travis-ci](http://travis-ci.org) and [Github Releases](http://docs.travis-ci.com/user/deployment/releases/). If you use this resource, please note the version number, which can be found by running `plant_lookup_version_current()`  This will allow anyone in the future to go back and use **exactly** the same version of the data for their analysis.
+This is designed to be a living database--it will update as taxonomy changes (which it always will). These updates will correspond with changes to the version number of this resource, and each version of the database will be available via [travis-ci](http://travis-ci.org) and [Github Releases](http://docs.travis-ci.com/user/deployment/releases/). If you use this resource for published analysis, please note the version number in your publication.  This will allow anyone in the future to go back and find **exactly** the same version of the data that you used.
  
-The core of this repository is a set of scripts that dynamically build a genus-family-order-higher taxa look-up table for land plants with the data lookup primarily coming from three sources (with scaping done by [taxize](https://github.com/ropensci/taxize)): 
+The core of this repository is a set of scripts that dynamically build a genus-family-order-higher taxa look-up table for land plants with the data lookup primarily coming from three sources (with most of the web-scraping done by [taxize](https://github.com/ropensci/taxize)): 
 
 1. [The Plant List](http://www.theplantlist.org/) for accepted genera to families
 
@@ -12,9 +12,9 @@ The core of this repository is a set of scripts that dynamically build a genus-f
 
 3. [A higher-level taxonomy lookup](http://datadryad.org/resource/doi:10.5061/dryad.63q27.2/1.1) compiled by [Dave Tank](http://phylodiversity.net/dtank/Tank_Lab/Tank_Lab.html) and colleagues
 
-We have a complete genus-family-order mapping for vascular plants. For bryophytes, there is only a genus-family mapping at present. We also correct some spelling errors, special character issues, and other errors from The Plant List.  We will try to keep this error correction up-to-date, but there may new errors introduced as the cannonical data sources shift to future versions.  
+We have a complete genus-family-order mapping for vascular plants. For bryophytes, there is only genus-family mapping at present; if anyone has a family-order map for bryophytes, please let me know. We also correct some spelling errors, special character issues, and other errors from The Plant List.  We will try to keep this curation up-to-date, but there may new errors introduced as the cannonical data sources shift to future versions.  
 
-The scripts are in the repository but not in the package.  Only the data and ways to access the data are in the package.  The reason for this is explained further down in the readme.  To use the data from the most recent release: first install and load devtools; that will then let you load the package from this respository:
+The scripts are in the repository but not in the package.  Only the data and ways to access the data are in the package; the reason for this design will become clear further down the readme.  To use the data from the most recent release: first install and load `devtools`; that will then let you load the `TaxonLookup` package from this respository:
 
 ```r
 install.packages("devtools")
@@ -35,7 +35,11 @@ The first call to `plant_lookup` will download the data, but subsequent calls wi
 head(plant_lookup(include_counts = TRUE))
 ```
 
-For taxonomic groups higher than order, use the `add_higher_order()` function.  
+For taxonomic groups higher than order, use the `add_higher_order()` function.  To get the version number of the dataset run:
+
+```r
+plant_lookup_version_current()
+```
 
 For most uses, the latest release should be sufficient, and this is all that is necessary to use the data.  
 However, if there have been some recent changes to taxonomy  that are both important for your project and incorporated in the cannical sources (the plant list or APWeb) but are more recent than the last release of this package, you might want to rebuild the lookup table from the sources. 
