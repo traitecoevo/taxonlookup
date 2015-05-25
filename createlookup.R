@@ -68,7 +68,8 @@ matchPlantListFamiliesToApweb<-function(tplGenera){
 }
 
 fixFernsAndOtherProblems<-function(genera.list, fae, errors){
-  problems<-unique(genera.list$family[is.na(genera.list$order)])
+  #problems<-unique(genera.list$family[is.na(genera.list$order)])
+  #currently only correcting Osmundaceae and Plagiogyriaceae
   genera.list$order[is.na(genera.list$order)]<-fae$order[match(genera.list$family,fae$family)[is.na(genera.list$order)]]
   #changing ë to e for now.  Encoding is a nightmare
   genera.list$family[genera.list$family=="Isoëtaceae"]<-"Isoetaceae"
