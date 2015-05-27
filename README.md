@@ -85,7 +85,9 @@ Download the package and rerun the build script.  We'll work this way as we add 
 # Notes for making a release using this *living dataset* design
 
 * Update the `DESCRIPTION` file to increase the version number.  Once we hit version 1, we use [semantic versioning](http://semver.org/) so be aware of when to change what number.  Assume it's `1.2.3` for the rest of instructions.
+<!---
 * Update known versions in `plant_lookup_versions` (eventually we'll do this with the github api but that will introduce a httr and jsonlite dependency)
+-->
 * Run `remake::make()` to rebuild `plant_lookup.csv`
 * Commit and push to github
 * In github, create a new release [link](https://github.com/wcornwell/TaxonLookup/releases/new)
