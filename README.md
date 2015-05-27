@@ -1,6 +1,6 @@
 # taxonlookup: a taxonomic lookup table for land plants
 
-[![Build Status](https://travis-ci.org/wcornwell/TaxonLookup.png?branch=master)](https://travis-ci.org/wcornwell/TaxonLookup)
+[![Build Status](https://travis-ci.org/wcornwell/taxonlookup.png?branch=master)](https://travis-ci.org/wcornwell/taxonlookup)
 
 This is designed to be a living database--it will update as taxonomy changes (which it always will). These updates will correspond with changes to the version number of this resource, and each version of the database will be available via [travis-ci](http://travis-ci.org) and [Github Releases](http://docs.travis-ci.com/user/deployment/releases/). If you use this resource for published analysis, please note the version number in your publication.  This will allow anyone in the future to go back and find **exactly** the same version of the data that you used.
  
@@ -14,7 +14,7 @@ The core of this repository is a set of scripts that dynamically build a genus-f
 
 We have a complete genus-family-order mapping for vascular plants. For bryophytes, there is only genus-family mapping at present; if anyone has a family-order map for bryophytes, please let me know. We also correct some spelling errors, special character issues, and other errors from The Plant List.  We will try to keep this curation up-to-date, but there may new errors introduced as the cannonical data sources shift to future versions.  
 
-The scripts are in the repository but not in the package.  Only the data and ways to access the data are in the package; the reason for this design will become clear further down the readme.  To use the data from the most recent release: first install and load `devtools`; that will then let you load the `TaxonLookup` package from this respository:
+The scripts are in the repository but not in the package.  Only the data and ways to access the data are in the package; the reason for this design will become clear further down the readme.  To use the data from the most recent release: first install and load `devtools`; that will then let you load the `taxonlookup` package from this respository:
 
 ```r
 install.packages("devtools")
@@ -85,12 +85,9 @@ Download the package and rerun the build script.  We'll work this way as we add 
 # Notes for making a release using this *living dataset* design
 
 * Update the `DESCRIPTION` file to increase the version number.  Once we hit version 1, we use [semantic versioning](http://semver.org/) so be aware of when to change what number.  Assume it's `1.2.3` for the rest of instructions.
-<!---
-* Update known versions in `plant_lookup_versions` (eventually we'll do this with the github api but that will introduce a httr and jsonlite dependency)
--->
 * Run `remake::make()` to rebuild `plant_lookup.csv`
 * Commit and push to github
-* In github, create a new release [link](https://github.com/wcornwell/TaxonLookup/releases/new)
+* In github, create a new release [link](https://github.com/wcornwell/taxonlookup/releases/new)
   - Tag version must be prefixed with the letter "v", e.g., `v1.2.3`
   - In the release title / description give a short descripton about what the feature(s) that this release adds is/are
   - Drag the `plant_lookup.csv` file into the upload area or use the "selecting them" link
