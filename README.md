@@ -1,4 +1,4 @@
-# TaxonLookup: a taxonomic lookup table for land plants
+# taxonlookup: a taxonomic lookup table for land plants
 
 [![Build Status](https://travis-ci.org/wcornwell/TaxonLookup.png?branch=master)](https://travis-ci.org/wcornwell/TaxonLookup)
 
@@ -19,8 +19,8 @@ The scripts are in the repository but not in the package.  Only the data and way
 ```r
 install.packages("devtools")
 devtools::install_github("richfitz/storr")
-devtools::install_github("wcornwell/TaxonLookup")
-library(TaxonLookup)
+devtools::install_github("wcornwell/taxonlookup")
+library(taxonlookup)
 ```
 
 Then you can load the data using the `plant_lookup()` function:
@@ -93,4 +93,4 @@ Download the package and rerun the build script.  We'll work this way as we add 
   - In the release title / description give a short descripton about what the feature(s) that this release adds is/are
   - Drag the `plant_lookup.csv` file into the upload area or use the "selecting them" link
   - Click "Publish release"
-* Check that it works by running `TaxonLookup::plant_lookup("1.2.3")` which should pull the data.
+* Check that it works by running `taxonlookup::plant_lookup("1.2.3")` which should pull the data.
