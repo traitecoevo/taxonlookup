@@ -1,4 +1,4 @@
 library(testthat)
-library(TaxonLookup)
+library(taxonlookup)
 
-test_check("TaxonLookup")
+test_check("taxonlookup")
