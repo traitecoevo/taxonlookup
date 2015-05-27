@@ -54,3 +54,12 @@ test_that("lookup_table", {
   dat5 <- lookup_table(sp5, by_species=TRUE, missing_action="NA")
   expect_that(any(is.na(dat5$family)), is_true())
 })
+
+test_that("all versions", {
+  versions <- plant_lookup_versions("github")
+  for (v in versions) {
+    d <- plant_lookup(v)
+    expect_that(d, is_a("data.frame"))
+  }
+  expect_that(plant_lookup_versions("local"), equals(versions))
+})

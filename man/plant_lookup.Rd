@@ -2,6 +2,7 @@
 % Please edit documentation in R/plant_lookup.R
 \name{plant_lookup}
 \alias{plant_lookup}
+\alias{plant_lookup_delete}
 \alias{plant_lookup_version_current}
 \alias{plant_lookup_versions}
 \title{Plant lookup table}
@@ -9,19 +10,26 @@
 plant_lookup(version = plant_lookup_version_current(),
   include_counts = FALSE)
 
-plant_lookup_versions(all = FALSE)
+plant_lookup_versions(type = "local")
 
-plant_lookup_version_current(all = FALSE)
+plant_lookup_version_current(type = "local")
+
+plant_lookup_delete(version = NULL)
 }
 \arguments{
 \item{version}{Version number.  The default will load the most
 recent version on your computer or the most recent version known
-to the package if you have never downloaded the data before.}
+to the package if you have never downloaded the data before.  With
+\code{plant_lookup_delete}, omitting the versions deletes
+\emph{all} data sets.}
 
-\item{include_counts}{Logical: Include a column of number of "accepted" species within each genus counts as
+\item{include_counts}{Logical: Include a column of number of
+"accepted" species within each genus counts as
 \code{number.of.species}.}
 
-\item{all}{test against all version known to the package?}
+\item{type}{Type of version to return: options are "local"
+(versions installed locally) or "github" (versions available on
+github).  With any luck, "github" is a superset of "local".}
 }
 \description{
 Lookup table relating plant genera, families and orders along with

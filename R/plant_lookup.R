@@ -22,8 +22,11 @@
 ##' @title Plant lookup table
 ##' @param version Version number.  The default will load the most
 ##' recent version on your computer or the most recent version known
-##' to the package if you have never downloaded the data before.
-##' @param include_counts Logical: Include a column of number of "accepted" species within each genus counts as
+##' to the package if you have never downloaded the data before.  With
+##' \code{plant_lookup_delete}, omitting the versions deletes
+##' \emph{all} data sets.
+##' @param include_counts Logical: Include a column of number of
+##' "accepted" species within each genus counts as
 ##' \code{number.of.species}.
 ##' @export
 ##' @examples
@@ -45,96 +48,79 @@
 ##' #
 ##' # find the number of accepted species within the Myrtaceae
 ##' sum(pl$number.of.species[pl$family=="Myrtaceae"])
-##'
 plant_lookup <- function(version=plant_lookup_version_current(),
                          include_counts=FALSE) {
-  if (is.null(version)) {
-    version <- plant_lookup_version_current(FALSE)
-  }
-
-  st <- plant_lookup_storr()
-  if (st$exists(version)) {
-    d <- st$get(version)
-  } else {
-    d <- plant_lookup_fetch(version)
-    st$set(version, d)
-  }
-
+  d <- plant_lookup_storr()$get(version)
   if (!include_counts) {
     d <- d[names(d) != "number.of.species"]
   }
-
   d
 }
 
-##' @export
-##' @rdname plant_lookup
-##' @param all test against all version known to the package?
-plant_lookup_versions <- function(all=FALSE) {
-  if (all) {
-    c("0.1.0", "0.1.1","0.1.2","0.1.3","0.1.4","0.2.0","0.2.1")
-  } else {
-    plant_lookup_storr()$list()
-  }
+data <- function(...) {
+  plant_lookup(...)
 }
 
 ##' @export
 ##' @rdname plant_lookup
-plant_lookup_version_current <- function(all=FALSE) {
-  if (all) {
-    ## TODO: This *should* ping /latest I think.
-    ## Manually add data if data and package versions are out of line
-    last(plant_lookup_versions(TRUE))
-  } else {
-    v <- plant_lookup_storr()$list()
-    if (length(v) == 0L) {
-      plant_lookup_version_current(TRUE)
-    } else {
-      last(sort(numeric_version(v)))
-    }
+##' @param type Type of version to return: options are "local"
+##' (versions installed locally) or "github" (versions available on
+##' github).  With any luck, "github" is a superset of "local".
+plant_lookup_versions <- function(type="local") {
+  v <- switch(
+    type,
+    github=storr::github_release_versions(paste0("wcornwell/", .packageName)),
+    local=plant_lookup_storr()$list(),
+    stop("Unknown type ", type))
+  v
+}
+
+##' @export
+##' @rdname plant_lookup
+plant_lookup_version_current <- function(type="local") {
+  ## TODO: This *should* ping /latest I think.
+  ## Manually add data if data and package versions are out of line
+  if (type == "local" && length(plant_lookup_versions(type)) == 0L) {
+    type <- "github"
   }
+  last(plant_lookup_versions(type))
+}
+
+##' @importFrom storr storr
+plant_lookup_env <- new.env(parent=emptyenv())
+plant_lookup_storr <- function() {
+  ## Probably this pattern of env/lookup should be done with an
+  ## environment storr (repeated in baad.data)
+  if (is.null(plant_lookup_env$storr)) {
+    hook <- storr::fetch_hook_download(plant_lookup_url, read_csv)
+    st <- storr::driver_rds(plant_lookup_path())
+    dr <- storr::driver_external(st, hook)
+    plant_lookup_env$storr <- storr::storr(dr, "plant_lookup")
+  }
+  plant_lookup_env$storr
 }
 
 ##' @importFrom rappdirs user_data_dir
-plant_lookup_path <- function(version=NULL) {
-  path <- rappdirs::user_data_dir(.packageName)
+plant_lookup_path <- function() {
+  rappdirs::user_data_dir(.packageName)
+}
+
+##' @export
+##' @rdname plant_lookup
+plant_lookup_delete <- function(version=NULL) {
   if (is.null(version)) {
-    path
+    unlink(plant_lookup_path(), recursive=TRUE)
   } else {
-    file.path(path, sprintf("plant_lookup_%s.csv", version))
+    plant_lookup_storr()$del(version)
   }
 }
 
-plant_lookup_storr <- function() {
-  storr::storr_rds(rappdirs::user_data_dir(.packageName),
-                   default_namespace="plant_lookup")
-}
-
-plant_lookup_delete <- function(version) {
-  plant_lookup_storr()$del(version)
-}
-
-plant_lookup_url <- function(version) {
+## The namespace argument is 
+plant_lookup_url <- function(version, namespace) {
   prefix <- "https://github.com/wcornwell/TaxonLookup/releases/download/v"
   paste0(prefix, version, "/plant_lookup.csv")
 }
 
-##' @importFrom downloader download
-plant_lookup_fetch <- function(version) {
-  dest <- tempfile()
-  url <- plant_lookup_url(version)
-  downloader::download(url, dest)
-  ## Detecting error here is surprisingly hard:
-  if (!file.exists(dest)) {
-    stop("Download failed")
-  } else {
-    first <- readLines(dest, n=1, warn=FALSE)
-    if (grepl("error", first, fixed=TRUE) ||
-        grepl("DOCTYPE", first, fixed=TRUE)) {
-      file.remove(dest)
-      stop("Download failed: ", first)
-    }
-  }
-  #TODO: add dataset version as attribute
-  read.csv(dest, stringsAsFactors=FALSE)
+read_csv <- function(...) {
+  read.csv(..., stringsAsFactors=FALSE)
 }
