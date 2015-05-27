@@ -87,6 +87,7 @@ plant_lookup_version_current <- function(type="local") {
 }
 
 ##' @importFrom storr storr
+##' @importFrom httr GET
 plant_lookup_env <- new.env(parent=emptyenv())
 plant_lookup_storr <- function() {
   ## Probably this pattern of env/lookup should be done with an
