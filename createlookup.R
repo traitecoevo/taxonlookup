@@ -63,7 +63,9 @@ matchPlantListFamiliesToApweb<-function(tplGenera){
   tplGenera$family[tplGenera$family=="Apleniaceae"]<-"Aspleniaceae"
   tplGenera$order<-apFamilies$order[match(tplGenera$family,apFamilies$acceptedFamilies)]
   tplGenera$order[is.na(tplGenera$order)]<-apFamilies$order[match(tplGenera$family,apFamilies$family)[is.na(tplGenera$order)]]
-  tplGenera$order[tplGenera$group=="Bryophytes"]<-"unknown.bryophte.order"
+  tplGenera$order[tplGenera$group=="Bryophytes"]<-"undetermined_moss_order"
+  tplGenera$order[tplGenera$family %in% c("Leiosporocerotaceae", "Anthocerotaceae", "Notothyladaceae","Phymatocerotaceae","Dendrocerotaceae")]<-"undetermined_hornwort_order"
+  tplGenera$order[tplGenera$family %in% read.delim("source_data/liverwortFamilies.txt",header=FALSE)$V1]<-"undetermined_liverwort_order"
   return(tplGenera)
 }
 
