@@ -2,22 +2,23 @@
 ##' number of species in each genus.  Data persists across package
 ##' installations.
 ##'
-##' The data for this lookup primarily comes from two sources:
+##' The data within this lookup table comes from two sources:
 ##'
 ##' 1. The Plant List v1.1. (http://www.theplantlist.org/) for
 ##' accepted genera to families and species richness within each
-##' genera.  Note that we do not consider hybrids (e.g. Genus x
-##' species) as species for this count while the plant list summary
+##' genera.  Note that we do not consider hybrids (e.g. Genus X
+##' species) as distinct species for this count while the plant list summary
 ##' statistics do, so the the counts from this package will not line up exactly
 ##' with the ones on the TPL website.
 ##'
-##' 2. APWeb (http://www.mobot.org/MOBOT/research/APweb/) for family
-##' level synonymies and family-to-order for all vascular plant families.
+##' 2. APWeb (http://www.mobot.org/MOBOT/research/APweb/) for family-level
+##' synonymies and family-to-order for all vascular plant families.
 ##' Note that there is not currently order-level information available for Bryophytes.
 ##'
-##' 3. We correct some spelling
-##' errors, special character issues, genera listed in multiple families,
-##' and a few other errors from The Plant List.
+##' These data are then currated--we correct some spelling
+##' errors, special character issues, genera listed in multiple families, family-level synonomy,
+##' and other issues that arise in assembling a resources like this.  Details of the curration
+##' are at https://github.com/wcornwell/taxonlookup
 ##'
 ##' @title Plant lookup table
 ##' @param version Version number.  The default will load the most
@@ -48,6 +49,8 @@
 ##' #
 ##' # find the number of accepted species within the Myrtaceae
 ##' sum(pl$number.of.species[pl$family=="Myrtaceae"])
+##'
+##'
 plant_lookup <- function(version=plant_lookup_version_current(),
                          include_counts=FALSE) {
   d <- plant_lookup_storr()$get(version)
@@ -116,7 +119,7 @@ plant_lookup_delete <- function(version=NULL) {
   }
 }
 
-## The namespace argument is 
+## The namespace argument is
 plant_lookup_url <- function(version, namespace) {
   prefix <- "https://github.com/wcornwell/TaxonLookup/releases/download/v"
   paste0(prefix, version, "/plant_lookup.csv")
