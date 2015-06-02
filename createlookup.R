@@ -61,11 +61,19 @@ matchPlantListFamiliesToApweb<-function(tplGenera){
   #fix two spelling mistakes from the plant list, so that they match properly
   tplGenera$family[tplGenera$family=="Dryopteridacae"]<-"Dryopteridaceae"
   tplGenera$family[tplGenera$family=="Apleniaceae"]<-"Aspleniaceae"
+  #match to APWeb
   tplGenera$order<-apFamilies$order[match(tplGenera$family,apFamilies$acceptedFamilies)]
+  #for families still unmatched, use APWeb's synonomy
   tplGenera$order[is.na(tplGenera$order)]<-apFamilies$order[match(tplGenera$family,apFamilies$family)[is.na(tplGenera$order)]]
-  tplGenera$order[tplGenera$group=="Bryophytes"]<-"non_sphagnopsid_moss_order"
-  tplGenera$order[tplGenera$family=="Sphagnaceae"]<-"sphagnopsid_moss_order"
+  #"Bryophytes" are a problem
+  tplGenera$order[tplGenera$group=="Bryophytes"]<-"undeter_peristomate_moss"
+  #Sphagnopsida is generally thought to be the basal branch within the mosses
+  tplGenera$order[tplGenera$family=="Sphagnaceae"]<-"sphagnopsid_moss"
+  #andreaeopsida is the next one
+  tplGenera$order[tplGenera$family%in%c("Andreaeobryaceae","Takakiaceae")]<-"andreaeopsid_moss"
+  #splitting out the hornworts
   tplGenera$order[tplGenera$family %in% c("Leiosporocerotaceae", "Anthocerotaceae", "Notothyladaceae","Phymatocerotaceae","Dendrocerotaceae")]<-"undetermined_hornwort_order"
+  #and the liverworts
   tplGenera$order[tplGenera$family %in% read.delim("source_data/liverwortFamilies.txt",header=FALSE)$V1]<-"undetermined_liverwort_order"
   return(tplGenera)
 }
@@ -77,10 +85,6 @@ fixFernsAndOtherProblems<-function(genera.list, fae, errors){
   #changing ë to e for now.  Encoding is a nightmare
   genera.list$family[genera.list$family=="Isoëtaceae"]<-"Isoetaceae"
   genera.list$order[genera.list$family=="Isoetaceae"]<-"Isoetales"
-
-  # Rename some families with modern names; commented out for now so that our family names match other tpl lists
-  #genera.list$family[genera.list$family == "Leguminosae"] <- "Fabaceae"
-  #genera.list$family[genera.list$family == "Compositae"] <- "Asteraceae"
 
   # Too many spaces:
   genera.list$order <- gsub("\\s\\s+", " ", genera.list$order)
