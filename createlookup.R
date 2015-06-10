@@ -66,7 +66,6 @@ matchPlantListFamiliesToApweb<-function(tplGenera){
   tplGenera$order<-apFamilies$order[match(tplGenera$family,apFamilies$acceptedFamilies)]
   #for families still unmatched, use APWeb's synonomy
   tplGenera$order[is.na(tplGenera$order)]<-apFamilies$order[match(tplGenera$family,apFamilies$family)[is.na(tplGenera$order)]]
-<<<<<<< Updated upstream
   #"Bryophytes" are a problem
   tplGenera$order[tplGenera$group=="Bryophytes"]<-"undeter_peristomate_moss"
   #Sphagnopsida is generally thought to be the basal branch within the mosses
@@ -77,11 +76,9 @@ matchPlantListFamiliesToApweb<-function(tplGenera){
   tplGenera$order[tplGenera$family %in% c("Leiosporocerotaceae", "Anthocerotaceae", "Notothyladaceae","Phymatocerotaceae","Dendrocerotaceae")]<-"undetermined_hornwort_order"
   #and the liverworts
   tplGenera$order[tplGenera$family %in% read.delim("source_data/liverwortFamilies.txt",header=FALSE)$V1]<-"undetermined_liverwort_order"
-=======
   tplGenera$apweb.family<-tplGenera$family
   badFamilies<-unique(tplGenera$apweb.family[!tplGenera$apweb.family%in%apFamilies$acceptedFamilies&tplGenera$group!="Bryophytes"&tplGenera$apweb.family%in%apFamilies$family])
   tplGenera$apweb.family[tplGenera$apweb.family%in%badFamilies]<-apFamilies$synonym[match(tplGenera$apweb.family,apFamilies$family)][tplGenera$apweb.family%in%badFamilies]
->>>>>>> Stashed changes
   return(tplGenera)
 }
 
@@ -89,12 +86,7 @@ fixFernsAndOtherProblems<-function(genera.list, fae, errors){
   #problems<-unique(genera.list$family[is.na(genera.list$order)])
   #currently only correcting Osmundaceae and Plagiogyriaceae
   genera.list$order[is.na(genera.list$order)]<-fae$order[match(genera.list$family,fae$family)[is.na(genera.list$order)]]
-<<<<<<< Updated upstream
-  #changing ë to e for now.  Encoding is a nightmare
-  genera.list$family[genera.list$family=="Isoëtaceae"]<-"Isoetaceae"
-  genera.list$order[genera.list$family=="Isoetaceae"]<-"Isoetales"
 
-=======
   #genera.list$order[genera.list$family=="Cystodiaceae"]<-"Polypodiales"
   #genera.list$family[genera.list$family=="Isoëtaceae"]<-"Isoetaceae"
   #genera.list$order[genera.list$family=="Isoetaceae"]<-"Isoetales"
@@ -103,7 +95,6 @@ fixFernsAndOtherProblems<-function(genera.list, fae, errors){
   #genera.list$family[genera.list$family == "Leguminosae"] <- "Fabaceae"
   #genera.list$family[genera.list$family == "Compositae"] <- "Asteraceae"
 
->>>>>>> Stashed changes
   # Too many spaces:
   genera.list$order <- gsub("\\s\\s+", " ", genera.list$order)
   # Other standardisation:
