@@ -5,7 +5,7 @@
 \alias{plant_lookup_delete}
 \alias{plant_lookup_version_current}
 \alias{plant_lookup_versions}
-\title{Plant lookup table}
+\title{Plant taxonomy lookup table}
 \usage{
 plant_lookup(version = plant_lookup_version_current(),
   include_counts = FALSE, family.tax = "apweb")
@@ -29,8 +29,7 @@ to the package if you have never downloaded the data before.  With
 
 \item{family.tax}{= the value "ap.web" will return the family names from apweb
 otherwise the lookup will include the family names from the plant list.
-Currently there are 8 family names that differ between the two sources.
-\code{family.tax}.}
+Currently there are 8 family names that differ between the two sources.}
 
 \item{type}{Type of version to return: options are "local"
 (versions installed locally) or "github" (versions available on
@@ -57,27 +56,31 @@ Note that there is not currently order-level information available for Bryophyte
 
 These data are then currated--we correct some spelling
 errors, special character issues, genera listed in multiple families, family-level synonomy,
-and other issues that arise in assembling a resources like this.  Details of the curration
+and other issues that arise in assembling a resources like this.  Details of the curation
 are at https://github.com/wcornwell/taxonlookup
 }
 \examples{
 #
 # see the format of the resource
+#
 head(plant_lookup())
-
+#
 # or with number of species in each genus.
-
+#
 head(plant_lookup(include_counts = TRUE))
 #
 # load the data.frame into memory
+#
 pl<-plant_lookup(include_counts = TRUE)
 #
 # return family, order, and number of species for the genus Eucalyptus
+#
 pl$family[pl$genus=="Eucalyptus"]
 pl$order[pl$genus=="Eucalyptus"]
 pl$number.of.species[pl$genus=="Eucalyptus"]
 #
 # find the number of accepted species within the Myrtaceae
+#
 sum(pl$number.of.species[pl$family=="Myrtaceae"])
 }
 
