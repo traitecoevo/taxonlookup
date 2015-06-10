@@ -29,6 +29,10 @@
 ##' @param include_counts Logical: Include a column of number of
 ##' "accepted" species within each genus counts as
 ##' \code{number.of.species}.
+##' @param family.tax = the value "ap.web" will return the family names from apweb
+##' otherwise the lookup will include the family names from the plant list.
+##' Currently there are 8 family names that differ between the two sources.
+##' \code{number.of.species}.
 ##' @export
 ##' @examples
 ##' #
@@ -52,14 +56,20 @@
 ##'
 ##'
 plant_lookup <- function(version=plant_lookup_version_current(),
-                         include_counts=FALSE) {
-  d <- plant_lookup_storr()$get(version)
-  if (!include_counts) {
-    d <- d[names(d) != "number.of.species"]
+                         include_counts=FALSE,family.tax="apweb") {
+    d <- plant_lookup_storr()$get(version)
+    if (!include_counts) {
+      d <- d[names(d) != "number.of.species"]
+    }
+    if (family.tax=="apweb") {
+      d$family<-d$apweb.family
+      d <- d[names(d) != "apweb.family"]
+    }
+    else{
+      d <- d[names(d) != "apweb.family"]
+    }
+    d
   }
-  d
-}
-
 data <- function(...) {
   plant_lookup(...)
 }
