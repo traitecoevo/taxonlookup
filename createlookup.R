@@ -76,6 +76,10 @@ matchPlantListFamiliesToApweb<-function(tplGenera){
   tplGenera$order[tplGenera$family %in% c("Leiosporocerotaceae", "Anthocerotaceae", "Notothyladaceae","Phymatocerotaceae","Dendrocerotaceae")]<-"undetermined_hornwort_order"
   #and the liverworts
   tplGenera$order[tplGenera$family %in% read.delim("source_data/liverwortFamilies.txt",header=FALSE)$V1]<-"undetermined_liverwort_order"
+  #temporary: adjusting for a taxize bug
+  tplGenera$order[tplGenera$family=="Eriocaulaceae"]<-"Poales"
+
+  #setting up a seperate column with ApWeb synonymy
   tplGenera$apweb.family<-tplGenera$family
   badFamilies<-unique(tplGenera$apweb.family[!tplGenera$apweb.family%in%apFamilies$acceptedFamilies&tplGenera$group!="Bryophytes"&tplGenera$apweb.family%in%apFamilies$family])
   tplGenera$apweb.family[tplGenera$apweb.family%in%badFamilies]<-apFamilies$synonym[match(tplGenera$apweb.family,apFamilies$family)][tplGenera$apweb.family%in%badFamilies]
