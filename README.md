@@ -8,13 +8,13 @@ The core of this repository is a set of scripts that dynamically build a genus-f
 
 1. [The Plant List](http://www.theplantlist.org/) for accepted genera to families
 
-2. [APWeb](http://www.mobot.org/MOBOT/research/APweb/) for family-level synonymies and family to order as curated by [Peter Stephens](http://www.umsl.edu/~biology/About%20the%20Department/Faculty/stevens.html)
+2. [APWeb](http://www.mobot.org/MOBOT/research/APweb/) for family-level synonymies and family to order as curated by [Peter Stevens](http://www.umsl.edu/~biology/About%20the%20Department/Faculty/stevens.html)
 
 3. [A higher-level taxonomy lookup](http://datadryad.org/resource/doi:10.5061/dryad.63q27.2/1.1) compiled by [Dave Tank](http://phylodiversity.net/dtank/Tank_Lab/Tank_Lab.html) and colleagues
 
 We have a complete genus-family-order mapping for vascular plants. For bryophytes, there is only genus-family mapping at present; if anyone has a family-order map for bryophytes, please let me know. We also correct some spelling errors, special character issues, and other errors from The Plant List.  We will try to keep this curation up-to-date, but there may new errors introduced as the cannonical data sources shift to future versions.  
 
-The scripts are in the repository but not in the package.  Only the data and ways to access the data are in the package; the reason for this design will become clear further down the readme.  To use the data from the most recent release: first install and load `devtools`; that will then let you load the `taxonlookup` package from this respository:
+The scripts are in the repository but not in the package.  Only the data and ways to access the data are in the package; the reason for this design will become clear further down the readme.  To use the data from the most recent release first install and load `devtools`; that will then let you load the one dependancy and then the `taxonlookup` package from this respository:
 
 ```r
 install.packages("devtools")
@@ -23,7 +23,7 @@ devtools::install_github("wcornwell/taxonlookup")
 library(taxonlookup)
 ```
 
-Then you can load the data using the `plant_lookup()` function:
+Then you can download and load the data into `R` using the `plant_lookup()` function:
 
 ```r
 head(plant_lookup())
@@ -35,14 +35,14 @@ The first call to `plant_lookup` will download the data, but subsequent calls wi
 head(plant_lookup(include_counts = TRUE))
 ```
 
-For taxonomic groups higher than order, use the `add_higher_order()` function.  To get the version number of the dataset run:
+For taxonomic groups higher than order, use the `add_higher_order()` function.  Because currently the higher taxonomy of plants does not have a nested structure, the format of that lookup table is a little more complicated.  Check the help file for more details.  To get the version number of the dataset run:
 
 ```r
 plant_lookup_version_current()
 ```
 
 For most uses, the latest release should be sufficient, and this is all that is necessary to use the data.  
-However, if there have been some recent changes to taxonomy  that are both important for your project and incorporated in the cannical sources (the plant list or APWeb) but are more recent than the last release of this package, you might want to rebuild the lookup table from the sources. 
+However, if there have been some recent changes to taxonomy  that are both important for your project and incorporated in the cannical sources (the plant list or APWeb) but are more recent than the last release of this package, you might want to rebuild the lookup table from the sources. Because this requires downloading the data from the web sources, this will run  slowly, depending on your internet connection.  
 
 # Rebuilding the lookup table
 
@@ -60,7 +60,7 @@ Download and install 3 additional packages from github:
 	devtools::install_github("ropensci/taxize")
 ```
 
-This will require a recent version of taxize, so if you have that already installed, please re-install.  Then run the following command from within R.  Make sure the home directory is within the repository:
+This will require a recent version of taxize, so if you have that already installed an older version, please re-install.  Then run the following command from within R.  Make sure the home directory is within the repository:
 
 ```r
 	remake::make()
