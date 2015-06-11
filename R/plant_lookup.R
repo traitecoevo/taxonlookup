@@ -106,7 +106,12 @@ plant_lookup_env <- new.env(parent=emptyenv())
 plant_lookup_storr <- function() {
   ## Probably this pattern of env/lookup should be done with an
   ## environment storr (repeated in baad.data)
-  if (is.null(plant_lookup_env$storr)) {
+  ##
+  ## NOTE: the *second* thing here is working around a nasty corner
+  ## case where the caching directory might have been deleted.
+  ## Recreating the storr will fix that.
+  if (is.null(plant_lookup_env$storr) ||
+      !file.exists(plant_lookup_path())) {
     hook <- storr::fetch_hook_download(plant_lookup_url, read_csv)
     st <- storr::driver_rds(plant_lookup_path())
     dr <- storr::driver_external(st, hook)

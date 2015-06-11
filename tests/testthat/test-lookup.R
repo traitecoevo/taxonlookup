@@ -63,3 +63,9 @@ test_that("all versions", {
   }
   expect_that(plant_lookup_versions("local"), equals(versions))
 })
+
+test_that("survive cache delete", {
+  pl <- plant_lookup()
+  plant_lookup_delete()
+  expect_that(plant_lookup(), not(throws_error()))
+})
