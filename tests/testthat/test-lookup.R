@@ -1,5 +1,8 @@
 context("lookup")
 
+## TODO: this should probably work with a temporary directory, rather
+## than the real data.
+
 test_that("lookup_table", {
   lookup <- plant_lookup()
   set.seed(1)
@@ -66,6 +69,6 @@ test_that("all versions", {
 
 test_that("survive cache delete", {
   pl <- plant_lookup()
-  plant_lookup_delete()
+  plant_lookup_del(NULL)
   expect_that(plant_lookup(), not(throws_error()))
 })

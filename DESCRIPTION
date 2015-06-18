@@ -7,5 +7,5 @@ License: BSD_2_clause + file LICENSE
 LazyData: true
 Authors@R: as.person(c("Will Cornwell <wcornwell@gmail.com> [aut, cre]","Rich FitzJohn <rich.fitzjohn@gmail.com> [aut]","Matt Pennell <mwpennell@gmail.com> [aut]"))
 Maintainer: Will Cornwell <wcornwell@gmail.com>
-Imports: rappdirs, storr (>= 0.1.1), httr
+Imports: storr (>= 0.1.3)
 Suggests: testthat

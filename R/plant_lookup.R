@@ -21,18 +21,24 @@
 ##' are at https://github.com/wcornwell/taxonlookup
 ##'
 ##' @title Plant taxonomy lookup table
+##'
 ##' @param version Version number.  The default will load the most
-##' recent version on your computer or the most recent version known
-##' to the package if you have never downloaded the data before.  With
-##' \code{plant_lookup_delete}, omitting the versions deletes
-##' \emph{all} data sets.
+##'   recent version on your computer or the most recent version known
+##'   to the package if you have never downloaded the data before.
+##'   With \code{plant_lookup_del}, specifying \code{version=NULL}
+##'   will delete \emph{all} data sets.
+##'
 ##' @param include_counts Logical: Include a column of number of
-##' "accepted" species within each genus counts as
-##' \code{number.of.species}.
-##' @param family.tax = the value "ap.web" will return the family names from apweb
-##' otherwise the lookup will include the family names from the plant list.
-##' Currently there are 8 family names that differ between the two sources.
+##'   "accepted" species within each genus counts as
+##'   \code{number.of.species}.
+##'
+##' @param family.tax = the value "ap.web" will return the family
+##'   names from apweb otherwise the lookup will include the family
+##'   names from the plant list.  Currently there are 8 family names
+##'   that differ between the two sources.
+##'
 ##' @export
+##' @import storr
 ##' @examples
 ##' #
 ##' # see the format of the resource
@@ -56,89 +62,57 @@
 ##' # find the number of accepted species within the Myrtaceae
 ##' #
 ##' sum(pl$number.of.species[pl$family=="Myrtaceae"])
-##'
-##'
-plant_lookup <- function(version=plant_lookup_version_current(),
-                         include_counts=FALSE,family.tax="apweb") {
-    d <- plant_lookup_storr()$get(version)
-    if (!include_counts) {
-      d <- d[names(d) != "number.of.species"]
-    }
-    if (family.tax=="apweb") {
-      d$family<-d$apweb.family
-    }
-    d <- d[names(d) != "apweb.family"]
-    d
+plant_lookup <- function(version=NULL, include_counts=FALSE, family.tax="apweb") {
+  d <- plant_lookup_get(version)
+  if (!include_counts) {
+    d <- d[names(d) != "number.of.species"]
   }
+  if (family.tax == "apweb") {
+    d$family <- d$apweb.family
+  }
+  d[names(d) != "apweb.family"]
+}
 
-data <- function(...) {
-  plant_lookup(...)
+## This one is the important part; it defines the three core bits of
+## information we need;
+##   1. the repository name (wcornwell/taxonlookup)
+##   2. the file to download (plant_lookup.csv)
+##   3. the function to read the file, given a filename (read_csv)
+plant_lookup_info <- function() {
+  github_release_storr_info("wcornwell/taxonlookup",
+                            "plant_lookup.csv",
+                            read_csv)
+}
+
+## Below here are wrappers around the storr functions but with our
+## information object.  We could actually save plant_lookup_info() as
+## an *object* in the package, but I prefer this approach.
+plant_lookup_get <- function(version=NULL) {
+  github_release_storr_get(plant_lookup_info(), version)
 }
 
 ##' @export
 ##' @rdname plant_lookup
 ##' @param type Type of version to return: options are "local"
-##' (versions installed locally) or "github" (versions available on
-##' github).  With any luck, "github" is a superset of "local".
+##'   (versions installed locally) or "github" (versions available on
+##'   github).  With any luck, "github" is a superset of "local".  For
+##'   \code{plant_lookup_version_current}, if "local" is given, but there
+##'   are no local versions, then we do check for the most recent
+##'   github version.
 plant_lookup_versions <- function(type="local") {
-  v <- switch(
-    type,
-    github=storr::github_release_versions(paste0("wcornwell/", .packageName)),
-    local=plant_lookup_storr()$list(),
-    stop("Unknown type ", type))
-  v
+  github_release_storr_versions(plant_lookup_info(), type)
 }
 
 ##' @export
 ##' @rdname plant_lookup
 plant_lookup_version_current <- function(type="local") {
-  ## TODO: This *should* ping /latest I think.
-  ## Manually add data if data and package versions are out of line
-  if (type == "local" && length(plant_lookup_versions(type)) == 0L) {
-    type <- "github"
-  }
-  last(plant_lookup_versions(type))
-}
-
-##' @importFrom storr storr
-##' @importFrom httr GET
-plant_lookup_env <- new.env(parent=emptyenv())
-plant_lookup_storr <- function() {
-  ## Probably this pattern of env/lookup should be done with an
-  ## environment storr (repeated in baad.data)
-  ##
-  ## NOTE: the *second* thing here is working around a nasty corner
-  ## case where the caching directory might have been deleted.
-  ## Recreating the storr will fix that.
-  if (is.null(plant_lookup_env$storr) ||
-      !file.exists(plant_lookup_path())) {
-    hook <- storr::fetch_hook_download(plant_lookup_url, read_csv)
-    st <- storr::driver_rds(plant_lookup_path())
-    dr <- storr::driver_external(st, hook)
-    plant_lookup_env$storr <- storr::storr(dr, "plant_lookup")
-  }
-  plant_lookup_env$storr
-}
-
-##' @importFrom rappdirs user_data_dir
-plant_lookup_path <- function() {
-  rappdirs::user_data_dir(.packageName)
+  github_release_storr_version_current(plant_lookup_info(), type)
 }
 
 ##' @export
 ##' @rdname plant_lookup
-plant_lookup_delete <- function(version=NULL) {
-  if (is.null(version)) {
-    unlink(plant_lookup_path(), recursive=TRUE)
-  } else {
-    plant_lookup_storr()$del(version)
-  }
-}
-
-## The namespace argument is
-plant_lookup_url <- function(version, namespace) {
-  prefix <- "https://github.com/wcornwell/TaxonLookup/releases/download/v"
-  paste0(prefix, version, "/plant_lookup.csv")
+plant_lookup_del <- function(version) {
+  github_release_storr_del(plant_lookup_info(), version)
 }
 
 read_csv <- function(...) {

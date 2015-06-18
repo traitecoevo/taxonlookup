@@ -2,38 +2,41 @@
 % Please edit documentation in R/plant_lookup.R
 \name{plant_lookup}
 \alias{plant_lookup}
-\alias{plant_lookup_delete}
+\alias{plant_lookup_del}
 \alias{plant_lookup_version_current}
 \alias{plant_lookup_versions}
 \title{Plant taxonomy lookup table}
 \usage{
-plant_lookup(version = plant_lookup_version_current(),
-  include_counts = FALSE, family.tax = "apweb")
+plant_lookup(version = NULL, include_counts = FALSE, family.tax = "apweb")
 
 plant_lookup_versions(type = "local")
 
 plant_lookup_version_current(type = "local")
 
-plant_lookup_delete(version = NULL)
+plant_lookup_del(version)
 }
 \arguments{
 \item{version}{Version number.  The default will load the most
-recent version on your computer or the most recent version known
-to the package if you have never downloaded the data before.  With
-\code{plant_lookup_delete}, omitting the versions deletes
-\emph{all} data sets.}
+  recent version on your computer or the most recent version known
+  to the package if you have never downloaded the data before.
+  With \code{plant_lookup_del}, specifying \code{version=NULL}
+  will delete \emph{all} data sets.}
 
 \item{include_counts}{Logical: Include a column of number of
-"accepted" species within each genus counts as
-\code{number.of.species}.}
+  "accepted" species within each genus counts as
+  \code{number.of.species}.}
 
-\item{family.tax}{= the value "ap.web" will return the family names from apweb
-otherwise the lookup will include the family names from the plant list.
-Currently there are 8 family names that differ between the two sources.}
+\item{family.tax}{= the value "ap.web" will return the family
+  names from apweb otherwise the lookup will include the family
+  names from the plant list.  Currently there are 8 family names
+  that differ between the two sources.}
 
 \item{type}{Type of version to return: options are "local"
 (versions installed locally) or "github" (versions available on
-github).  With any luck, "github" is a superset of "local".}
+github).  With any luck, "github" is a superset of "local".  For
+\code{plant_lookup_version_current}, if "local" is given, but there
+are no local versions, then we do check for the most recent
+github version.}
 }
 \description{
 Lookup table relating plant genera, families and orders along with
