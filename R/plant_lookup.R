@@ -32,10 +32,11 @@
 ##'   "accepted" species within each genus counts as
 ##'   \code{number.of.species}.
 ##'
-##' @param family.tax = the value "ap.web" will return the family
+##' @param family.tax the value "ap.web" will return the family
 ##'   names from apweb otherwise the lookup will include the family
 ##'   names from the plant list.  Currently there are 8 family names
-##'   that differ between the two sources.
+##'   that differ between the two sources (e.g., Compositae in the plant list
+##'   versus Asteraceae in ap.web)
 ##'
 ##' @export
 ##' @import storr
