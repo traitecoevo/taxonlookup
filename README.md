@@ -18,6 +18,7 @@ The scripts are in the repository but not in the package.  Only the data and way
 
 ```r
 install.packages("devtools")
+devtools::install_github("hadley/httr")
 devtools::install_github("richfitz/storr")
 devtools::install_github("wcornwell/taxonlookup")
 library(taxonlookup)
