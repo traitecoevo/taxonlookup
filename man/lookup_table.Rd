@@ -30,7 +30,7 @@ with one row per species and with species as row names.}
 Build a lookup table for a set of species, connecting the species names to plant genera, families and orders
 }
 \details{
-##' The data within this lookup table comes from two sources:
+The data within this lookup table comes from two sources:
 
 1. The Plant List v1.1. (http://www.theplantlist.org/) for
 accepted genera to families and species richness within each
@@ -52,6 +52,7 @@ lookup_table("Pinus ponderosa")
 #
 #
 # control how you want the function to handle non-matches
+#
 lookup_table(c("Pinus ponderosa","Neitheragenus noraspecies"))
 #
 lookup_table(c("Pinus ponderosa","Neitheragenus noraspecies"),missing_action="NA")

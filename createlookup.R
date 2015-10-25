@@ -83,6 +83,7 @@ matchPlantListFamiliesToApweb<-function(tplGenera){
   tplGenera$apweb.family<-tplGenera$family
   badFamilies<-unique(tplGenera$apweb.family[!tplGenera$apweb.family%in%apFamilies$acceptedFamilies&tplGenera$group!="Bryophytes"&tplGenera$apweb.family%in%apFamilies$family])
   tplGenera$apweb.family[tplGenera$apweb.family%in%badFamilies]<-apFamilies$synonym[match(tplGenera$apweb.family,apFamilies$family)][tplGenera$apweb.family%in%badFamilies]
+  tplGenera$apweb.family[tplGenera$apweb.family=="Compositae"]<-"Asteraceae"
   return(tplGenera)
 }
 
