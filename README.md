@@ -1,6 +1,7 @@
 # taxonlookup: a taxonomic lookup table for land plants
 
 [![Build Status](https://travis-ci.org/traitecoevo/taxonlookup.png?branch=master)](https://travis-ci.org/traitecoevo/taxonlookup)
+[![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.32636.svg)](http://dx.doi.org/10.5281/zenodo.32636)
 
 This is designed to be a living database--it will update as taxonomy changes (which it always will). These updates will correspond with changes to the version number of this resource, and each version of the database will be available via [travis-ci](http://travis-ci.org) and [Github Releases](http://docs.travis-ci.com/user/deployment/releases/). If you use this resource for published analysis, please note the version number in your publication.  This will allow anyone in the future to go back and find **exactly** the same version of the data that you used.
  
