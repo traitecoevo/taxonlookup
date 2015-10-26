@@ -62,6 +62,7 @@ matchPlantListFamiliesToApweb<-function(tplGenera){
   #fix two spelling mistakes from the plant list, so that they match properly
   tplGenera$family[tplGenera$family=="Dryopteridacae"]<-"Dryopteridaceae"
   tplGenera$family[tplGenera$family=="Apleniaceae"]<-"Aspleniaceae"
+  tplGenera$family[tplGenera$family=="Bataceae"]<-"Batidaceae"
   #match to APWeb
   tplGenera$order<-apFamilies$order[match(tplGenera$family,apFamilies$acceptedFamilies)]
   #for families still unmatched, use APWeb's synonomy
