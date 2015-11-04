@@ -21,10 +21,10 @@ library(taxonlookup)
 lookup_table(c("Pinus ponderosa","Quercus agrifolia"),by_species=TRUE)
 ```
 
-|| genus        | family           | order  | group
-| ------------- |:-------------:| -----:| -----:|
-|Pinus ponderosa |    Pinus | Pinaceae | Pinales | Gymnosperms|
-|Quercus agrifolia | Quercus | Fagaceae | Fagales | Angiosperms|
+|   | Genus        | Family           | Order  | Group|
+| ------------- | ----------- | ----------- | ----------- | ----------- |
+| Pinus ponderosa |    Pinus | Pinaceae | Pinales | Gymnosperms|
+| Quercus agrifolia | Quercus | Fagaceae | Fagales | Angiosperms|
 
 That's it, really.  There are a few other functions to get species diversity numbers and other (non-Linnean) high clades.  Below is information about the data sources and the versioned data distribution system (which we think is really cool), but you don't need to read that stuff to use the package.  
 
