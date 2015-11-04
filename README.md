@@ -3,19 +3,9 @@
 [![Build Status](https://travis-ci.org/traitecoevo/taxonlookup.png?branch=master)](https://travis-ci.org/traitecoevo/taxonlookup)
 [![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.32636.svg)](http://dx.doi.org/10.5281/zenodo.32636)
 
-This is designed to be a living database--it will update as taxonomy changes (which it always will). These updates will correspond with changes to the version number of this resource, and each version of the database will be available via [travis-ci](http://travis-ci.org) and [Github Releases](http://docs.travis-ci.com/user/deployment/releases/). If you use this resource for published analysis, please note the version number in your publication.  This will allow anyone in the future to go back and find **exactly** the same version of the data that you used.
- 
-The core of this repository is a set of scripts that dynamically build a genus-family-order-higher taxa look-up table for land plants with the data lookup primarily coming from three sources (with most of the web-scraping done by [taxize](https://github.com/ropensci/taxize)): 
+## How to use this package
 
-1. [The Plant List](http://www.theplantlist.org/) for accepted genera to families
-
-2. [APWeb](http://www.mobot.org/MOBOT/research/APweb/) for family-level synonymies and family to order as curated by [Peter Stevens](http://www.umsl.edu/~biology/About%20the%20Department/Faculty/stevens.html)
-
-3. [A higher-level taxonomy lookup](http://datadryad.org/resource/doi:10.5061/dryad.63q27.2/1.1) compiled by [Dave Tank](http://phylodiversity.net/dtank/Tank_Lab/Tank_Lab.html) and colleagues
-
-We have a complete genus-family-order mapping for vascular plants. For bryophytes, there is only genus-family mapping at present; if anyone has a family-order map for bryophytes, please let me know. We also correct some spelling errors, special character issues, and other errors from The Plant List.  We will try to keep this curation up-to-date, but there may new errors introduced as the cannonical data sources shift to future versions.  
-
-The scripts are in the repository but not in the package.  Only the data and ways to access the data are in the package; the reason for this design will become clear further down the readme.  To use the data from the most recent release first install and load `devtools`; that will then let you load the one dependancy and then the `taxonlookup` package from this respository:
+### Install the libraries
 
 ```r
 install.packages("devtools")
@@ -25,7 +15,41 @@ devtools::install_github("wcornwell/taxonlookup")
 library(taxonlookup)
 ```
 
-Then you can download and load the data into `R` using the `plant_lookup()` function:
+### find the higher taxonomy for your species list
+
+```r
+lookup_table(c("Pinus ponderosa","Quercus agrifolia"),by_species=TRUE)
+```
+
+|| genus        | family           | order  | group
+| ------------- |:-------------:| -----:| -----:|
+|Pinus ponderosa |    Pinus | Pinaceae | Pinales | Gymnosperms|
+|Quercus agrifolia | Quercus | Fagaceae | Fagales | Angiosperms|
+
+That's it, really.  There are a few other functions to get species diversity numbers and other (non-Linnean) high clades.  Below is information about the data sources and the versioned data distribution system (which we think is really cool), but you don't need to read that stuff to use the package.  
+
+----------------------
+
+## Data sources
+
+1. [The Plant List](http://www.theplantlist.org/) for accepted genera to families
+
+2. [APWeb](http://www.mobot.org/MOBOT/research/APweb/) for family-level synonymies and family to order as curated by [Peter Stevens](http://www.umsl.edu/~biology/About%20the%20Department/Faculty/stevens.html)
+
+3. [A higher-level taxonomy lookup](http://datadryad.org/resource/doi:10.5061/dryad.63q27.2/1.1) compiled by [Dave Tank](http://phylodiversity.net/dtank/Tank_Lab/Tank_Lab.html) and colleagues
+
+We have a complete genus-family-order mapping for vascular plants. For bryophytes, there is only genus-family mapping at present; if anyone has a family-order map for bryophytes, please let me know. We also correct some spelling errors, special character issues, and other errors from The Plant List.  We will try to keep this curation up-to-date, but there may new errors introduced as the cannonical data sources shift to future versions.  
+
+
+## Details about the data distribution system
+
+This is designed to be a living database--it will update as taxonomy changes (which it always will). These updates will correspond with changes to the version number of this resource, and each version of the database will be available via [travis-ci](http://travis-ci.org) and [Github Releases](http://docs.travis-ci.com/user/deployment/releases/). If you use this resource for published analysis, please note the version number in your publication.  This will allow anyone in the future to go back and find **exactly** the same version of the data that you used.
+ 
+The core of this repository is a set of scripts that dynamically build a genus-family-order-higher taxa look-up table for land plants with the data lookup primarily coming from three sources (with most of the web-scraping done by [taxize](https://github.com/ropensci/taxize)): 
+
+The scripts are in the repository but not in the package.  Only the data and ways to access the data are in the package; the reason for this design will become clear further down the readme.  
+
+You can download and load the data into `R` using the `plant_lookup()` function:
 
 ```r
 head(plant_lookup())
