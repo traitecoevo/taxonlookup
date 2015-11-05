@@ -1,6 +1,7 @@
 # taxonlookup: a taxonomic lookup table for land plants
 
 [![Build Status](https://travis-ci.org/traitecoevo/taxonlookup.png?branch=master)](https://travis-ci.org/traitecoevo/taxonlookup)
+[![codecov.io](https://codecov.io/github/traitecoevo/taxonlookup/coverage.svg?branch=master)](https://codecov.io/github/traitecoevo/taxonlookup?branch=master)
 [![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.32636.svg)](http://dx.doi.org/10.5281/zenodo.32636)
 
 ## How to use this package
