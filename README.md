@@ -15,7 +15,7 @@ devtools::install_github("wcornwell/taxonlookup")
 library(taxonlookup)
 ```
 
-### find the higher taxonomy for your species list
+### Find the higher taxonomy for your species list
 
 ```r
 lookup_table(c("Pinus ponderosa","Quercus agrifolia"),by_species=TRUE)
@@ -26,7 +26,9 @@ lookup_table(c("Pinus ponderosa","Quercus agrifolia"),by_species=TRUE)
 | Pinus ponderosa |    Pinus | Pinaceae | Pinales | Gymnosperms|
 | Quercus agrifolia | Quercus | Fagaceae | Fagales | Angiosperms|
 
-That's it, really.  There are a few other functions to get species diversity numbers and other (non-Linnean) high clades.  Below is information about the data sources and the versioned data distribution system (which we think is really cool), but you don't need to read that stuff to use the package.  
+There are a few other functions to get species diversity numbers and other (non-Linnean) high clades if you want that information.  If you use this package in a published paper, **please note the version number**.  This  will allow others to reproduce your work later.  
+
+That's it, really.  Below is information about the data sources and the versioned data distribution system (which we think is really cool), feel free to check it out, but you don't need to read the rest of this to use the package.  
 
 ----------------------
 
