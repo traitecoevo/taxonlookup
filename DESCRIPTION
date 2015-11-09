@@ -2,11 +2,18 @@ Package: taxonlookup
 Title: A dynamically-updating versioned taxonomic resource for vascular plants
 Version: 0.3.3
 Date: 2015-08-03
-Description: This is a taxon lookup table for land plants.  It is built from a set of scripts that dynamically build a versioned genus-family-order-higher taxa lookup table from canonical sources on the web.  It uses semantic versioning to keep track of changes. 
-Depends: R (>= 3.1.0)
+Description: This is a taxon lookup table for land plants. It is built from a
+    set of scripts that dynamically build a versioned genus-family-order-higher taxa
+    lookup table from canonical sources on the web. It uses semantic versioning to
+    keep track of changes.
+Depends:
+    R (>= 3.1.0)
 License: MIT + file LICENSE
 LazyData: true
 Authors@R: as.person(c("Will Cornwell <wcornwell@gmail.com> [aut, cre]","Rich FitzJohn <rich.fitzjohn@gmail.com> [aut]","Matt Pennell <mwpennell@gmail.com> [aut]"))
 Maintainer: Will Cornwell <wcornwell@gmail.com>
-Imports: storr (>= 0.1.3)
-Suggests: testthat
+Imports:
+    storr (>= 0.1.3)
+Suggests:
+    testthat
+RoxygenNote: 5.0.0

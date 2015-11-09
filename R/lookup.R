@@ -28,7 +28,6 @@
 ##' @param by_species If \code{TRUE}, then return a larger data frame
 ##' with one row per species and with species as row names.
 ##' @export
-##'
 ##' @examples
 ##' lookup_table("Pinus_ponderosa")
 ##' #
