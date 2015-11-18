@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/traitecoevo/taxonlookup.png?branch=master)](https://travis-ci.org/traitecoevo/taxonlookup)
 [![codecov.io](https://codecov.io/github/traitecoevo/taxonlookup/coverage.svg?branch=master)](https://codecov.io/github/traitecoevo/taxonlookup?branch=master)
-[![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.32636.svg)](http://dx.doi.org/10.5281/zenodo.32636)
+[![DOI](https://zenodo.org/badge/18839/traitecoevo/taxonlookup.svg)](https://zenodo.org/badge/latestdoi/18839/traitecoevo/taxonlookup)
 
 ## How to use this package
 
