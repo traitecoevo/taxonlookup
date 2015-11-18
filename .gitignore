@@ -14,6 +14,5 @@ vignettes/*.pdf
 .Rproj.user
 .remake/
 .DS_Store
-plant_lookup.csv
 plantListAcceptedNames/
 source_data/Spermatophyta_Genera.csv
