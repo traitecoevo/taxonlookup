@@ -122,3 +122,4 @@ Download the package and rerun the build script.  We'll work this way as we add 
   - Drag the `plant_lookup.csv` file into the upload area or use the "selecting them" link
   - Click "Publish release"
 * Check that it works by running `taxonlookup::plant_lookup("1.2.3")` which should pull the data.
+* Update the Zenodo badge on the readme
