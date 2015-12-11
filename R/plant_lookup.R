@@ -126,5 +126,6 @@ read_csv <- function(...) {
 }
 
 plant_lookup_release <- function(description, path=NULL, ...) {
-  datastorr::github_release_create(info, description=description, ...)
+  datastorr::github_release_create(plant_lookup_info(path),
+                                   description=description, ...)
 }
