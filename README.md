@@ -113,13 +113,15 @@ Download the package and rerun the build script.  We'll work this way as we add 
 
 # Notes for making a release using this *living dataset* design
 
-* Update the `DESCRIPTION` file to increase the version number.  Once we hit version 1, we use [semantic versioning](http://semver.org/) so be aware of when to change what number.  Assume it's `1.2.3` for the rest of instructions.
+* Update the `DESCRIPTION` file to **increase** the version number.  Now that we are past version 1.0.0, we will use [semantic versioning](http://semver.org/) so be aware of when to change what number.
 * Run `remake::make()` to rebuild `plant_lookup.csv`
-* Commit and push to github
-* In github, create a new release [link](https://github.com/wcornwell/taxonlookup/releases/new)
-  - Tag version must be prefixed with the letter "v", e.g., `v1.2.3`
-  - In the release title / description give a short descripton about what the feature(s) that this release adds is/are
-  - Drag the `plant_lookup.csv` file into the upload area or use the "selecting them" link
-  - Click "Publish release"
-* Check that it works by running `taxonlookup::plant_lookup("1.2.3")` which should pull the data.
+* Commit code changes and `DESCRIPTION` and push to GitHub
+* With R in the package directory, run
+
+```r
+taxonlookup:::plant_lookup_release("<description>")
+```
+
+where `"<description>"` is a brief description of new features of the release.
+* Check that it works by running `taxonlookup::plant_lookup(taxonlookup::plant_lookup_version_current(FALSE))` which should pull the data.
 * Update the Zenodo badge on the readme

@@ -124,3 +124,7 @@ plant_lookup_del <- function(version, path=NULL) {
 read_csv <- function(...) {
   read.csv(..., stringsAsFactors=FALSE)
 }
+
+plant_lookup_release <- function(description, path=NULL, ...) {
+  datastorr::github_release_create(info, description=description, ...)
+}
