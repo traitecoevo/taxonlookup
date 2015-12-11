@@ -2,7 +2,8 @@ context("plant_lookup")
 
 ## Need to do something nice here with testing?
 test_that("table sane", {
-  lookup <- plant_lookup()
+  path <- tempfile()
+  lookup <- plant_lookup(path=path)
   expect_that(ncol(lookup), equals(4L))
   expect_that(lookup, is_a("data.frame"))
   expect_that(names(lookup),
@@ -10,10 +11,8 @@ test_that("table sane", {
   expect_that(any(is.na(lookup)), is_false())
   expect_that(any(lookup == ""), is_false())
   expect_that(any(duplicated(lookup$genus)), is_false())
-})
 
-test_that("table sane", {
-  lookup <- plant_lookup(include_counts=TRUE)
+  lookup <- plant_lookup(include_counts=TRUE, path=path)
   expect_that(ncol(lookup), equals(5L))
   expect_that(lookup, is_a("data.frame"))
   expect_that(names(lookup),

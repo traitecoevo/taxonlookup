@@ -39,8 +39,14 @@
 ##'   that differ between the two sources (e.g., Compositae in the plant list
 ##'   versus Asteraceae in ap.web)
 ##'
+##' @param path Path to store the data at.  If not given,
+##'   \code{datastorr} will use \code{rappdirs} to find the best place
+##'   to put persistent application data on your system.  You can
+##'   delete the persistent data at any time by running
+##'   \code{mydata_del(NULL)} (or \code{mydata_del(NULL, path)} if you
+##'   use a different path).
+##'
 ##' @export
-##' @import storr
 ##' @examples
 ##' #
 ##' # see the format of the resource
@@ -64,8 +70,9 @@
 ##' # find the number of accepted species within the Myrtaceae
 ##' #
 ##' sum(pl$number.of.species[pl$family=="Myrtaceae"])
-plant_lookup <- function(version=NULL, include_counts=FALSE, family.tax="apweb") {
-  d <- plant_lookup_get(version)
+plant_lookup <- function(version=NULL, include_counts=FALSE,
+                         family.tax="apweb", path=NULL) {
+  d <- plant_lookup_get(version, path)
   if (!include_counts) {
     d <- d[names(d) != "number.of.species"]
   }
@@ -80,41 +87,38 @@ plant_lookup <- function(version=NULL, include_counts=FALSE, family.tax="apweb")
 ##   1. the repository name (wcornwell/taxonlookup)
 ##   2. the file to download (plant_lookup.csv)
 ##   3. the function to read the file, given a filename (read_csv)
-plant_lookup_info <- function() {
-  github_release_storr_info("wcornwell/taxonlookup",
-                            "plant_lookup.csv",
-                            read_csv)
+plant_lookup_info <- function(path) {
+  datastorr::github_release_info("wcornwell/taxonlookup",
+                                 filename="plant_lookup.csv",
+                                 read=read_csv,
+                                 path=path)
 }
 
-## Below here are wrappers around the storr functions but with our
-## information object.  We could actually save plant_lookup_info() as
-## an *object* in the package, but I prefer this approach.
-plant_lookup_get <- function(version=NULL) {
-  github_release_storr_get(plant_lookup_info(), version)
-}
-
-##' @export
-##' @rdname plant_lookup
-##' @param type Type of version to return: options are "local"
-##'   (versions installed locally) or "github" (versions available on
-##'   github).  With any luck, "github" is a superset of "local".  For
-##'   \code{plant_lookup_version_current}, if "local" is given, but there
-##'   are no local versions, then we do check for the most recent
-##'   github version.
-plant_lookup_versions <- function(type="local") {
-  github_release_storr_versions(plant_lookup_info(), type)
+plant_lookup_get <- function(version=NULL, path=NULL) {
+  datastorr::github_release_get(plant_lookup_info(path), version)
 }
 
 ##' @export
 ##' @rdname plant_lookup
-plant_lookup_version_current <- function(type="local") {
-  github_release_storr_version_current(plant_lookup_info(), type)
+##' @param local Logical indicating if local or github versions should
+##'   be polled.  With any luck, \code{local=FALSE} is a superset of
+##'   \code{local=TRUE}.  For \code{mydata_version_current}, if
+##'   \code{TRUE}, but there are no local versions, then we do check
+##'   for the most recent github version.
+plant_lookup_versions <- function(local=TRUE, path=NULL) {
+  datastorr::github_release_versions(plant_lookup_info(path), local)
 }
 
 ##' @export
 ##' @rdname plant_lookup
-plant_lookup_del <- function(version) {
-  github_release_storr_del(plant_lookup_info(), version)
+plant_lookup_version_current <- function(local=TRUE, path=NULL) {
+  datastorr::github_release_version_current(plant_lookup_info(info), local)
+}
+
+##' @export
+##' @rdname plant_lookup
+plant_lookup_del <- function(version, path=NULL) {
+  datastorr::github_release_del(plant_lookup_info(path), version)
 }
 
 read_csv <- function(...) {

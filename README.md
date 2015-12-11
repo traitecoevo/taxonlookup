@@ -6,12 +6,12 @@
 
 ## How to use this package
 
-### Install the libraries
+### Install the required packages
 
 ```r
 install.packages("devtools")
 devtools::install_github("hadley/httr")
-devtools::install_github("richfitz/storr")
+devtools::install_github(c("richfitz/storr@refactor", "richfitz/datastorr"))
 devtools::install_github("wcornwell/taxonlookup")
 library(taxonlookup)
 ```

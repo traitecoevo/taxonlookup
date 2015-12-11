@@ -7,13 +7,14 @@
 \alias{plant_lookup_versions}
 \title{Plant taxonomy lookup table}
 \usage{
-plant_lookup(version = NULL, include_counts = FALSE, family.tax = "apweb")
+plant_lookup(version = NULL, include_counts = FALSE, family.tax = "apweb",
+  path = NULL)
 
-plant_lookup_versions(type = "local")
+plant_lookup_versions(local = TRUE, path = NULL)
 
-plant_lookup_version_current(type = "local")
+plant_lookup_version_current(local = TRUE, path = NULL)
 
-plant_lookup_del(version)
+plant_lookup_del(version, path = NULL)
 }
 \arguments{
 \item{version}{Version number.  The default will load the most
@@ -32,12 +33,18 @@ names from the plant list.  Currently there are 8 family names
 that differ between the two sources (e.g., Compositae in the plant list
 versus Asteraceae in ap.web)}
 
-\item{type}{Type of version to return: options are "local"
-(versions installed locally) or "github" (versions available on
-github).  With any luck, "github" is a superset of "local".  For
-\code{plant_lookup_version_current}, if "local" is given, but there
-are no local versions, then we do check for the most recent
-github version.}
+\item{path}{Path to store the data at.  If not given,
+\code{datastorr} will use \code{rappdirs} to find the best place
+to put persistent application data on your system.  You can
+delete the persistent data at any time by running
+\code{mydata_del(NULL)} (or \code{mydata_del(NULL, path)} if you
+use a different path).}
+
+\item{local}{Logical indicating if local or github versions should
+be polled.  With any luck, \code{local=FALSE} is a superset of
+\code{local=TRUE}.  For \code{mydata_version_current}, if
+\code{TRUE}, but there are no local versions, then we do check
+for the most recent github version.}
 }
 \description{
 Lookup table relating plant genera, families and orders along with

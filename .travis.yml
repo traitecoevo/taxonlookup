@@ -9,7 +9,8 @@ before_install:
 
 install:
   - ./travis-tool.sh install_deps
-  - ./travis-tool.sh github_package richfitz/storr
+  - ./travis-tool.sh github_package richfitz/storr@refactor
+  - ./travis-tool.sh github_package richfitz/datastorr
   - ./travis-tool.sh github_package jimhester/covr
 
 script: ./travis-tool.sh run_tests
@@ -19,7 +20,7 @@ r_github_packages:
 
 after_success:
   - Rscript -e 'library(covr); coveralls()'
-  - Rscript -e 'library(covr);codecov()'
+  - Rscript -e 'library(covr); codecov()'
 
 after_failure:
   - ./travis-tool.sh dump_logs

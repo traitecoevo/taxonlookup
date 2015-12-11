@@ -1,10 +1,7 @@
 context("lookup")
 
-## TODO: this should probably work with a temporary directory, rather
-## than the real data.
-
 test_that("lookup_table", {
-  lookup <- plant_lookup()
+  lookup <- plant_lookup(path=tempfile())
   set.seed(1)
   sp <- sample(lookup$genus, 20)
   dat <- lookup_table(sp, lookup)
@@ -59,16 +56,19 @@ test_that("lookup_table", {
 })
 
 test_that("all versions", {
-  versions <- plant_lookup_versions("github")
+  path <- tempfile()
+  versions <- plant_lookup_versions(FALSE, path)
   for (v in versions) {
-    d <- plant_lookup(v)
+    d <- plant_lookup(v, path=path)
     expect_that(d, is_a("data.frame"))
   }
-  expect_that(plant_lookup_versions("local"), equals(versions))
+  expect_that(plant_lookup_versions(TRUE, path), equals(versions))
 })
 
 test_that("survive cache delete", {
-  pl <- plant_lookup()
-  plant_lookup_del(NULL)
-  expect_that(plant_lookup(), not(throws_error()))
+  path <- tempfile()
+  pl <- plant_lookup(path=path)
+  plant_lookup_del(NULL, path=path)
+  expect_that(file.exists(path), is_false())
+  expect_that(plant_lookup(path=path), not(throws_error()))
 })

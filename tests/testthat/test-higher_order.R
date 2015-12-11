@@ -1,10 +1,8 @@
 context("higher_order")
 
-## TODO: this should probably work with a temporary directory, rather
-## than the real data.
-
 test_that("higher_order", {
-  ho<-add_higher_order()
-  expect_that(length(ho$genus)== length(unique(ho$genus)),is_true())
+  lookup <- plant_lookup(path=tempfile())
+  ho <- add_higher_order(lookup)
+  expect_that(length(ho$genus), equals(length(unique(ho$genus))))
 })
 
