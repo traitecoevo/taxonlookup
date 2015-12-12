@@ -13,7 +13,7 @@ LazyData: true
 Authors@R: as.person(c("Will Cornwell <wcornwell@gmail.com> [aut, cre]","Rich FitzJohn <rich.fitzjohn@gmail.com> [aut]","Matt Pennell <mwpennell@gmail.com> [aut]"))
 Maintainer: Will Cornwell <wcornwell@gmail.com>
 Imports:
-    datastorr
+    datastorr (>= 0.0.3)
 Suggests:
     testthat
 RoxygenNote: 5.0.1
