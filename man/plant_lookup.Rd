@@ -68,7 +68,7 @@ Note that there is not currently order-level information available for Bryophyte
 These data are then currated--we correct some spelling
 errors, special character issues, genera listed in multiple families, family-level synonomy,
 and other issues that arise in assembling a resources like this.  Details of the curation
-are at https://github.com/wcornwell/taxonlookup
+are at https://github.com/traitecoevo/taxonlookup
 }
 \examples{
 #

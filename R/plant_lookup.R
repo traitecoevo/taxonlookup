@@ -19,7 +19,7 @@
 ##' These data are then currated--we correct some spelling
 ##' errors, special character issues, genera listed in multiple families, family-level synonomy,
 ##' and other issues that arise in assembling a resources like this.  Details of the curation
-##' are at https://github.com/wcornwell/taxonlookup
+##' are at https://github.com/traitecoevo/taxonlookup
 ##'
 ##' @title Plant taxonomy lookup table
 ##'
@@ -84,11 +84,11 @@ plant_lookup <- function(version=NULL, include_counts=FALSE,
 
 ## This one is the important part; it defines the three core bits of
 ## information we need;
-##   1. the repository name (wcornwell/taxonlookup)
+##   1. the repository name (traitecoevo/taxonlookup)
 ##   2. the file to download (plant_lookup.csv)
 ##   3. the function to read the file, given a filename (read_csv)
 plant_lookup_info <- function(path) {
-  datastorr::github_release_info("wcornwell/taxonlookup",
+  datastorr::github_release_info("traitecoevo/taxonlookup",
                                  filename="plant_lookup.csv",
                                  read=read_csv,
                                  path=path)
