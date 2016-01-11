@@ -78,7 +78,7 @@ However, if there have been some recent changes to taxonomy  that are both impor
 To build the lookup table, first clone this repository.  Then install the required packages from CRAN:
 
 ```r
-	install.packages(c("R6","yaml","digest","devtools"))
+	install.packages(c("R6","yaml","digest","devtools","downloader"))
 ```
 
 Download and install 3 additional packages from github:    
