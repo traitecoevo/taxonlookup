@@ -112,7 +112,7 @@ plant_lookup_versions <- function(local=TRUE, path=NULL) {
 ##' @export
 ##' @rdname plant_lookup
 plant_lookup_version_current <- function(local=TRUE, path=NULL) {
-  datastorr::github_release_version_current(plant_lookup_info(info), local)
+  datastorr::github_release_version_current(plant_lookup_info(path), local)
 }
 
 ##' @export

@@ -69,7 +69,6 @@ matchPlantListFamiliesToApweb<-function(tplGenera){
   tplGenera$order[is.na(tplGenera$order)]<-apFamilies$order[match(tplGenera$family,apFamilies$family)[is.na(tplGenera$order)]]
   #fixing Vivianiaceae problem
   tplGenera$order[tplGenera$family=="Vivianiaceae"]<-"Geraniales"
-
   #"Bryophytes" are a problem
   tplGenera$order[tplGenera$group=="Bryophytes"]<-"undeter_peristomate_moss"
   #Sphagnopsida is generally thought to be the basal branch within the mosses

@@ -21,4 +21,5 @@ test_that("table sane", {
   expect_that(any(is.na(lookup)), is_false())
   expect_that(any(lookup == ""), is_false())
   expect_that(any(duplicated(lookup$genus)), is_false())
+  expect_is(plant_lookup_version_current(),"character")
 })

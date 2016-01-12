@@ -3,6 +3,11 @@ sources:
 
 packages:
   - taxize
+  - R6
+  - yaml
+  - digest
+  - devtools
+  - downloader
 
 targets:
   all:

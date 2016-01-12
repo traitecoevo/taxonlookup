@@ -27,7 +27,7 @@ lookup_table(c("Pinus ponderosa","Quercus agrifolia"),by_species=TRUE)
 | Pinus ponderosa |    Pinus | Pinaceae | Pinales | Gymnosperms|
 | Quercus agrifolia | Quercus | Fagaceae | Fagales | Angiosperms|
 
-There are a few other functions to get species diversity numbers and other (non-Linnean) high clades if you want that information.  If you use this package in a published paper, **please note the version number**.  This  will allow others to reproduce your work later.  
+There are a few other functions to get species diversity numbers and other (non-Linnean) high clades if you want that information.  **If you use this package in a published paper, please note the version number**.  This  will allow others to reproduce your work later.  
 
 That's it, really.  Below is information about the data sources and the versioned data distribution system (which we think is really cool), feel free to check it out, but you don't need to read the rest of this to use the package.  
 
@@ -75,23 +75,16 @@ However, if there have been some recent changes to taxonomy  that are both impor
 
 # Rebuilding the lookup table
 
-To build the lookup table, first clone this repository.  Then install the required packages from CRAN:
+To build the lookup table, first clone this repository.  Then download and install `remake` from github:    
 
 ```r
-	install.packages(c("R6","yaml","digest","devtools","downloader"))
-```
-
-Download and install 3 additional packages from github:    
-
-```r
-	devtools::install_github("richfitz/storr")
 	devtools::install_github("richfitz/remake")
-	devtools::install_github("ropensci/taxize")
 ```
 
-This will require a recent version of taxize, so if you have that already installed an older version, please re-install.  Then run the following command from within R.  Make sure the home directory is within the repository:
+Then run the following commands from within R.  Make sure the home directory is within the repository:
 
 ```r
+  remake::install_missing_packages()
 	remake::make()
 ```	
 

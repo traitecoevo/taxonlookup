@@ -1,7 +1,7 @@
 Package: taxonlookup
 Title: A dynamically-updating versioned taxonomic resource for vascular plants
-Version: 1.0.1
-Date: 2015-11-18
+Version: 1.0.2
+Date: 2016-01-12
 Description: This is a taxon lookup table for land plants. It is built from a
     set of scripts that dynamically build a versioned genus-family-order-higher taxa
     lookup table from canonical sources on the web. It uses semantic versioning to
