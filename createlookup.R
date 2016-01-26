@@ -21,25 +21,31 @@ downloadPlantList<-function(familyList){
 
 get.genera<-function(family, path,tf){
   ah <- read.csv(file.path(path,family), stringsAsFactors=FALSE)
-  accepted.species<-subset(ah,Taxonomic.status.in.TPL=="Accepted")
-  group<-tf$group[match(accepted.species$Family[1],tf$family)]
-  if (nrow(accepted.species)==0) {
+  #
+  group<-tf$group[match(ah$Family[1],tf$family)]
+  if (nrow(ah)==0) {
     return(NULL)
   }
   not.species <- c("Species.hybrid.marker", "Genus.hybrid.marker", "Infraspecific.epithet")
-  tmp <- accepted.species[not.species]
-  accepted.species <- accepted.species[apply(tmp == "" | is.na(tmp), 1, all), ]
-  if (nrow(accepted.species)==0) {
+  tmp <- ah[not.species]
+  ah <- ah[apply(tmp == "" | is.na(tmp), 1, all), ]
+  if (nrow(ah)==0) {
     return(NULL)
   }
 
   # not using table(accepted.species$Genus) because it leaves things oddly structured
-  n.species <- tapply(accepted.species$Infraspecific.rank, accepted.species$Genus, length)
+  accepted.species<-subset(ah,Taxonomic.status.in.TPL=="Accepted")
+  n.accepted.species <- tapply(accepted.species$Infraspecific.rank, accepted.species$Genus, length)
+  n.total.species <- tapply(ah$Infraspecific.rank, ah$Genus, length)
+  n.accepted.species.matched<-n.accepted.species[match(names(n.total.species),names(n.accepted.species))]
+  names(n.accepted.species.matched)<-names(n.total.species)
+  n.accepted.species.matched[is.na(n.accepted.species.matched)]<-0
 
-  out <- data.frame(family=accepted.species$Family[1],
-                    genus=names(n.species),
+  out <- data.frame(family=ah$Family[1],
+                    genus=names(n.total.species),
                     group=group,
-                    number.of.species=n.species,
+                    number.of.accepted.species=n.accepted.species.matched,
+                    number.of.accepted.and.unresolved.species=n.total.species,
                     stringsAsFactors=FALSE)
   return(out)
 }
@@ -119,8 +125,8 @@ fixFernsAndOtherProblems<-function(genera.list, fae, errors){
   ret <- dropTplErrors(genera.list, errors)
 
   # Sort rows and columns appropriately:
-  ret <- ret[c("number.of.species","genus", "family", "apweb.family","order", "group")]
-  ret <- ret[order(ret$group,ret$order, ret$family, ret$apweb.family,ret$genus,ret$number.of.species), ]
+  ret <- ret[c("number.of.accepted.species","number.of.accepted.and.unresolved.species","genus", "family", "apweb.family","order", "group")]
+  ret <- ret[order(ret$group,ret$order, ret$family, ret$apweb.family,ret$genus,ret$number.of.accepted.species,ret$number.of.accepted.and.unresolved.species), ]
   rownames(ret) <- NULL
 
   return(ret)
