@@ -1,3 +1,24 @@
+check.list<-function(genera.list){
+  counting.genera<-table(genera.list$genus)
+  multi.counts<-names(counting.genera[counting.genera>1])
+  bad.genus<-NA
+  bad.family<-NA
+  for (i in 1:length(unique(multi.counts))){
+   now<-filter(genera.list,genus==multi.counts[i])
+   if (sum(now$number.of.accepted.species)>0){
+     if(!any(now$number.of.accepted.species==0)) message (multi.counts[i])
+     out<-filter(now,number.of.accepted.species==0)
+     bad.genus<-c(bad.genus,out$genus)
+     bad.family<-c(bad.family,out$family)
+   }
+   if (sum(now$number.of.accepted.species)==0) message(multi.counts[i])
+  }
+}
+
+
+
+
+
 getTplVascularPlantFamilies<-function(){
   #get full list of families
   tf<-tpl_families()
@@ -97,17 +118,15 @@ matchPlantListFamiliesToApweb<-function(tplGenera){
 }
 
 fixFernsAndOtherProblems<-function(genera.list, fae, errors){
+  #filling in tpl orders for families that apweb misses
   #problems<-unique(genera.list$family[is.na(genera.list$order)])
   #currently only correcting Osmundaceae and Plagiogyriaceae
   genera.list$order[is.na(genera.list$order)]<-fae$order[match(genera.list$family,fae$family)[is.na(genera.list$order)]]
 
+  #this was fixed upstream
   #genera.list$order[genera.list$family=="Cystodiaceae"]<-"Polypodiales"
   #genera.list$family[genera.list$family=="Isoëtaceae"]<-"Isoetaceae"
   #genera.list$order[genera.list$family=="Isoetaceae"]<-"Isoetales"
-
-  # Rename some families with modern names
-  #genera.list$family[genera.list$family == "Leguminosae"] <- "Fabaceae"
-  #genera.list$family[genera.list$family == "Compositae"] <- "Asteraceae"
 
   # Too many spaces:
   genera.list$order <- gsub("\\s\\s+", " ", genera.list$order)
@@ -169,7 +188,7 @@ readHigherOrderTaxonomy <- function(filename, genera.list) {
   res <- rbind(easy, hard)
 
   rownames(res) <- res$order
-  res[names(res) != "order"]
+  return(res[names(res) != "order"])
 }
 
 packageData <- function(higher_order_taxonomy, filename) {

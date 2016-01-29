@@ -30,7 +30,7 @@ test_that("lookup_table", {
               equals(rep(NA_character_, 2)))
 
   ## Automatically detect the species table:
-  dat2 <- lookup_table(sp2, missing_action="NA")
+  dat2 <- lookup_table(sp2, missing_action="drop")
   expect_that(dat2, is_identical_to(dat))
 
   ## Filtering.
