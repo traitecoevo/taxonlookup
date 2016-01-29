@@ -74,7 +74,8 @@ plant_lookup <- function(version=NULL, include_counts=FALSE,
                          family.tax="apweb", path=NULL) {
   d <- plant_lookup_get(version, path)
   if (!include_counts) {
-    d <- d[names(d) != "number.of.species"]
+    d <- d[names(d) != "number.of.accepted.species"]
+    d <- d[names(d) != "number.of.accepted.and.unresolved.species"]
   }
   if (family.tax == "apweb") {
     d$family <- d$apweb.family
