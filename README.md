@@ -43,6 +43,17 @@ That's it, really.  Below is information about the data sources and the versione
 
 We have a complete genus-family-order mapping for vascular plants. For bryophytes, there is only genus-family mapping at present; if anyone has a family-order map for bryophytes, please let me know. We also correct some spelling errors, special character issues, and other errors from The Plant List.  We will try to keep this curation up-to-date, but there may new errors introduced as the cannonical data sources shift to future versions.  
 
+## Notes on genus-to-family mapping
+
+`Taxonlookup` is constrained to a one-to-one genus-to-family (Linnean) mapping of taxa.  The Plant List v1.1 is not strict about following this rule and so this creates a few conflicts, which hopefully these will be resolved in v1.2.  In the `taxonlookup` we resolve these conflicts with the following rules:
+
+1. For conflicts among accepted species the genus is mapped to the family with more accepted species. This seemed to solve a somewhat common TPL bug where there was one moss species with the genus mistakenly listed as Pinus or something like that, and we didn't wanted a behavior that drops the clearly legitimate mapping of Pinus to Pinaceae.
+
+2. For conflicts in which some species are accepted and others unresolved, the genus is mapped to the family of the accepted species.
+
+3. For conflicts where all the species are unresolved it drops the genus entirely from both (or in some cases all three) families
+
+The full list of TPL genus--family pairs that get dropped based on these criteria is [here](https://github.com/traitecoevo/taxonlookup/blob/master/source_data/badGeneraFamilyPairs.csv).
 
 ## Details about the data distribution system
 
