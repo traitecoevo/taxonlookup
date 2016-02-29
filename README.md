@@ -45,9 +45,9 @@ We have a complete genus-family-order mapping for vascular plants. For bryophyte
 
 ## Notes on genus-to-family mapping
 
-`Taxonlookup` is constrained to a one-to-one genus-to-family (Linnean) mapping of taxa.  The Plant List v1.1 is not strict about following this rule and so this creates a few conflicts, which hopefully these will be resolved in v1.2.  In the `taxonlookup` we resolve these conflicts with the following rules:
+`Taxonlookup` is strictly constrained to a one-to-one genus-to-family (Linnean) mapping of taxa.  The Plant List v1.1, which itself assembles data from multiple sources, is not strict about following implementing this rule and so this creates a few conflicts, which hopefully will be resolved in v1.2.  In the meantime, `taxonlookup` resolves these conflicts (one genus name mapping to multiple families) using the following rules:
 
-1. For conflicts among accepted species the genus is mapped to the family with more accepted species. This seemed to solve a somewhat common TPL bug where there was one moss species with the genus mistakenly listed as Pinus or something like that, and we didn't wanted a behavior that drops the clearly legitimate mapping of Pinus to Pinaceae.
+1. For conflicts where two "accepted species" with the same genus name are mapped to different families, the genus is mapped to the family with more accepted species. This seemed to solve a somewhat common error in which one species is mistakenly given the wrong genus name.  For example, there could be one moss species with the genus mistakenly listed as Pinus. In this case we want a behavior that maintains the clearly legitimate mapping of Pinus to Pinaceae.
 
 2. For conflicts in which some species are accepted and others unresolved, the genus is mapped to the family of the accepted species.
 
