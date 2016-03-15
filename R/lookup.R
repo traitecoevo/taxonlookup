@@ -27,6 +27,12 @@
 ##' missing values and \code{error} will throw an error.
 ##' @param by_species If \code{TRUE}, then return a larger data frame
 ##' with one row per species and with species as row names.
+##'
+##' @param family.tax There are two available family taxonomies--"apweb" and "plantlist". the default is "apweb"
+##'
+##' @param include_counts This will include the number of species in the genus (data from the plant list) in the output
+##'
+##'
 ##' @export
 ##' @examples
 ##' lookup_table("Pinus_ponderosa")
@@ -45,9 +51,9 @@
 lookup_table <- function(species_list, lookup_table=NULL,
                          genus_column="genus",
                          missing_action=c("drop", "NA", "error"),
-                         by_species=FALSE) {
+                         by_species=FALSE,family.tax="apweb",include_counts=FALSE) {
   if (is.null(lookup_table)) {
-    lookup_table <- plant_lookup()
+    lookup_table <- plant_lookup(family.tax=family.tax,include_counts=include_counts)
   }
 
   missing_action <- match.arg(missing_action)

@@ -5,7 +5,8 @@
 \title{Build a family and order lookup table for a set of species}
 \usage{
 lookup_table(species_list, lookup_table = NULL, genus_column = "genus",
-  missing_action = c("drop", "NA", "error"), by_species = FALSE)
+  missing_action = c("drop", "NA", "error"), by_species = FALSE,
+  family.tax = "apweb", include_counts = FALSE)
 }
 \arguments{
 \item{species_list}{Character vector of species bionomials  Genus and species may be seperated by  " "
@@ -25,6 +26,10 @@ missing values and \code{error} will throw an error.}
 
 \item{by_species}{If \code{TRUE}, then return a larger data frame
 with one row per species and with species as row names.}
+
+\item{family.tax}{There are two available family taxonomies--"apweb" and "plantlist". the default is "apweb"}
+
+\item{include_counts}{This will include the number of species in the genus (data from the plant list) in the output}
 }
 \description{
 Build a lookup table for a set of species, connecting the species names to plant genera, families and orders
