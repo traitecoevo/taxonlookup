@@ -9,7 +9,6 @@ before_install:
 
 install:
   - ./travis-tool.sh install_deps
-  - ./travis-tool.sh github_package richfitz/storr@refactor
   - ./travis-tool.sh github_package richfitz/datastorr
   - ./travis-tool.sh github_package jimhester/covr
 

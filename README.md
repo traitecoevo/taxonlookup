@@ -11,7 +11,7 @@
 ```r
 install.packages("devtools")
 devtools::install_github("hadley/httr")
-devtools::install_github(c("richfitz/storr@refactor", "richfitz/datastorr"))
+devtools::install_github("richfitz/datastorr")
 devtools::install_github("wcornwell/taxonlookup")
 library(taxonlookup)
 ```
