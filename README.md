@@ -2,7 +2,7 @@
 taxonlookup: a taxonomic lookup table for land plants
 =====================================================
 
-[![Build Status](https://travis-ci.org/traitecoevo/taxonlookup.png?branch=master)](https://travis-ci.org/traitecoevo/taxonlookup) [![codecov.io](https://codecov.io/github/traitecoevo/taxonlookup/coverage.svg?branch=master)](https://codecov.io/github/traitecoevo/taxonlookup?branch=master) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.839396)](https://zenodo.org/badge/DOI/10.5281/zenodo.839396)
+[![Build Status](https://travis-ci.org/traitecoevo/taxonlookup.png?branch=master)](https://travis-ci.org/traitecoevo/taxonlookup) [![codecov.io](https://codecov.io/github/traitecoevo/taxonlookup/coverage.svg?branch=master)](https://codecov.io/github/traitecoevo/taxonlookup?branch=master) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.839396.svg)](https://doi.org/10.5281/zenodo.839396)
 
 How to use this package
 -----------------------
@@ -10,11 +10,11 @@ How to use this package
 ### Install the required packages
 
 ``` r
-install.packages("devtools")
-devtools::install_github("hadley/httr")
-devtools::install_github("richfitz/datastorr")
+#install.packages("devtools") # if necessary
+devtools::install_github("ropenscilabs/datastorr")
 devtools::install_github("wcornwell/taxonlookup")
 library(taxonlookup)
+library(knitr)
 ```
 
 ### Find the higher taxonomy for your species list
@@ -23,8 +23,8 @@ library(taxonlookup)
 kable(lookup_table(c("Pinus ponderosa","Quercus agrifolia"),by_species=TRUE))
 ```
 
-|                   | Genus   | Family   | Order   | Group       |
-|-------------------|---------|----------|---------|-------------|
+|                   | genus   | family   | order   | group       |
+|-------------------|:--------|:---------|:--------|:------------|
 | Pinus ponderosa   | Pinus   | Pinaceae | Pinales | Gymnosperms |
 | Quercus agrifolia | Quercus | Fagaceae | Fagales | Angiosperms |
 
@@ -73,17 +73,42 @@ You can download and load the data into `R` using the `plant_lookup()` function:
 head(plant_lookup())
 ```
 
+    ##       genus       family       order       group
+    ## 1    Acorus    Acoraceae    Acorales Angiosperms
+    ## 2 Albidella Alismataceae Alismatales Angiosperms
+    ## 3    Alisma Alismataceae Alismatales Angiosperms
+    ## 4   Astonia Alismataceae Alismatales Angiosperms
+    ## 5 Baldellia Alismataceae Alismatales Angiosperms
+    ## 6  Burnatia Alismataceae Alismatales Angiosperms
+
 The first call to `plant_lookup` will download the data, but subsequent calls will be essentially instantaneous. If you are interested in diversity data, the data object also stores the number of accepted species within each genus as per the plant list:
 
 ``` r
 head(plant_lookup(include_counts = TRUE))
 ```
 
+    ##   number.of.accepted.species number.of.accepted.and.unresolved.species
+    ## 1                          2                                         5
+    ## 2                          1                                         1
+    ## 3                          8                                        16
+    ## 4                          1                                         1
+    ## 5                          3                                         5
+    ## 6                          1                                         1
+    ##       genus       family       order       group
+    ## 1    Acorus    Acoraceae    Acorales Angiosperms
+    ## 2 Albidella Alismataceae Alismatales Angiosperms
+    ## 3    Alisma Alismataceae Alismatales Angiosperms
+    ## 4   Astonia Alismataceae Alismatales Angiosperms
+    ## 5 Baldellia Alismataceae Alismatales Angiosperms
+    ## 6  Burnatia Alismataceae Alismatales Angiosperms
+
 For taxonomic groups higher than order, use the `add_higher_order()` function. Because currently the higher taxonomy of plants does not have a nested structure, the format of that lookup table is a little more complicated. Check the help file for more details. To get the version number of the dataset run:
 
 ``` r
 plant_lookup_version_current()
 ```
+
+    ## [1] "1.1.1"
 
 For most uses, the latest release should be sufficient, and this is all that is necessary to use the data.
 However, if there have been some recent changes to taxonomy that are both important for your project and incorporated in the cannical sources (the plant list or APWeb) but are more recent than the last release of this package, you might want to rebuild the lookup table from the sources. Because this requires downloading the data from the web sources, this will run slowly, depending on your internet connection.

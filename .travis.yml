@@ -2,10 +2,9 @@ language: r
 cache: packages
 sudo: false
 
-install:
-  - r_github_packages: richfitz/datastorr
-  - r_github_packages: jimhester/covr
-
+r_github_packages: 
+  - richfitz/datastorr
+  - jimhester/covr
 
 after_success:
   - Rscript -e 'library(covr); coveralls()'
