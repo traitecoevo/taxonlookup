@@ -8830,7 +8830,6 @@ number.of.accepted.species,number.of.accepted.and.unresolved.species,genus,famil
 34,60,Alysicarpus,Leguminosae,Fabaceae,Fabales,Angiosperms
 0,10,Amarenus,Leguminosae,Fabaceae,Fabales,Angiosperms
 1,2,Amblygonocarpus,Leguminosae,Fabaceae,Fabales,Angiosperms
-4,4,Amblytropis,Leguminosae,Fabaceae,Fabales,Angiosperms
 2,2,Amburana,Leguminosae,Fabaceae,Fabales,Angiosperms
 33,58,Amerimnon,Leguminosae,Fabaceae,Fabales,Angiosperms
 1,1,Amherstia,Leguminosae,Fabaceae,Fabales,Angiosperms
@@ -11856,7 +11855,6 @@ number.of.accepted.species,number.of.accepted.and.unresolved.species,genus,famil
 1,1,Petenaea,Petenaeaceae,Petenaeaceae,Huerteales,Angiosperms
 4,4,Huertea,Tapisciaceae,Tapisciaceae,Huerteales,Angiosperms
 2,2,Tapiscia,Tapisciaceae,Tapisciaceae,Huerteales,Angiosperms
-18,28,Adelanthus,Icacinaceae,Icacinaceae,Icacinales,Angiosperms
 8,10,Alsodeiopsis,Icacinaceae,Icacinaceae,Icacinales,Angiosperms
 8,8,Apodytes,Icacinaceae,Icacinaceae,Icacinales,Angiosperms
 5,5,Calatola,Icacinaceae,Icacinaceae,Icacinales,Angiosperms
@@ -12290,7 +12288,6 @@ number.of.accepted.species,number.of.accepted.and.unresolved.species,genus,famil
 1,5,Synnema,Acanthaceae,Acanthaceae,Lamiales,Angiosperms
 0,1,Syringidium,Acanthaceae,Acanthaceae,Lamiales,Angiosperms
 1,1,Taeniandra,Acanthaceae,Acanthaceae,Lamiales,Angiosperms
-0,1,Talbotia,Acanthaceae,Acanthaceae,Lamiales,Angiosperms
 3,7,Teliostachya,Acanthaceae,Acanthaceae,Lamiales,Angiosperms
 1,1,Tessmanniacanthus,Acanthaceae,Acanthaceae,Lamiales,Angiosperms
 1,7,Tetraglochidium,Acanthaceae,Acanthaceae,Lamiales,Angiosperms
@@ -20520,7 +20517,6 @@ number.of.accepted.species,number.of.accepted.and.unresolved.species,genus,famil
 5,6,Porlieria,Zygophyllaceae,Zygophyllaceae,Zygophyllales,Angiosperms
 1,59,Roepera,Zygophyllaceae,Zygophyllaceae,Zygophyllales,Angiosperms
 1,2,Sarcozygium,Zygophyllaceae,Zygophyllaceae,Zygophyllales,Angiosperms
-1,2,Schroeterella,Zygophyllaceae,Zygophyllaceae,Zygophyllales,Angiosperms
 1,2,Seetzenia,Zygophyllaceae,Zygophyllaceae,Zygophyllales,Angiosperms
 1,1,Sericodes,Zygophyllaceae,Zygophyllaceae,Zygophyllales,Angiosperms
 1,1,Sisyndite,Zygophyllaceae,Zygophyllaceae,Zygophyllales,Angiosperms
@@ -20864,6 +20860,7 @@ number.of.accepted.species,number.of.accepted.and.unresolved.species,genus,famil
 1,1,Cyrtopus,Cyrtopodaceae,Cyrtopodaceae,Undeter_peristomate_moss,Bryophytes
 8,8,Actinodontium,Daltoniaceae,Daltoniaceae,Undeter_peristomate_moss,Bryophytes
 1,1,Adelothecium,Daltoniaceae,Daltoniaceae,Undeter_peristomate_moss,Bryophytes
+4,4,Amblytropis,Daltoniaceae,Daltoniaceae,Undeter_peristomate_moss,Bryophytes
 1,1,Benitotania,Daltoniaceae,Daltoniaceae,Undeter_peristomate_moss,Bryophytes
 17,17,Callicosta,Daltoniaceae,Daltoniaceae,Undeter_peristomate_moss,Bryophytes
 32,32,Calyptrochaeta,Daltoniaceae,Daltoniaceae,Undeter_peristomate_moss,Bryophytes
