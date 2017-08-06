@@ -28,7 +28,7 @@ kable(lookup_table(c("Pinus ponderosa","Quercus agrifolia"),by_species=TRUE))
 | Pinus ponderosa   | Pinus   | Pinaceae | Pinales | Gymnosperms |
 | Quercus agrifolia | Quercus | Fagaceae | Fagales | Angiosperms |
 
-There are a few other functions to get species diversity numbers and other (non-Linnean) high clades if you want that information. **If you use this package in a published paper, please note the version number**. This will allow others to reproduce your work later.
+There are a few other functions to get species diversity numbers and other (non-Linnean) high clades if you want that information. **If you use this package in a published paper, please note the version number and the appropriate doi via Zenodo**. This will allow others to reproduce your work later.
 
 That's it, really. Below is information about the data sources and the versioned data distribution system (which we think is really cool), feel free to check it out, but you don't need to read the rest of this to use the package.
 
@@ -62,6 +62,10 @@ Details about the data distribution system
 ------------------------------------------
 
 This is designed to be a living database--it will update as taxonomy changes (which it always will). These updates will correspond with changes to the version number of this resource, and each version of the database will be available via [travis-ci](http://travis-ci.org) and [Github Releases](http://docs.travis-ci.com/user/deployment/releases/). If you use this resource for published analysis, please note the version number in your publication. This will allow anyone in the future to go back and find **exactly** the same version of the data that you used.
+
+Because Releases can be altered after the fact, we use [zenodo-github integration](https://guides.github.com/activities/citable-code/) to mint a DOI for each release. This will both give a citable DOI and help with the logevity of each version of the database. (Read more about this [here](https://www.software.ac.uk/blog/2016-09-26-making-code-citable-zenodo-and-github).)
+
+### Details about the data distribution system
 
 The core of this repository is a set of scripts that dynamically build a genus-family-order-higher taxa look-up table for land plants with the data lookup primarily coming from three sources (with most of the web-scraping done by [taxize](https://github.com/ropensci/taxize)):
 
@@ -108,7 +112,7 @@ For taxonomic groups higher than order, use the `add_higher_order()` function. B
 plant_lookup_version_current()
 ```
 
-    ## [1] "1.1.1"
+    ## [1] "1.1.2"
 
 For most uses, the latest release should be sufficient, and this is all that is necessary to use the data.
 However, if there have been some recent changes to taxonomy that are both important for your project and incorporated in the cannical sources (the plant list or APWeb) but are more recent than the last release of this package, you might want to rebuild the lookup table from the sources. Because this requires downloading the data from the web sources, this will run slowly, depending on your internet connection.
@@ -134,20 +138,10 @@ This requires a working internet connection and that the plant list, mobot, and 
 Living database
 ===============
 
-Stable version
---------------
-
-Eventually this package will exist on CRAN; versions there will be our "stable releases" and will generally correspond to an increase in the first version number.
-
 Development version
 -------------------
 
-We will periodically release development versions of the database using github releases (every CRAN release will also be a github release). We'll do this automatically using [travis-ci](http://travis-ci.org) using its [deploy to github releases](http://docs.travis-ci.com/user/deployment/releases/) and [conditional deployment](http://docs.travis-ci.com/user/deployment/#Conditional-Releases-with-on%3A) features. This will correspond to an increase in the second version number and also to the first version number when simultaneously being released to CRAN.
-
-Bleeding edge version
----------------------
-
-Download the package and rerun the build script. We'll work this way as we add new data to the package.
+We will periodically release development versions of the database using github releases. We'll check these automatically using [travis-ci](http://travis-ci.org). As taxonomy is a moving target, we expect that the lookup to change with time.
 
 Notes for making a release using this *living dataset* design
 =============================================================
@@ -161,4 +155,7 @@ Notes for making a release using this *living dataset* design
 taxonlookup:::plant_lookup_release("<description>")
 ```
 
-where `"<description>"` is a brief description of new features of the release. \* Check that it works by running `taxonlookup::plant_lookup(taxonlookup::plant_lookup_version_current(FALSE))` which should pull the data. \* Update the Zenodo badge on the readme
+where `"<description>"` is a brief description of new features of the release.
+
+-   Check that it works by running `taxonlookup::plant_lookup(taxonlookup::plant_lookup_version_current(FALSE))` which should pull the data.
+-   Update the Zenodo badge on the readme
