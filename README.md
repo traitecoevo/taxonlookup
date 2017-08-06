@@ -2,7 +2,7 @@
 taxonlookup: a taxonomic lookup table for land plants
 =====================================================
 
-[![Build Status](https://travis-ci.org/traitecoevo/taxonlookup.png?branch=master)](https://travis-ci.org/traitecoevo/taxonlookup) [![codecov.io](https://codecov.io/github/traitecoevo/taxonlookup/coverage.svg?branch=master)](https://codecov.io/github/traitecoevo/taxonlookup?branch=master) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.839396.svg)](https://doi.org/10.5281/zenodo.839396)
+[![Build Status](https://travis-ci.org/traitecoevo/taxonlookup.png?branch=master)](https://travis-ci.org/traitecoevo/taxonlookup) [![codecov.io](https://codecov.io/github/traitecoevo/taxonlookup/coverage.svg?branch=master)](https://codecov.io/github/traitecoevo/taxonlookup?branch=master) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.839526.svg)](https://doi.org/10.5281/zenodo.839526) [![GitHub version](https://badge.fury.io/gh/traitecoevo%2Ftaxonlookup.svg)](https://badge.fury.io/gh/traitecoevo%2Ftaxonlookup)
 
 How to use this package
 -----------------------
@@ -10,7 +10,7 @@ How to use this package
 ### Install the required packages
 
 ``` r
-#install.packages("devtools") # if necessary
+#istall.packages("devtools") # if necessary
 devtools::install_github("ropenscilabs/datastorr")
 devtools::install_github("wcornwell/taxonlookup")
 library(taxonlookup)
@@ -107,7 +107,7 @@ For taxonomic groups higher than order, use the `add_higher_order()` function. B
 plant_lookup_version_current()
 ```
 
-    ## [1] "1.1.2"
+    ## [1] "1.1.3"
 
 For most uses, the latest release should be sufficient, and this is all that is necessary to use the data.
 However, if there have been some recent changes to taxonomy that are both important for your project and incorporated in the cannical sources (the plant list or APWeb) but are more recent than the last release of this package, you might want to rebuild the lookup table from the sources. Because this requires downloading the data from the web sources, this will run slowly, depending on your internet connection.

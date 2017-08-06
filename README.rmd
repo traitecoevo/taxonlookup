@@ -6,14 +6,16 @@ output: github_document
 
 [![Build Status](https://travis-ci.org/traitecoevo/taxonlookup.png?branch=master)](https://travis-ci.org/traitecoevo/taxonlookup)
 [![codecov.io](https://codecov.io/github/traitecoevo/taxonlookup/coverage.svg?branch=master)](https://codecov.io/github/traitecoevo/taxonlookup?branch=master)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.839396.svg)](https://doi.org/10.5281/zenodo.839396)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.839526.svg)](https://doi.org/10.5281/zenodo.839526)
+[![GitHub version](https://badge.fury.io/gh/traitecoevo%2Ftaxonlookup.svg)](https://badge.fury.io/gh/traitecoevo%2Ftaxonlookup)
+
 
 ## How to use this package
 
 ### Install the required packages
 
 ```{r, message=FALSE}
-#install.packages("devtools") # if necessary
+#istall.packages("devtools") # if necessary
 devtools::install_github("ropenscilabs/datastorr")
 devtools::install_github("wcornwell/taxonlookup")
 library(taxonlookup)
