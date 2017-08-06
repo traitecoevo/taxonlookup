@@ -77,6 +77,12 @@ combineGeneraLists<-function(path,tf){
   return(tplGenera)
 }
 
+patchTPL<-function(tplGenera,additions){
+  out<-rbind(tplGenera,additions)
+  return(out)
+}
+
+
 matchPlantListFamiliesToApweb<-function(tplGenera){
   apFamilies<-apgFamilies()
   #Some commas come in from apWeb and they cause problems later unless we take them out

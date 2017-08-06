@@ -24,8 +24,14 @@ targets:
   tplGenera:
     command: combineGeneraLists(downloadTPL,VascularPlantFamilies)
 
+  additions:
+    command: read_csv(file="source_data/Additions.csv",row.names=1)
+
+  tplGenera_patched:
+    command: patchTPL(tplGenera,additions)
+
   lookupRaw:
-    command: matchPlantListFamiliesToApweb(tplGenera)
+    command: matchPlantListFamiliesToApweb(tplGenera_patched)
 
   lookupPatch:
     command: read_csv("source_data/genus_order_lookup_fae.csv")

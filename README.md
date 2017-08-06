@@ -74,37 +74,32 @@ The scripts are in the repository but not in the package. Only the data and ways
 You can download and load the data into `R` using the `plant_lookup()` function:
 
 ``` r
-head(plant_lookup())
+kable(head(plant_lookup()))
 ```
 
-    ##       genus       family       order       group
-    ## 1    Acorus    Acoraceae    Acorales Angiosperms
-    ## 2 Albidella Alismataceae Alismatales Angiosperms
-    ## 3    Alisma Alismataceae Alismatales Angiosperms
-    ## 4   Astonia Alismataceae Alismatales Angiosperms
-    ## 5 Baldellia Alismataceae Alismatales Angiosperms
-    ## 6  Burnatia Alismataceae Alismatales Angiosperms
+| genus     | family       | order       | group       |
+|:----------|:-------------|:------------|:------------|
+| Acorus    | Acoraceae    | Acorales    | Angiosperms |
+| Albidella | Alismataceae | Alismatales | Angiosperms |
+| Alisma    | Alismataceae | Alismatales | Angiosperms |
+| Astonia   | Alismataceae | Alismatales | Angiosperms |
+| Baldellia | Alismataceae | Alismatales | Angiosperms |
+| Burnatia  | Alismataceae | Alismatales | Angiosperms |
 
 The first call to `plant_lookup` will download the data, but subsequent calls will be essentially instantaneous. If you are interested in diversity data, the data object also stores the number of accepted species within each genus as per the plant list:
 
 ``` r
-head(plant_lookup(include_counts = TRUE))
+kable(head(plant_lookup(include_counts = TRUE)[,c(1,3,4)]))
 ```
 
-    ##   number.of.accepted.species number.of.accepted.and.unresolved.species
-    ## 1                          2                                         5
-    ## 2                          1                                         1
-    ## 3                          8                                        16
-    ## 4                          1                                         1
-    ## 5                          3                                         5
-    ## 6                          1                                         1
-    ##       genus       family       order       group
-    ## 1    Acorus    Acoraceae    Acorales Angiosperms
-    ## 2 Albidella Alismataceae Alismatales Angiosperms
-    ## 3    Alisma Alismataceae Alismatales Angiosperms
-    ## 4   Astonia Alismataceae Alismatales Angiosperms
-    ## 5 Baldellia Alismataceae Alismatales Angiosperms
-    ## 6  Burnatia Alismataceae Alismatales Angiosperms
+|  number.of.accepted.species| genus     | family       |
+|---------------------------:|:----------|:-------------|
+|                           2| Acorus    | Acoraceae    |
+|                           1| Albidella | Alismataceae |
+|                           8| Alisma    | Alismataceae |
+|                           1| Astonia   | Alismataceae |
+|                           3| Baldellia | Alismataceae |
+|                           1| Burnatia  | Alismataceae |
 
 For taxonomic groups higher than order, use the `add_higher_order()` function. Because currently the higher taxonomy of plants does not have a nested structure, the format of that lookup table is a little more complicated. Check the help file for more details. To get the version number of the dataset run:
 
