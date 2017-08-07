@@ -7620,6 +7620,7 @@ number.of.accepted.species,number.of.accepted.and.unresolved.species,genus,famil
 0,1,Raddisia,Celastraceae,Celastraceae,Celastrales,Angiosperms
 4,8,Reissantia,Celastraceae,Celastraceae,Celastrales,Angiosperms
 11,19,Rhacoma,Celastraceae,Celastraceae,Celastrales,Angiosperms
+0,2,Robsonodendron,Celastraceae,Celastraceae,Celastrales,Angiosperms
 0,1,Romualdea,Celastraceae,Celastraceae,Celastrales,Angiosperms
 0,3,Rubentia,Celastraceae,Celastraceae,Celastrales,Angiosperms
 0,1,Rzedowskia,Celastraceae,Celastraceae,Celastrales,Angiosperms
@@ -8203,6 +8204,7 @@ number.of.accepted.species,number.of.accepted.and.unresolved.species,genus,famil
 0,4,Royena,Ebenaceae,Ebenaceae,Ericales,Angiosperms
 0,1,Tetraclis,Ebenaceae,Ebenaceae,Ericales,Angiosperms
 11,12,Acrostemon,Ericaceae,Ericaceae,Ericales,Angiosperms
+0,6,Acrothamnus,Ericaceae,Ericaceae,Ericales,Angiosperms
 18,18,Acrotriche,Ericaceae,Ericaceae,Ericales,Angiosperms
 147,156,Agapetes,Ericaceae,Ericaceae,Ericales,Angiosperms
 31,34,Agarista,Ericaceae,Ericaceae,Ericales,Angiosperms
@@ -8211,6 +8213,7 @@ number.of.accepted.species,number.of.accepted.and.unresolved.species,genus,famil
 0,2,Ammyrsine,Ericaceae,Ericaceae,Ericales,Angiosperms
 30,38,Andersonia,Ericaceae,Ericaceae,Ericales,Angiosperms
 3,78,Andromeda,Ericaceae,Ericaceae,Ericales,Angiosperms
+0,2,Androstoma,Ericaceae,Ericaceae,Ericales,Angiosperms
 0,2,Aniserica,Ericaceae,Ericaceae,Ericales,Angiosperms
 12,12,Anomalanthus,Ericaceae,Ericaceae,Ericales,Angiosperms
 0,3,Anthodendron,Ericaceae,Ericaceae,Ericales,Angiosperms
@@ -8319,6 +8322,7 @@ number.of.accepted.species,number.of.accepted.and.unresolved.species,genus,famil
 7,7,Ledothamnus,Ericaceae,Ericaceae,Ericales,Angiosperms
 6,16,Ledum,Ericaceae,Ericaceae,Ericales,Angiosperms
 3,5,Leiophyllum,Ericaceae,Ericaceae,Ericales,Angiosperms
+0,13,Leptecophylla,Ericaceae,Ericaceae,Ericales,Angiosperms
 7,281,Leucopogon,Ericaceae,Ericaceae,Ericales,Angiosperms
 9,25,Leucothoe,Ericaceae,Ericaceae,Ericales,Angiosperms
 1,15,Lissanthe,Ericaceae,Ericaceae,Ericales,Angiosperms
@@ -8603,6 +8607,7 @@ number.of.accepted.species,number.of.accepted.and.unresolved.species,genus,famil
 0,1,Pelleteria,Primulaceae,Primulaceae,Ericales,Angiosperms
 1,3,Pelletiera,Primulaceae,Primulaceae,Ericales,Angiosperms
 1,1,Petesiodes,Primulaceae,Primulaceae,Ericales,Angiosperms
+0,7,Petesioides,Primulaceae,Primulaceae,Ericales,Angiosperms
 0,6,Pimelandra,Primulaceae,Primulaceae,Ericales,Angiosperms
 1,1,Pleiomeris,Primulaceae,Primulaceae,Ericales,Angiosperms
 1,1,Pomatosace,Primulaceae,Primulaceae,Ericales,Angiosperms
@@ -13071,6 +13076,7 @@ number.of.accepted.species,number.of.accepted.and.unresolved.species,genus,famil
 1,1,Eremitilla,Orobanchaceae,Orobanchaceae,Lamiales,Angiosperms
 9,9,Escobedia,Orobanchaceae,Orobanchaceae,Lamiales,Angiosperms
 7,8,Esterhazya,Orobanchaceae,Orobanchaceae,Lamiales,Angiosperms
+0,6,Eufragia,Orobanchaceae,Orobanchaceae,Lamiales,Angiosperms
 54,510,Euphrasia,Orobanchaceae,Orobanchaceae,Lamiales,Angiosperms
 2,33,Gerardia,Orobanchaceae,Orobanchaceae,Lamiales,Angiosperms
 2,2,Gerardiina,Orobanchaceae,Orobanchaceae,Lamiales,Angiosperms
@@ -13357,6 +13363,7 @@ number.of.accepted.species,number.of.accepted.and.unresolved.species,genus,famil
 0,1,Bornmuellerantha,Scrophulariaceae,Scrophulariaceae,Lamiales,Angiosperms
 0,1,Braunblanquetia,Scrophulariaceae,Scrophulariaceae,Lamiales,Angiosperms
 141,158,Buddleja,Scrophulariaceae,Scrophulariaceae,Lamiales,Angiosperms
+0,1,Calamphoreus,Scrophulariaceae,Scrophulariaceae,Lamiales,Angiosperms
 3,3,Camptoloma,Scrophulariaceae,Scrophulariaceae,Lamiales,Angiosperms
 0,3,Campuleia,Scrophulariaceae,Scrophulariaceae,Lamiales,Angiosperms
 7,15,Capraria,Scrophulariaceae,Scrophulariaceae,Lamiales,Angiosperms
@@ -13371,6 +13378,7 @@ number.of.accepted.species,number.of.accepted.and.unresolved.species,genus,famil
 1,1,Dermatobotrys,Scrophulariaceae,Scrophulariaceae,Lamiales,Angiosperms
 68,90,Diascia,Scrophulariaceae,Scrophulariaceae,Lamiales,Angiosperms
 9,10,Diclis,Scrophulariaceae,Scrophulariaceae,Lamiales,Angiosperms
+0,4,Diocirea,Scrophulariaceae,Scrophulariaceae,Lamiales,Angiosperms
 11,11,Dischisma,Scrophulariaceae,Scrophulariaceae,Lamiales,Angiosperms
 1,1,Dolichostemon,Scrophulariaceae,Scrophulariaceae,Lamiales,Angiosperms
 0,1,Elmigera,Scrophulariaceae,Scrophulariaceae,Lamiales,Angiosperms
@@ -16896,6 +16904,7 @@ number.of.accepted.species,number.of.accepted.and.unresolved.species,genus,famil
 45,50,Aulonemia,Poaceae,Poaceae,Poales,Angiosperms
 0,2,Australopyrum,Poaceae,Poaceae,Poales,Angiosperms
 1,1,Austrochloris,Poaceae,Poaceae,Poales,Angiosperms
+0,5,Austroderia,Poaceae,Poaceae,Poales,Angiosperms
 4,4,Austrofestuca,Poaceae,Poaceae,Poales,Angiosperms
 0,3,Austrostipa,Poaceae,Poaceae,Poales,Angiosperms
 21,55,Avena,Poaceae,Poaceae,Poales,Angiosperms
@@ -19964,6 +19973,7 @@ number.of.accepted.species,number.of.accepted.and.unresolved.species,genus,famil
 1,2,Tolmiea,Saxifragaceae,Saxifragaceae,Saxifragales,Angiosperms
 0,1,Yamala,Saxifragaceae,Saxifragaceae,Saxifragales,Angiosperms
 0,4,Zahlbrucknera,Saxifragaceae,Saxifragaceae,Saxifragales,Angiosperms
+0,1,Tetracarpaea,Tetracarpaeaceae,Tetracarpaeaceae,Saxifragales,Angiosperms
 0,6,Amphione,Convolvulaceae,Convolvulaceae,Solanales,Angiosperms
 6,13,Aniseia,Convolvulaceae,Convolvulaceae,Solanales,Angiosperms
 0,3,Anthanema,Convolvulaceae,Convolvulaceae,Solanales,Angiosperms
