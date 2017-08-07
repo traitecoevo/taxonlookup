@@ -9,3 +9,4 @@
 ^Makefile$
 ^plant_lookup\.csv$
 ^\.remake$
+^README\.rmd$

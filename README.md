@@ -2,7 +2,7 @@
 taxonlookup: a taxonomic lookup table for land plants
 =====================================================
 
-[![Build Status](https://travis-ci.org/traitecoevo/taxonlookup.png?branch=master)](https://travis-ci.org/traitecoevo/taxonlookup) [![codecov.io](https://codecov.io/github/traitecoevo/taxonlookup/coverage.svg?branch=master)](https://codecov.io/github/traitecoevo/taxonlookup?branch=master) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.839526.svg)](https://doi.org/10.5281/zenodo.839526) [![GitHub version](https://badge.fury.io/gh/traitecoevo%2Ftaxonlookup.svg)](https://badge.fury.io/gh/traitecoevo%2Ftaxonlookup)
+[![Build Status](https://travis-ci.org/traitecoevo/taxonlookup.png?branch=master)](https://travis-ci.org/traitecoevo/taxonlookup) [![codecov.io](https://codecov.io/github/traitecoevo/taxonlookup/coverage.svg?branch=master)](https://codecov.io/github/traitecoevo/taxonlookup?branch=master) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.839589.svg)](https://doi.org/10.5281/zenodo.839589) [![GitHub version](https://badge.fury.io/gh/traitecoevo%2Ftaxonlookup.svg)](https://badge.fury.io/gh/traitecoevo%2Ftaxonlookup)
 
 How to use this package
 -----------------------
@@ -14,19 +14,17 @@ How to use this package
 devtools::install_github("ropenscilabs/datastorr")
 devtools::install_github("wcornwell/taxonlookup")
 library(taxonlookup)
-library(knitr)
 ```
 
 ### Find the higher taxonomy for your species list
 
 ``` r
-kable(lookup_table(c("Pinus ponderosa","Quercus agrifolia"),by_species=TRUE))
+lookup_table(c("Pinus ponderosa","Quercus agrifolia"),by_species=TRUE)
 ```
 
-|                   | genus   | family   | order   | group       |
-|-------------------|:--------|:---------|:--------|:------------|
-| Pinus ponderosa   | Pinus   | Pinaceae | Pinales | Gymnosperms |
-| Quercus agrifolia | Quercus | Fagaceae | Fagales | Angiosperms |
+    ##                     genus   family   order       group
+    ## Pinus ponderosa     Pinus Pinaceae Pinales Gymnosperms
+    ## Quercus agrifolia Quercus Fagaceae Fagales Angiosperms
 
 There are a few other functions to get species diversity numbers and other (non-Linnean) high clades if you want that information. **If you use this package in a published paper, please note the version number and the appropriate doi via Zenodo**. This will allow others to reproduce your work later.
 
@@ -74,32 +72,30 @@ The scripts are in the repository but not in the package. Only the data and ways
 You can download and load the data into `R` using the `plant_lookup()` function:
 
 ``` r
-kable(head(plant_lookup()))
+head(plant_lookup())
 ```
 
-| genus     | family       | order       | group       |
-|:----------|:-------------|:------------|:------------|
-| Acorus    | Acoraceae    | Acorales    | Angiosperms |
-| Albidella | Alismataceae | Alismatales | Angiosperms |
-| Alisma    | Alismataceae | Alismatales | Angiosperms |
-| Astonia   | Alismataceae | Alismatales | Angiosperms |
-| Baldellia | Alismataceae | Alismatales | Angiosperms |
-| Burnatia  | Alismataceae | Alismatales | Angiosperms |
+    ##       genus       family       order       group
+    ## 1    Acorus    Acoraceae    Acorales Angiosperms
+    ## 2 Albidella Alismataceae Alismatales Angiosperms
+    ## 3    Alisma Alismataceae Alismatales Angiosperms
+    ## 4   Astonia Alismataceae Alismatales Angiosperms
+    ## 5 Baldellia Alismataceae Alismatales Angiosperms
+    ## 6  Burnatia Alismataceae Alismatales Angiosperms
 
 The first call to `plant_lookup` will download the data, but subsequent calls will be essentially instantaneous. If you are interested in diversity data, the data object also stores the number of accepted species within each genus as per the plant list:
 
 ``` r
-kable(head(plant_lookup(include_counts = TRUE)[,c(1,3,4)]))
+head(plant_lookup(include_counts = TRUE)[,c(1,3,4)])
 ```
 
-|  number.of.accepted.species| genus     | family       |
-|---------------------------:|:----------|:-------------|
-|                           2| Acorus    | Acoraceae    |
-|                           1| Albidella | Alismataceae |
-|                           8| Alisma    | Alismataceae |
-|                           1| Astonia   | Alismataceae |
-|                           3| Baldellia | Alismataceae |
-|                           1| Burnatia  | Alismataceae |
+    ##   number.of.accepted.species     genus       family
+    ## 1                          2    Acorus    Acoraceae
+    ## 2                          1 Albidella Alismataceae
+    ## 3                          8    Alisma Alismataceae
+    ## 4                          1   Astonia Alismataceae
+    ## 5                          3 Baldellia Alismataceae
+    ## 6                          1  Burnatia Alismataceae
 
 For taxonomic groups higher than order, use the `add_higher_order()` function. Because currently the higher taxonomy of plants does not have a nested structure, the format of that lookup table is a little more complicated. Check the help file for more details. To get the version number of the dataset run:
 
@@ -107,7 +103,7 @@ For taxonomic groups higher than order, use the `add_higher_order()` function. B
 plant_lookup_version_current()
 ```
 
-    ## [1] "1.1.3"
+    ## [1] "1.1.4"
 
 For most uses, the latest release should be sufficient, and this is all that is necessary to use the data.
 However, if there have been some recent changes to taxonomy that are both important for your project and incorporated in the cannical sources (the plant list or APWeb) but are more recent than the last release of this package, you might want to rebuild the lookup table from the sources. Because this requires downloading the data from the web sources, this will run slowly, depending on your internet connection.
@@ -118,14 +114,14 @@ Rebuilding the lookup table
 To build the lookup table, first clone this repository. Then download and install `remake` from github:
 
 ``` r
-    devtools::install_github("richfitz/remake")
+devtools::install_github("richfitz/remake")
 ```
 
 Then run the following commands from within R. Make sure the home directory is within the repository:
 
 ``` r
-  remake::install_missing_packages()
-    remake::make()
+remake::install_missing_packages()
+remake::make()
 ```
 
 This requires a working internet connection and that the plant list, mobot, and datadryad servers are up and working properly. This will dynamically re-create the lookup tables within your local version of the package, as well as save the main file as a `.csv` in your home directory.
