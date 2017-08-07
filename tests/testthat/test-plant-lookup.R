@@ -21,5 +21,10 @@ test_that("table sane", {
   expect_is(plant_lookup_version_current(),"character")
   only_corn<-subset(lookup,lookup$genus=="Zea")
   expect_true(only_corn$family[1]=="Poaceae")
+  expect_true(only_corn$order[1]=="Poales")
   expect_true(only_corn$group[1]=="Angiosperms")
+
+  #test additions
+  only_tassy<-subset(lookup,lookup$genus=="Tetracarpaea")
+  expect_true(only_tassy$family[1]=="Tetracarpaeaceae")
 })
