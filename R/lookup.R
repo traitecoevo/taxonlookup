@@ -32,6 +32,8 @@
 ##'
 ##' @param include_counts This will include the number of species in the genus (data from the plant list) in the output
 ##'
+##' @param ... variables passed on to \code{\link{plant_lookup}}, including version number.
+##'
 ##'
 ##' @export
 ##' @examples

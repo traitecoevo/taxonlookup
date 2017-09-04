@@ -30,6 +30,8 @@ with one row per species and with species as row names.}
 \item{family.tax}{There are two available family taxonomies--"apweb" and "plantlist". the default is "apweb"}
 
 \item{include_counts}{This will include the number of species in the genus (data from the plant list) in the output}
+
+\item{...}{variables passed on to \code{\link{plant_lookup}}, including version number.}
 }
 \description{
 Build a lookup table for a set of species, connecting the species names to plant genera, families and orders

@@ -163,7 +163,7 @@ For taxonomic groups higher than order, use the `add_higher_order()` function. B
 plant_lookup_version_current()
 ```
 
-    ## [1] "1.1.3"
+    ## [1] "1.1.5"
 
 For most uses, the latest release should be sufficient, and this is all that is necessary to use the data.
 However, if there have been some recent changes to taxonomy that are both important for your project and incorporated in the cannical sources (the plant list or APWeb) but are more recent than the last release of this package, you might want to rebuild the lookup table from the sources. Because this requires downloading the data from the web sources, this will run slowly, depending on your internet connection.
