@@ -102,7 +102,7 @@ plant_lookup_get <- function(version=NULL, path=NULL) {
 ##' @export
 ##' @rdname plant_lookup
 ##' @param local Logical indicating if local or github versions should
-##'   be polled.  With any luck, \code{local=FALSE} is a superset of
+##'   be pulled.  With any luck, \code{local=FALSE} is a superset of
 ##'   \code{local=TRUE}.  For \code{mydata_version_current}, if
 ##'   \code{TRUE}, but there are no local versions, then we do check
 ##'   for the most recent github version.
@@ -112,9 +112,23 @@ plant_lookup_versions <- function(local=TRUE, path=NULL) {
 
 ##' @export
 ##' @rdname plant_lookup
-plant_lookup_version_current <- function(local=TRUE, path=NULL) {
-  datastorr::github_release_version_current(plant_lookup_info(path), local)
+plant_lookup_version_current_local <- function(path=NULL) {
+  datastorr::github_release_version_current(plant_lookup_info(path), local=TRUE)
 }
+
+##' @export
+##' @rdname plant_lookup
+plant_lookup_version_current_github <- function(path=NULL) {
+  datastorr::github_release_version_current(plant_lookup_info(path), local=FALSE)
+}
+
+##' @export
+##' @rdname plant_lookup
+get_most_recent_plant_lookup <- function(path=NULL){
+  datastorr::github_release_get(info=plant_lookup_info(path)
+                                  , version=plant_lookup_version_current_github())
+}
+
 
 ##' @export
 ##' @rdname plant_lookup
@@ -123,7 +137,7 @@ plant_lookup_del <- function(version, path=NULL) {
 }
 
 read_csv <- function(...) {
-  read.csv(..., stringsAsFactors=FALSE)
+  utils::read.csv(..., stringsAsFactors=FALSE)
 }
 
 plant_lookup_release <- function(description, path=NULL, ...) {

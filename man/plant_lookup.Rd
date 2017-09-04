@@ -3,7 +3,9 @@
 \name{plant_lookup}
 \alias{plant_lookup}
 \alias{plant_lookup_versions}
-\alias{plant_lookup_version_current}
+\alias{plant_lookup_version_current_local}
+\alias{plant_lookup_version_current_github}
+\alias{get_most_recent_plant_lookup}
 \alias{plant_lookup_del}
 \title{Plant taxonomy lookup table}
 \usage{
@@ -12,7 +14,11 @@ plant_lookup(version = NULL, include_counts = FALSE, family.tax = "apweb",
 
 plant_lookup_versions(local = TRUE, path = NULL)
 
-plant_lookup_version_current(local = TRUE, path = NULL)
+plant_lookup_version_current_local(path = NULL)
+
+plant_lookup_version_current_github(path = NULL)
+
+get_most_recent_plant_lookup(path = NULL)
 
 plant_lookup_del(version, path = NULL)
 }
@@ -41,7 +47,7 @@ delete the persistent data at any time by running
 use a different path).}
 
 \item{local}{Logical indicating if local or github versions should
-be polled.  With any luck, \code{local=FALSE} is a superset of
+be pulled.  With any luck, \code{local=FALSE} is a superset of
 \code{local=TRUE}.  For \code{mydata_version_current}, if
 \code{TRUE}, but there are no local versions, then we do check
 for the most recent github version.}

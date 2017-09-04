@@ -60,7 +60,7 @@ test_that("all versions", {
   versions <- plant_lookup_versions(FALSE, path)
   for (v in versions) {
     d <- plant_lookup(v, path=path)
-    expect_that(d, is_a("data.frame"))
+    expect_is(d, "data.frame")
   }
   expect_that(plant_lookup_versions(TRUE, path), equals(versions))
 })
@@ -69,6 +69,6 @@ test_that("survive cache delete", {
   path <- tempfile()
   pl <- plant_lookup(path=path)
   plant_lookup_del(NULL, path=path)
-  expect_that(file.exists(path), is_false())
-  expect_that(plant_lookup(path=path), not(throws_error()))
+  expect_false(file.exists(path))
+  expect_output(plant_lookup(path=path))
 })
