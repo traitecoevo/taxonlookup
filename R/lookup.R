@@ -51,9 +51,12 @@
 lookup_table <- function(species_list, lookup_table=NULL,
                          genus_column="genus",
                          missing_action=c("drop", "NA", "error"),
-                         by_species=FALSE,family.tax="apweb",include_counts=FALSE) {
+                         by_species=FALSE,
+                         family.tax="apweb",
+                         include_counts=FALSE,
+                         ...) {
   if (is.null(lookup_table)) {
-    lookup_table <- plant_lookup(family.tax=family.tax,include_counts=include_counts)
+    lookup_table <- plant_lookup(family.tax=family.tax,include_counts=include_counts,...)
   }
 
   missing_action <- match.arg(missing_action)

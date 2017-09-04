@@ -2,9 +2,9 @@
 % Please edit documentation in R/plant_lookup.R
 \name{plant_lookup}
 \alias{plant_lookup}
-\alias{plant_lookup_del}
-\alias{plant_lookup_version_current}
 \alias{plant_lookup_versions}
+\alias{plant_lookup_version_current}
+\alias{plant_lookup_del}
 \title{Plant taxonomy lookup table}
 \usage{
 plant_lookup(version = NULL, include_counts = FALSE, family.tax = "apweb",
@@ -94,4 +94,3 @@ pl$number.of.species[pl$genus=="Eucalyptus"]
 #
 sum(pl$number.of.species[pl$family=="Myrtaceae"])
 }
-

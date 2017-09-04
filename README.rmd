@@ -32,6 +32,41 @@ There are a few other functions to get species diversity numbers and other (non-
 
 That's it, really.  Below is information about the data sources and the versioned data distribution system (which we think is really cool), feel free to check it out, but you don't need to read the rest of this to use the package.  
 
+### Reproducing a specific version
+
+If you are publishing a paper with this library, or you want the results of your analysis to be reproducable for any other reason, include the version number in your call to lookup table.  This will always pull the specific version of the taxonomy lookup that you used.  If you leave this out, on a new machine the library will download the most recent version of the database rather than the specific one that you used.
+
+```{r}
+lookup_table(c("Pinus ponderosa", "Quercus agrifolia"), by_species=TRUE, version="1.1.0")
+```
+
+### Higher taxonomy lookup
+
+If you want different taxonomic levels, use `add_higher_order`.  This shows the format of the resource:
+
+```{r}
+head(add_higher_order())
+```
+
+This could for example, return orders within the Rosidae:
+```{r}
+# load the data.frame into memory
+ho<-add_higher_order()
+unique(ho$order[ho$Rosidae=="Rosidae"])
+```
+Combined with the species counts from the plant list this can be used to get the current estimates of diversity.  For example, find the number of accepted Conifer species in the world:
+
+```{r}
+sum(ho$number.of.accepted.species[ho$Coniferae=="Coniferae"])
+```
+
+Compare with the number of accepted plus the number of unresolved species:
+
+```{r}
+sum(ho$number.of.accepted.and.unresolved.species[ho$Coniferae=="Coniferae"])
+```
+
+
 ----------------------
 
 ## Data sources

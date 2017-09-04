@@ -30,6 +30,99 @@ There are a few other functions to get species diversity numbers and other (non-
 
 That's it, really. Below is information about the data sources and the versioned data distribution system (which we think is really cool), feel free to check it out, but you don't need to read the rest of this to use the package.
 
+### Reproducing a specific version
+
+If you are publishing a paper with this library, or you want the results of your analysis to be reproducable for any other reason, include the version number in your call to lookup table. This will always pull the specific version of the taxonomy lookup that you used. If you leave this out, on a new machine the library will download the most recent version of the database rather than the specific one that you used.
+
+``` r
+lookup_table(c("Pinus ponderosa","Quercus agrifolia"),by_species=TRUE,version="1.1.0")
+```
+
+    ##                     genus   family   order       group
+    ## Pinus ponderosa     Pinus Pinaceae Pinales Gymnosperms
+    ## Quercus agrifolia Quercus Fagaceae Fagales Angiosperms
+
+### Higher taxonomy lookup
+
+If you want different taxonomic levels, use `add_higher_order`. This shows the format of the resource:
+
+``` r
+head(add_higher_order())
+```
+
+    ##   number.of.accepted.species number.of.accepted.and.unresolved.species
+    ## 1                          2                                         5
+    ## 2                          1                                         1
+    ## 3                          8                                        16
+    ## 4                          1                                         1
+    ## 5                          3                                         5
+    ## 6                          1                                         1
+    ##       genus       family       order       group Spermatophyta
+    ## 1    Acorus    Acoraceae    Acorales Angiosperms Spermatophyta
+    ## 2 Albidella Alismataceae Alismatales Angiosperms Spermatophyta
+    ## 3    Alisma Alismataceae Alismatales Angiosperms Spermatophyta
+    ## 4   Astonia Alismataceae Alismatales Angiosperms Spermatophyta
+    ## 5 Baldellia Alismataceae Alismatales Angiosperms Spermatophyta
+    ## 6  Burnatia Alismataceae Alismatales Angiosperms Spermatophyta
+    ##   Angiospermae Mesangiospermae Monocotyledoneae Nartheciidae Petrosaviidae
+    ## 1 Angiospermae Mesangiospermae Monocotyledoneae                           
+    ## 2 Angiospermae Mesangiospermae Monocotyledoneae Nartheciidae              
+    ## 3 Angiospermae Mesangiospermae Monocotyledoneae Nartheciidae              
+    ## 4 Angiospermae Mesangiospermae Monocotyledoneae Nartheciidae              
+    ## 5 Angiospermae Mesangiospermae Monocotyledoneae Nartheciidae              
+    ## 6 Angiospermae Mesangiospermae Monocotyledoneae Nartheciidae              
+    ##   Commelinidae Eudicotyledoneae Gunneridae Superasteridae Pentapetalae
+    ## 1                                                                     
+    ## 2                                                                     
+    ## 3                                                                     
+    ## 4                                                                     
+    ## 5                                                                     
+    ## 6                                                                     
+    ##   Asteridae Campanulidae Lamiidae Superrosidae Rosidae Malvidae Fabidae
+    ## 1                                                                      
+    ## 2                                                                      
+    ## 3                                                                      
+    ## 4                                                                      
+    ## 5                                                                      
+    ## 6                                                                      
+    ##   Magnoliidae Acrogymnospermae Cycadophyta Coniferae Cupressophyta
+    ## 1                                                                 
+    ## 2                                                                 
+    ## 3                                                                 
+    ## 4                                                                 
+    ## 5                                                                 
+    ## 6                                                                 
+    ##   Gnetophyta
+    ## 1           
+    ## 2           
+    ## 3           
+    ## 4           
+    ## 5           
+    ## 6
+
+This could for example, return orders within the Rosidae:
+
+``` r
+# load the data.frame into memory
+ho<-add_higher_order()
+unique(ho$order[ho$Rosidae=="Rosidae"])
+```
+
+    ##  [1] "Brassicales"     "Celastrales"     "Crossosomatales"
+    ##  [4] "Cucurbitales"    "Fabales"         "Fagales"        
+    ##  [7] "Geraniales"      "Huerteales"      "Malpighiales"   
+    ## [10] "Malvales"        "Myrtales"        "Oxalidales"     
+    ## [13] "Picramniales"    "Rosales"         "Sapindales"     
+    ## [16] "Vitales"         "Zygophyllales"
+
+Combined with the species counts from the plant list this can be used to get the current estimates of diversity. For example, find the number of Conifer species in the world:
+
+``` r
+sum(ho$number.of.species[ho$Coniferae=="Coniferae"])
+```
+
+    ## [1] 0
+
 ------------------------------------------------------------------------
 
 Data sources
@@ -103,7 +196,7 @@ For taxonomic groups higher than order, use the `add_higher_order()` function. B
 plant_lookup_version_current()
 ```
 
-    ## [1] "1.1.4"
+    ## [1] "1.1.3"
 
 For most uses, the latest release should be sufficient, and this is all that is necessary to use the data.
 However, if there have been some recent changes to taxonomy that are both important for your project and incorporated in the cannical sources (the plant list or APWeb) but are more recent than the last release of this package, you might want to rebuild the lookup table from the sources. Because this requires downloading the data from the web sources, this will run slowly, depending on your internet connection.

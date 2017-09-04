@@ -6,7 +6,7 @@
 \usage{
 lookup_table(species_list, lookup_table = NULL, genus_column = "genus",
   missing_action = c("drop", "NA", "error"), by_species = FALSE,
-  family.tax = "apweb", include_counts = FALSE)
+  family.tax = "apweb", include_counts = FALSE, ...)
 }
 \arguments{
 \item{species_list}{Character vector of species bionomials  Genus and species may be seperated by  " "
@@ -63,4 +63,3 @@ lookup_table(c("Pinus ponderosa","Neitheragenus noraspecies"))
 lookup_table(c("Pinus ponderosa","Neitheragenus noraspecies"),missing_action="NA")
 
 }
-

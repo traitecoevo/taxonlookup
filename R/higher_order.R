@@ -26,7 +26,7 @@
 ##' unique(ho$order[ho$Rosidae=="Rosidae"])
 ##' #
 ##' # find the number of Conifer species in the world
-##' sum(ho$number.of.species[ho$Coniferae=="Coniferae"])
+##' sum(ho$number.of.accepted.species[ho$Coniferae=="Coniferae"])
 ##'
 add_higher_order <- function(lookup=plant_lookup(include_counts=TRUE), order_column="order") {
   hot <- higher_order_taxonomy[lookup[[order_column]], ]

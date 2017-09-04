@@ -38,7 +38,6 @@ ho<-add_higher_order()
 unique(ho$order[ho$Rosidae=="Rosidae"])
 #
 # find the number of Conifer species in the world
-sum(ho$number.of.species[ho$Coniferae=="Coniferae"])
+sum(ho$number.of.accepted.species[ho$Coniferae=="Coniferae"])
 
 }
-
