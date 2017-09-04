@@ -24,7 +24,7 @@ library(taxonlookup)
 ### Find the higher taxonomy for your species list
 
 ```{r}
-lookup_table(c("Pinus ponderosa","Quercus agrifolia"),by_species=TRUE)
+lookup_table(c("Pinus ponderosa","Quercus agrifolia"), by_species=TRUE)
 ```
 
 
@@ -42,10 +42,10 @@ lookup_table(c("Pinus ponderosa", "Quercus agrifolia"), by_species=TRUE, version
 
 ### Higher taxonomy lookup
 
-If you want different taxonomic levels, use `add_higher_order`.  This shows the format of the resource:
+If you want different taxonomic levels, use `add_higher_order`.  Because of the incomplete nesting of many taxonomic levels, this resource has a non-intuitive format.  If a genus is within a specific group, that column includes the name of the clade.  If it is not, then that cell is left blank.  This shows the format of the resource:
 
 ```{r}
-head(add_higher_order())
+knitr::kable(head(add_higher_order()))
 ```
 
 This could for example, return orders within the Rosidae:

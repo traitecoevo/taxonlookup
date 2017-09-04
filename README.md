@@ -19,7 +19,7 @@ library(taxonlookup)
 ### Find the higher taxonomy for your species list
 
 ``` r
-lookup_table(c("Pinus ponderosa","Quercus agrifolia"),by_species=TRUE)
+lookup_table(c("Pinus ponderosa","Quercus agrifolia"), by_species=TRUE)
 ```
 
     ##                     genus   family   order       group
@@ -35,7 +35,7 @@ That's it, really. Below is information about the data sources and the versioned
 If you are publishing a paper with this library, or you want the results of your analysis to be reproducable for any other reason, include the version number in your call to lookup table. This will always pull the specific version of the taxonomy lookup that you used. If you leave this out, on a new machine the library will download the most recent version of the database rather than the specific one that you used.
 
 ``` r
-lookup_table(c("Pinus ponderosa","Quercus agrifolia"),by_species=TRUE,version="1.1.0")
+lookup_table(c("Pinus ponderosa", "Quercus agrifolia"), by_species=TRUE, version="1.1.0")
 ```
 
     ##                     genus   family   order       group
@@ -44,61 +44,20 @@ lookup_table(c("Pinus ponderosa","Quercus agrifolia"),by_species=TRUE,version="1
 
 ### Higher taxonomy lookup
 
-If you want different taxonomic levels, use `add_higher_order`. This shows the format of the resource:
+If you want different taxonomic levels, use `add_higher_order`. Because of the incomplete nesting of many taxonomic levels, this resource has a non-intuitive format. If a genus is within a specific group, that column includes the name of the clade. If it is not, then that cell is left blank. This shows the format of the resource:
 
 ``` r
-head(add_higher_order())
+knitr::kable(head(add_higher_order()))
 ```
 
-    ##   number.of.accepted.species number.of.accepted.and.unresolved.species
-    ## 1                          2                                         5
-    ## 2                          1                                         1
-    ## 3                          8                                        16
-    ## 4                          1                                         1
-    ## 5                          3                                         5
-    ## 6                          1                                         1
-    ##       genus       family       order       group Spermatophyta
-    ## 1    Acorus    Acoraceae    Acorales Angiosperms Spermatophyta
-    ## 2 Albidella Alismataceae Alismatales Angiosperms Spermatophyta
-    ## 3    Alisma Alismataceae Alismatales Angiosperms Spermatophyta
-    ## 4   Astonia Alismataceae Alismatales Angiosperms Spermatophyta
-    ## 5 Baldellia Alismataceae Alismatales Angiosperms Spermatophyta
-    ## 6  Burnatia Alismataceae Alismatales Angiosperms Spermatophyta
-    ##   Angiospermae Mesangiospermae Monocotyledoneae Nartheciidae Petrosaviidae
-    ## 1 Angiospermae Mesangiospermae Monocotyledoneae                           
-    ## 2 Angiospermae Mesangiospermae Monocotyledoneae Nartheciidae              
-    ## 3 Angiospermae Mesangiospermae Monocotyledoneae Nartheciidae              
-    ## 4 Angiospermae Mesangiospermae Monocotyledoneae Nartheciidae              
-    ## 5 Angiospermae Mesangiospermae Monocotyledoneae Nartheciidae              
-    ## 6 Angiospermae Mesangiospermae Monocotyledoneae Nartheciidae              
-    ##   Commelinidae Eudicotyledoneae Gunneridae Superasteridae Pentapetalae
-    ## 1                                                                     
-    ## 2                                                                     
-    ## 3                                                                     
-    ## 4                                                                     
-    ## 5                                                                     
-    ## 6                                                                     
-    ##   Asteridae Campanulidae Lamiidae Superrosidae Rosidae Malvidae Fabidae
-    ## 1                                                                      
-    ## 2                                                                      
-    ## 3                                                                      
-    ## 4                                                                      
-    ## 5                                                                      
-    ## 6                                                                      
-    ##   Magnoliidae Acrogymnospermae Cycadophyta Coniferae Cupressophyta
-    ## 1                                                                 
-    ## 2                                                                 
-    ## 3                                                                 
-    ## 4                                                                 
-    ## 5                                                                 
-    ## 6                                                                 
-    ##   Gnetophyta
-    ## 1           
-    ## 2           
-    ## 3           
-    ## 4           
-    ## 5           
-    ## 6
+|  number.of.accepted.species|  number.of.accepted.and.unresolved.species| genus     | family       | order       | group       | Spermatophyta | Angiospermae | Mesangiospermae | Monocotyledoneae | Nartheciidae | Petrosaviidae | Commelinidae | Eudicotyledoneae | Gunneridae | Superasteridae | Pentapetalae | Asteridae | Campanulidae | Lamiidae | Superrosidae | Rosidae | Malvidae | Fabidae | Magnoliidae | Acrogymnospermae | Cycadophyta | Coniferae | Cupressophyta | Gnetophyta |
+|---------------------------:|------------------------------------------:|:----------|:-------------|:------------|:------------|:--------------|:-------------|:----------------|:-----------------|:-------------|:--------------|:-------------|:-----------------|:-----------|:---------------|:-------------|:----------|:-------------|:---------|:-------------|:--------|:---------|:--------|:------------|:-----------------|:------------|:----------|:--------------|:-----------|
+|                           2|                                          5| Acorus    | Acoraceae    | Acorales    | Angiosperms | Spermatophyta | Angiospermae | Mesangiospermae | Monocotyledoneae |              |               |              |                  |            |                |              |           |              |          |              |         |          |         |             |                  |             |           |               |            |
+|                           1|                                          1| Albidella | Alismataceae | Alismatales | Angiosperms | Spermatophyta | Angiospermae | Mesangiospermae | Monocotyledoneae | Nartheciidae |               |              |                  |            |                |              |           |              |          |              |         |          |         |             |                  |             |           |               |            |
+|                           8|                                         16| Alisma    | Alismataceae | Alismatales | Angiosperms | Spermatophyta | Angiospermae | Mesangiospermae | Monocotyledoneae | Nartheciidae |               |              |                  |            |                |              |           |              |          |              |         |          |         |             |                  |             |           |               |            |
+|                           1|                                          1| Astonia   | Alismataceae | Alismatales | Angiosperms | Spermatophyta | Angiospermae | Mesangiospermae | Monocotyledoneae | Nartheciidae |               |              |                  |            |                |              |           |              |          |              |         |          |         |             |                  |             |           |               |            |
+|                           3|                                          5| Baldellia | Alismataceae | Alismatales | Angiosperms | Spermatophyta | Angiospermae | Mesangiospermae | Monocotyledoneae | Nartheciidae |               |              |                  |            |                |              |           |              |          |              |         |          |         |             |                  |             |           |               |            |
+|                           1|                                          1| Burnatia  | Alismataceae | Alismatales | Angiosperms | Spermatophyta | Angiospermae | Mesangiospermae | Monocotyledoneae | Nartheciidae |               |              |                  |            |                |              |           |              |          |              |         |          |         |             |                  |             |           |               |            |
 
 This could for example, return orders within the Rosidae:
 
@@ -115,13 +74,21 @@ unique(ho$order[ho$Rosidae=="Rosidae"])
     ## [13] "Picramniales"    "Rosales"         "Sapindales"     
     ## [16] "Vitales"         "Zygophyllales"
 
-Combined with the species counts from the plant list this can be used to get the current estimates of diversity. For example, find the number of Conifer species in the world:
+Combined with the species counts from the plant list this can be used to get the current estimates of diversity. For example, find the number of accepted Conifer species in the world:
 
 ``` r
-sum(ho$number.of.species[ho$Coniferae=="Coniferae"])
+sum(ho$number.of.accepted.species[ho$Coniferae=="Coniferae"])
 ```
 
-    ## [1] 0
+    ## [1] 760
+
+Compare with the number of accepted plus the number of unresolved species:
+
+``` r
+sum(ho$number.of.accepted.and.unresolved.species[ho$Coniferae=="Coniferae"])
+```
+
+    ## [1] 877
 
 ------------------------------------------------------------------------
 
