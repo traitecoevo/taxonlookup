@@ -1,9 +1,8 @@
 language: r
-cache: packages
 sudo: false
 
-r_github_packages: 
-  - richfitz/datastorr
+r_github_packages:
+  - ropenscilabs/datastorr
   - jimhester/covr
 
 after_success:
