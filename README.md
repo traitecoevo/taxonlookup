@@ -1,6 +1,6 @@
 
-taxonlookup: a taxonomic lookup table for land plants
-=====================================================
+taxonlookup: a versioned taxonomic lookup table for land plants
+===============================================================
 
 [![Build Status](https://travis-ci.org/traitecoevo/taxonlookup.png?branch=master)](https://travis-ci.org/traitecoevo/taxonlookup) [![codecov.io](https://codecov.io/github/traitecoevo/taxonlookup/coverage.svg?branch=master)](https://codecov.io/github/traitecoevo/taxonlookup?branch=master) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.839589.svg)](https://doi.org/10.5281/zenodo.839589) [![GitHub version](https://badge.fury.io/gh/traitecoevo%2Ftaxonlookup.svg)](https://badge.fury.io/gh/traitecoevo%2Ftaxonlookup)
 
@@ -160,13 +160,20 @@ head(plant_lookup(include_counts = TRUE)[,c(1,3,4)])
 For taxonomic groups higher than order, use the `add_higher_order()` function. Because currently the higher taxonomy of plants does not have a nested structure, the format of that lookup table is a little more complicated. Check the help file for more details. To get the version number of the dataset run:
 
 ``` r
-plant_lookup_version_current()
+plant_lookup_version_current_local()
 ```
 
     ## [1] "1.1.5"
 
-For most uses, the latest release should be sufficient, and this is all that is necessary to use the data.
-However, if there have been some recent changes to taxonomy that are both important for your project and incorporated in the cannical sources (the plant list or APWeb) but are more recent than the last release of this package, you might want to rebuild the lookup table from the sources. Because this requires downloading the data from the web sources, this will run slowly, depending on your internet connection.
+For the most current version on Github run:
+
+``` r
+plant_lookup_version_current_github()
+```
+
+    ## [1] "1.1.5"
+
+For most uses, the latest release should be sufficient, and this is all that is necessary to use the data. However, if there have been some recent changes to taxonomy that are both important for your project and incorporated in the cannical sources (the plant list or APWeb) but are more recent than the last release of this package, you might want to rebuild the lookup table from the sources. Because this requires downloading the data from the web sources, this will run slowly, depending on your internet connection.
 
 Rebuilding the lookup table
 ===========================
