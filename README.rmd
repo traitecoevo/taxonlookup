@@ -48,7 +48,7 @@ If you want different taxonomic levels, use `add_higher_order`.  Because of the 
 knitr::kable(head(add_higher_order()))
 ```
 
-This could for example, return orders within the Rosidae:
+This could, for example, return orders within the Rosidae:
 ```{r}
 # load the data.frame into memory
 ho<-add_higher_order()
