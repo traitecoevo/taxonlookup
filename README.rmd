@@ -14,7 +14,7 @@ output: github_document
 
 ### Install the required packages
 
-```{r, message=FALSE}
+```{r, message=FALSE,results=FALSE}
 #istall.packages("devtools") # if necessary
 devtools::install_github("ropenscilabs/datastorr")
 devtools::install_github("wcornwell/taxonlookup")
@@ -167,3 +167,7 @@ where `"<description>"` is a brief description of new features of the release.
 
 * Check that it works by running `taxonlookup::plant_lookup(taxonlookup::plant_lookup_version_current(FALSE))` which should pull the data.
 * Update the Zenodo badge on the readme
+
+## License
+
+MIT + file LICENSE © [Will Cornwell](https://github.com/wcornwell).
